@@ -21,7 +21,7 @@ Tomek - 666 655 333 - holuss@gmail.com
 === Tasks/Work breakdown                                             ===
 ========================================================================
 
-
+initial change ~ Seb
 
 
 

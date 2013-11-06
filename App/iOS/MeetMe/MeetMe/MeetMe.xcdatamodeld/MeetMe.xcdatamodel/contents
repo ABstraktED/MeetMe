@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A603" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Comment" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id_event" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id_user" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="fromComment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toComment" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Contact" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id_user" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="fromContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toContact" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Event" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="eventDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id_location" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id_user" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="fromEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toEvent" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Invitation" syncable="YES">
+        <attribute name="confirmation" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="id_event" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id_user" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <relationship name="fromInvitation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="toInvitation" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="Location" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="User" syncable="YES">
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location_id" attributeType="Integer 32" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="password" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="surname" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="toComment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Comment" inverseName="fromComment" inverseEntity="Comment" syncable="YES"/>
+        <relationship name="toContact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="fromContact" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="toEvent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="fromEvent" inverseEntity="Event" syncable="YES"/>
+        <relationship name="toInvitation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Invitation" inverseName="fromInvitation" inverseEntity="Invitation" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="User" positionX="-254" positionY="27" width="128" height="28"/>
+        <element name="Invitation" positionX="-36" positionY="0" width="128" height="118"/>
+        <element name="Location" positionX="-20" positionY="257" width="128" height="103"/>
+        <element name="Comment" positionX="-495" positionY="-70" width="128" height="133"/>
+        <element name="Event" positionX="-461" positionY="236" width="128" height="148"/>
+        <element name="Contact" positionX="-200" positionY="378" width="128" height="88"/>
+    </elements>
+</model>

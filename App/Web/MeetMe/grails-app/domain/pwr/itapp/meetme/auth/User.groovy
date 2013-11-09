@@ -1,5 +1,7 @@
 package pwr.itapp.meetme.auth
 
+import pwr.itapp.meetme.Location
+
 class User {
 
 	transient springSecurityService
@@ -10,16 +12,24 @@ class User {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	
+	String email
+	String name
+	String phone
+	boolean status
+	String image
+	Location location
 
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		username blank: false, unique: true
-		password blank: false
+		username blank: false, unique: true, nullable: false
+		password blank: false, nullable: false
 	}
 
 	static mapping = {
 		password column: '`password`'
+		version false
 	}
 
 	Set<Role> getAuthorities() {

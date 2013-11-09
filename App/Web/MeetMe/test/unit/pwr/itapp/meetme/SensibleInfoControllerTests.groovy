@@ -1,4 +1,4 @@
-package meetme
+package pwr.itapp.meetme
 
 
 
@@ -8,8 +8,8 @@ import org.junit.*
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(HelloController)
-class HelloControllerTests {
+@TestFor(SensibleInfoController)
+class SensibleInfoControllerTests {
 
     void testSomething() {
        fail "Implement me"

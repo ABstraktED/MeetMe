@@ -71,6 +71,7 @@ environments {
 
 // log4j configuration
 log4j = {
+	debug 'org.springframework.security'
     // Example of changing the log pattern for the default console appender:
     //
     //appenders {
@@ -89,3 +90,19 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'pwr.itapp.meetme.auth.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'pwr.itapp.meetme.auth.UserRole'
+grails.plugin.springsecurity.authority.className = 'pwr.itapp.meetme.auth.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                              ['permitAll'],
+	'/index':                         ['permitAll'],
+	'/index.gsp':                     ['permitAll'],
+	'/**/js/**':                      ['permitAll'],
+	'/**/css/**':                     ['permitAll'],
+	'/**/images/**':                  ['permitAll'],
+	'/**/favicon.ico':                ['permitAll']
+]
+

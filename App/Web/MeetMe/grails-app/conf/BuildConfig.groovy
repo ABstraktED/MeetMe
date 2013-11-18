@@ -50,10 +50,12 @@ grails.project.dependency.resolution = {
         runtime ":hibernate:$grailsVersion"
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
-		compile ':spring-security-core:2.0-RC2'
+		compile ":spring-security-core:2.0-RC2"
+		compile ":spring-security-ui:1.0-RC1"
 		compile ":famfamfam:1.0.1"
 		compile ":mail:1.0.1"
 		compile ":jquery-ui:1.10.3"
+		compile ":twitter-bootstrap:3.0.2"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"

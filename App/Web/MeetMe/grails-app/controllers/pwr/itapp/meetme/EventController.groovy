@@ -4,6 +4,8 @@ import grails.plugin.springsecurity.annotation.Secured
 
 import org.springframework.dao.DataIntegrityViolationException
 
+
+@Secured('permitAll')
 class EventController {
 
     static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -12,6 +14,10 @@ class EventController {
     def index() {
         redirect(action: "list", params: params)
     }
+	
+	def newEvent(){
+		render(view:'new')
+	}
 
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)

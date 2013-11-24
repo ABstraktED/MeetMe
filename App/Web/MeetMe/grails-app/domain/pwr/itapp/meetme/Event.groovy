@@ -10,7 +10,7 @@ class Event {
 	Location location
 	String title
 	String description
-	Timestamp date
+	Date date
 
     static constraints = {
     }
@@ -19,5 +19,7 @@ class Event {
 	
 	static mapping = {
 		version false
+		invitations cascade: 'all-delete-orphan'
+		location cascade: 'all'
 	}
 }

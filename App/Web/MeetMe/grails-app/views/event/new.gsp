@@ -9,7 +9,6 @@
 	href="${resource(dir: 'css/le-frog', file: 'jquery-ui-1.10.3.custom.css')}"
 	type="text/css">
 <g:javascript src="jquery-ui-timepicker-addon.js" />
-<g:javascript src="gmap3.js" />
 <g:javascript src="maps.js" />
 <g:javascript src="jquery.geocomplete.js" />
 </head>

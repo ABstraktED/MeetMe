@@ -43,9 +43,17 @@ class EventController {
 			test: "Event ${params.title} successfully created"
 		]
 	}
+	
+	def search(){
+		
+		def eventInstance = new Event(params)
+		
+	}
+	
+	
 
-	def list(Integer max) {
-		params.max = Math.min(max ?: 10, 100)
+	def list() {
+		params.max = 10
 		[eventInstanceList: Event.list(params), eventInstanceTotal: Event.count()]
 	}
 

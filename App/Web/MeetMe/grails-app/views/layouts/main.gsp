@@ -13,9 +13,11 @@
 	<div class="basic-main" >
 		<div class="basic-main">
 			<div class="basic-menu">
-				<a href="<g:createLink controller="event" action="history"/>">My Events</a>
+				<a href="<g:createLink controller="event" action="created"/>">My Events</a>
 				<br/>
 				<a href="<g:createLink controller="event" action="newEvent"/>">Create Event</a>
+				<br/>
+				<a href="<g:createLink controller="event" action="list"/>">Find Events</a>
 			</div>
 			<div class="basic-data" >
 				<g:layoutBody/>

@@ -1,11 +1,13 @@
 package pwr.itapp.meetme
 
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 import grails.plugin.springsecurity.SpringSecurityService;
 import grails.plugin.springsecurity.annotation.Secured
 
+import org.hibernate.hql.ast.util.LiteralProcessor.DecimalFormatter;
 import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -25,14 +27,16 @@ class EventController {
 	}
 
 	def processEvent(){
+		println params.date
 		params.date = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(params.date)
-
+		println params.date
+		println params.lat + " " + params.lng
 		def locationInstance = Location.find(new Location(params))
 		if(locationInstance == null){
 			locationInstance = new Location(params)
 		}
-		
 		params.put("location", locationInstance)
+		println locationInstance.lat + " " + locationInstance.lng
 		params.put("user", getAuthenticatedUser())
 		def eventInstance = new Event(params)
 		if(!eventInstance.save(flush:true)){
@@ -74,13 +78,26 @@ class EventController {
 
 	def show(Long id) {
 		def eventInstance = Event.get(id)
+		println eventInstance.getDate()
+		def discussion = Comment.findAll("from Comment c where c.event = " + id)
 		if (!eventInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), id])
 			redirect(action: "list")
 			return
 		}
-
-		[eventInstance: eventInstance]
+		[eventInstance: eventInstance, discussion: discussion]
+	}
+	
+	def newComment(){
+		params.put("date", new Date())
+		params.put("user", getAuthenticatedUser())
+		params.put("event", Event.get(params.eventId))
+		def commentInstance = new Comment(params)
+		if(!commentInstance.save(flush:true)){
+			error: "Could not save"
+			return
+		}
+		redirect(action: "show", id: params.eventId)
 	}
 
 	def edit(Long id) {

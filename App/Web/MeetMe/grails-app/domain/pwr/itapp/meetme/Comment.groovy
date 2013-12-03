@@ -11,7 +11,7 @@ class Comment implements Serializable{
 	User user
 	Event event
 	String content
-	Timestamp date
+	Date date
 	
 	
     static constraints = {
@@ -19,6 +19,6 @@ class Comment implements Serializable{
 	
 	static mapping = {
 		version false
-		id composite: ['user', 'event']
+		id composite: ['user', 'event', 'date']
 	}
 }

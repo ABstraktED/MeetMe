@@ -2,8 +2,8 @@ package pwr.itapp.meetme
 
 class Location {
 
-	double lng
-	double lat
+	BigDecimal lng
+	BigDecimal lat
 	String address
 
 

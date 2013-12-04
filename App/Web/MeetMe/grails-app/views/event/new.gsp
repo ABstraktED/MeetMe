@@ -30,7 +30,7 @@
 		</div>
 		<g:hiddenField name="lat" />
 		<g:hiddenField name="lng" />
-		<input type="submit" value="Create">
+		<input type="submit" value="Create" >
 	</g:form>
 
 
@@ -54,6 +54,11 @@
 			// Map
 			$('#address').geocomplete({
 				map : "#map_canvas",
+				  mapOptions: {
+					    zoom: 16
+					  },
+				  markerOption:{
+					  draggable: true},
 				details : "form"
 			});
 
@@ -72,53 +77,52 @@
 		// JAVASCRIPT
 		// Gets and sets current location on map
 		
-		var map;
+		
 
-		function initialize() {
-			alert("MEH");
+		//function initialize() {
 			// Set up the map
-			var mapOptions = {
-				zoom : 10,
-				mapTypeId : google.maps.MapTypeId.ROADMAP,
-				streetViewControl : false
-			};
+			//var mapOptions = {
+				//zoom : 10,
+				//mapTypeId : google.maps.MapTypeId.ROADMAP,
+				//streetViewControl : false
+			//};
 
-			map = new google.maps.Map(document.getElementById('map_canvas'),
-					mapOptions);
+			//var map = new google.maps.Map(document.getElementById('map_canvas'),
+				//	mapOptions);
 			// Try HTML5 geolocation
-			if (navigator.geolocation) {
-				navigator.geolocation
-						.getCurrentPosition(
-								function(position) {
-									var pos = new google.maps.LatLng(
-											position.coords.latitude,
-											position.coords.longitude);
+			//if (navigator.geolocation) {
+				//navigator.geolocation
+					//	.getCurrentPosition(
+						//		function(position) {
+							//		var pos = new google.maps.LatLng(
+								//			position.coords.latitude,
+									//		position.coords.longitude);
 
-									var marker = new google.maps.Marker({
-										title : "Your location",
-										map : map,
-										position : pos,
-										content : 'Here'
-									});
+									//var marker = new google.maps.Marker({
+										//title : "Your location",
+										//map : map,
+										//position : pos,
+										//content : 'Here'
+									//});
 									//var infowindow = new google.maps.InfoWindow({
 									//map: map,
 									//position: pos,
 									//  content: 'Location found using HTML5.'
 									//});
 
-									map.setCenter(pos);
-								},
-								function() {
-									alert("Your browser supports Geolocation, however you have it disabled!");
-								});
+								//	map.setCenter(pos);
+								//},
+								//function() {
+									//alert("Your browser supports Geolocation, however you have it disabled!");
+								//});
 
-			} else {
+			//} else {
 				// Browser doesn't support Geolocatio
-				alert("Your browser does not support geolocation!");
-			}
+				//alert("Your browser does not support geolocation!");
+		//	}
 
-		}
-		 //   google.maps.event.addDomListener(window, 'load', initialize);
+		//}
+		    //google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
 
 </body>

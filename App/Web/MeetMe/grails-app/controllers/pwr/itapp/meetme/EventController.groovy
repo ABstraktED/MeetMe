@@ -1,15 +1,12 @@
 package pwr.itapp.meetme
 
-import java.text.DateFormat;
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
-
-import grails.plugin.springsecurity.SpringSecurityService;
 import grails.plugin.springsecurity.annotation.Secured
 
-import org.hibernate.hql.ast.util.LiteralProcessor.DecimalFormatter;
+import java.text.SimpleDateFormat
+
 import org.springframework.dao.DataIntegrityViolationException
-import org.springframework.format.annotation.DateTimeFormat;
+
+import pwr.itapp.meetme.auth.User
 
 
 @Secured(['ROLE_ADMIN'])
@@ -27,16 +24,14 @@ class EventController {
 	}
 
 	def processEvent(){
-		println params.date
 		params.date = new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(params.date)
-		println params.date
-		println params.lat + " " + params.lng
+		params.lat = new BigDecimal(params.lat)
+		params.lng = new BigDecimal(params.lng)
 		def locationInstance = Location.find(new Location(params))
 		if(locationInstance == null){
 			locationInstance = new Location(params)
 		}
 		params.put("location", locationInstance)
-		println locationInstance.lat + " " + locationInstance.lng
 		params.put("user", getAuthenticatedUser())
 		def eventInstance = new Event(params)
 		if(!eventInstance.save(flush:true)){
@@ -80,12 +75,25 @@ class EventController {
 		def eventInstance = Event.get(id)
 		println eventInstance.getDate()
 		def discussion = Comment.findAll("from Comment c where c.event = " + id)
+		def invited = Invitation.findAll("from Invitation i where i.event = " + id)
 		if (!eventInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'event.label', default: 'Event'), id])
 			redirect(action: "list")
 			return
 		}
-		[eventInstance: eventInstance, discussion: discussion]
+		[eventInstance: eventInstance, discussion: discussion, invited: invited]
+	}
+	
+	def invite(){
+		def userInstance = User.findByEmail(params.email)
+		params.put("user", userInstance)
+		params.put("event", Event.get(params.eventId))
+		def invitationInstance = new Invitation(params)
+		if(!invitationInstance.save(flush:true)){
+			error: "Could not save"
+			return
+		}
+		redirect(action: "show", id: params.eventId)
 	}
 	
 	def newComment(){

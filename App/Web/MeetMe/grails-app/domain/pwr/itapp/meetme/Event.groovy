@@ -21,5 +21,6 @@ class Event {
 		version false
 		invitations cascade: 'all-delete-orphan'
 		location cascade: 'all'
+		title email: true
 	}
 }

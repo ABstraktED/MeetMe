@@ -14,5 +14,7 @@ class Location {
 
 	static mapping = {
 		version false
+		lng scale: 14
+		lat scale: 14
 	}
 }

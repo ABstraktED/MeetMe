@@ -200,6 +200,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Marcel Starczyk";
 				TargetAttributes = {
+					8E95EF7D182A971F003210FE = {
+						DevelopmentTeam = B2DHKT4P87;
+					};
 					8E95EF9D182A971F003210FE = {
 						TestTargetID = 8E95EF7D182A971F003210FE;
 					};
@@ -369,6 +372,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MeetMe/MeetMe-Prefix.pch";
 				INFOPLIST_FILE = "MeetMe/MeetMe-Info.plist";
@@ -382,6 +386,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "MeetMe/MeetMe-Prefix.pch";
 				INFOPLIST_FILE = "MeetMe/MeetMe-Info.plist";
@@ -451,6 +456,7 @@
 				8E95EFB2182A971F003210FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8E95EFB3182A971F003210FE /* Build configuration list for PBXNativeTarget "MeetMeTests" */ = {
 			isa = XCConfigurationList;
@@ -459,6 +465,7 @@
 				8E95EFB5182A971F003210FE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

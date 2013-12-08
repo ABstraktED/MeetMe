@@ -109,9 +109,13 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/js/**':                      ['permitAll'],
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
-	'/**/favicon.ico':                ['permitAll']
+	'/**/favicon.ico':                ['permitAll'],
+	'/**/Authentication/**':		  ['permitAll'],
+	'/**/User/**':		  			  ['permitAll'],
 ]
-
+grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/authentication/error'
+grails.plugin.springsecurity.auth.loginFormUrl = '/authentication/login/'
+grails.plugin.springsecurity.logout.postOnly = false
 
 // sendMail configuration…
 
@@ -119,8 +123,8 @@ grails {
 	mail {
 		host = "smtp.gmail.com"
 		port = 465
-		username = "folque@gmail.com"
-		password = "*"
+		username = "meetme.notify@gmail.com"
+		password = "nmjkio90()"
 		props = ["mail.smtp.auth":"true",
 			"mail.smtp.socketFactory.port":"465",
 			"mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
@@ -134,3 +138,5 @@ jquery {
 }
 
 grails.gorm.failOnError=true
+
+

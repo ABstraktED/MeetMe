@@ -21,21 +21,22 @@
 					href="<g:createLink controller="event" action="newEvent"/>">Create
 					Event</a> <br /> <a
 					href="<g:createLink controller="event" action="list"/>">Find
-					Events</a><br /> -----<br /> <a
+					Events</a> <br /> 
+					-----<br/><a
 					href="<g:createLink controller="user" action="create"/>">Create
-					user (as Everyone) </a> <br /> <a
+					user (as Everyone) </a> <br /><a
 					href="<g:createLink controller="user" action="createAdmin"/>">Create
-					user (as Admin) </a> <br /> <a
+					user (as Admin) </a> <br /><a
 					href="<g:createLink controller="user" action="listAdmin"/>">User
-					list (as Admin)</a> <br />
+					list (as Admin)</a> <br /><a
+					href="<g:createLink controller="user" action="edit"/>/${userId}">
+					Edit (myself)
+					</a> <br /><a
+					href="<g:createLink controller="user" action="show"/>/${userId}">
+					Show (myself)
+					</a> <br />
 
 				<sec:ifLoggedIn>
-					<a href="<g:createLink controller="user" action="edit"/>/${userId}">
-						Edit (myself) </a>
-					<br />
-					<a href="<g:createLink controller="user" action="show"/>/${userId}">
-						Show (myself) </a>
-					<br />
 				Welcome <sec:username />, 
 	<a href="<g:createLink controller="authentication" action="logout"/>">Logout</a>
 				</sec:ifLoggedIn>
@@ -43,6 +44,7 @@
 					<a
 						href="<g:createLink controller="authentication" action="login"/>">Login</a>
 				</sec:ifNotLoggedIn>
+				
 			</div>
 			<div class="basic-data">
 				<g:layoutBody />

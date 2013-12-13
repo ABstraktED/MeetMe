@@ -1,0 +1,149 @@
+@CHARSET "UTF-8";
+
+@font-face {
+	font-family: "hnl";
+  	src: url('../fonts/HelveticaNeueUltraLight.ttf'); 
+}
+
+body { 
+  background: url('../images/web_graphics/authorization/auth_background.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.container{
+	font-family: Calibri;
+	width: 400px;
+	margin: 50px auto 0 auto;
+}
+
+#logo{
+	width: 123px;
+	height: 147px;
+	background: url('../images/web_graphics/logo_white_123x147.png');
+	margin: 0 auto 20px auto;
+	
+}
+
+#title{
+	font-size: 48px;
+	color: rgb(255,255,255);
+	text-align: center;
+	text-shadow: -2px 2px 5px rgba(0,0,0, 0.3);
+}
+
+#subtitle{
+	font-size: 16px;
+	color: rgb(255,255,255);
+	text-align: center;
+	text-shadow: -2px 2px 5px rgba(0,0,0, 0.3);
+	
+}
+
+/* div container */
+#form-cont{
+	width: 100%;
+	margin-top: 30px;
+}
+
+.form-control{
+	height: 32px;
+	width: 200px;
+	padding: 0px 10px;
+	margin: 10 auto;
+	box-shadow: -2px 2px 5px rgba(0,0,0, 0.3);
+	border: none;
+	border-radius: 2px;
+}
+
+.login-message{
+	text-align:center;
+	color: rgb(0,0,0);
+}
+
+#login-btn{
+	background: rgb(0,0,0);
+	color: rgb(255,255,255);
+}
+
+#login-btn:hover{
+	background: rgb(30,30,30);
+	cursor: hand;
+}
+
+#login-help{
+	margin: 10px auto;
+    width: 210px;
+    color: rgb(255,255,255);
+}
+
+.forgot-link{
+	text-decoration:none;
+	color: rgb(255,255,255);
+}
+
+.forgot-link>a{
+	text-decoration:none;
+	color: rgb(255,255,255);
+}
+
+.forgot-link>a:hover{
+	text-decoration: underline;
+	color: rgb(255,255,255);
+}
+
+.link-container {
+    text-align: center;
+    
+}
+
+
+#join-us{	
+	display: inline-block;
+    width: 200px;
+    padding: 10px 0px;
+    margin-top: 40px;
+    
+	box-shadow: -2px 2px 5px rgba(0,0,0, 0.3);
+	border: none;
+	border-radius: 2px;
+	
+	background: rgb(170,170,60);
+	color: rgb(255,255,255);	
+	
+	text-decoration: none;
+	font-size: 18px;
+}
+
+#join-us:hover{
+	background: rgb(190,190,70);	
+}
+	
+
+
+/*-------------------- clearfix --------------------  */
+.clearfix:before,.clearfix:after {
+	content: ".";
+	display: block;
+	position: relative;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1px;
+}
+
+.clearfix {
+	display: block;
+}
+
+
+

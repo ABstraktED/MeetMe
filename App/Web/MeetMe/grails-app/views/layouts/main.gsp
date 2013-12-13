@@ -6,7 +6,7 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'basic.css')}"
 	type="text/css">
-<g:javascript src="jquery-1.10.2.min.js" />
+<r:require module="jquery" />
 <title><g:layoutTitle default="Meet Me" /></title>
 <g:set var="userId" value="${sec.loggedInUserInfo(field:'id')}" />
 <g:layoutHead />

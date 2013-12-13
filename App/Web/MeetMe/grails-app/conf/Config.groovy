@@ -114,7 +114,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/User/**':		  			  ['permitAll'],
 ]
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/authentication/error'
-grails.plugin.springsecurity.auth.loginFormUrl = '/authentication/login/'
+grails.plugin.springsecurity.auth.loginFormUrl = '/authentication/login/'//'/login/auth'//'/authentication/login/'
 grails.plugin.springsecurity.logout.postOnly = false
 
 // sendMail configuration…

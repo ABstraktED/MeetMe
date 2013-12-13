@@ -59,9 +59,8 @@ class AuthenticationController {
 			redirect uri: config.successHandler.defaultTargetUrl
 			return
 		}
-
 		String view = 'login'
-		String postUrl = 'loginPost'
+		String postUrl = createLink(action: "loginPost", controller:"authentication")
 		render view: view, model: [postUrl: postUrl,
 			rememberMeParameter: config.rememberMe.parameter]
 	}
@@ -99,6 +98,7 @@ class AuthenticationController {
 			else
 			{
 				appendFlashMessage('User not found by given email')
+				println 'User not found by given email'
 				render view: view, model: [postUrl: postUrl,
 					rememberMeParameter: config.rememberMe.parameter]
 				return
@@ -116,6 +116,8 @@ class AuthenticationController {
 				appendFlashMessage('User not found by given phone')
 				render view: view, model: [postUrl: postUrl,
 					rememberMeParameter: config.rememberMe.parameter]
+				
+				println 'User not found by given phone'
 				return
 			}
 		}
@@ -131,6 +133,7 @@ class AuthenticationController {
 				appendFlashMessage('User not found by given user name')
 				render view: view, model: [postUrl: postUrl,
 					rememberMeParameter: config.rememberMe.parameter]
+				println 'User not found by given user name'
 				return
 			}
 		}	
@@ -142,6 +145,7 @@ class AuthenticationController {
 			j_username: userName, 
 			j_password: userPass,
 			j_rememberMe: params[config.rememberMe.parameter] ]
+		println 'login redirect'
 	}
 
 	/**

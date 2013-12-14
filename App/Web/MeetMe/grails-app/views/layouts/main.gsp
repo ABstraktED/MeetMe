@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="${resource(dir: 'css', file: 'basic.css')}"
 	type="text/css">
 <g:javascript src="jquery-1.10.2.min.js" />
-<r:require module="jquery" />
 <title><g:layoutTitle default="Meet Me" /></title>
 <g:set var="userId" value="${sec.loggedInUserInfo(field:'id')}" />
 <g:layoutHead />
@@ -29,7 +28,6 @@
 					user (as Admin) </a> <br /> <a
 					href="<g:createLink controller="user" action="listAdmin"/>">User
 					list (as Admin)</a> <br />
-
 				<sec:ifLoggedIn>
 					<a href="<g:createLink controller="user" action="edit"/>/${userId}">
 						Edit (myself) </a>

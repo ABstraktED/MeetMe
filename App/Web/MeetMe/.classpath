@@ -263,5 +263,11 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.grails.ide.eclipse.core.CLASSPATH_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/luke/Git/ABstraktED/MeetMe/App/Web/MeetMe/lib/gdata-client-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luke/Git/ABstraktED/MeetMe/App/Web/MeetMe/lib/gdata-client-meta-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luke/Git/ABstraktED/MeetMe/App/Web/MeetMe/lib/gdata-contacts-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luke/Git/ABstraktED/MeetMe/App/Web/MeetMe/lib/gdata-contacts-meta-3.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luke/Git/ABstraktED/MeetMe/App/Web/MeetMe/lib/gdata-core-1.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/luke/Git/ABstraktED/MeetMe/App/Web/MeetMe/lib/google-collect-1.0-rc1.jar"/>
 	<classpathentry kind="output" path="target-eclipse/classes"/>
 </classpath>

@@ -28,6 +28,9 @@
 						<td>${fieldValue(bean: eventInstance, field: "location.address")}</td>
 						
 						<td>${fieldValue(bean: eventInstance, field: "user.username")}</td>
+						<td><a href="<g:createLink controller="event" action="inviteFromGoogleContacts"/>?eventId=${fieldValue(bean: eventInstance, field: "id")}">Invite from Google Contacts</a>
+						
+						${fieldValue(bean: eventInstance, field: "user.username")}</td>
 					</tr>
 				</g:each>
 			</tbody>

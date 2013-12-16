@@ -5,7 +5,7 @@
 <title><g:message code='spring.security.ui.login.title' /></title>
 <meta name='layout' content='register' />
 
-<link rel="stylesheet" href="${resource(dir: 'css', file: 'meetme_auth.css')}" type="text/css">
+<link rel="stylesheet" href="${resource(dir: 'css', file: 'meetme-auth.css')}" type="text/css">
 
 </head>
 

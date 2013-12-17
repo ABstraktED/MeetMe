@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import applicaiton.MeetMeApplication;
+import application.MeetMeApplication;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 

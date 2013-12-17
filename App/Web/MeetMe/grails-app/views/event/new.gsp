@@ -22,7 +22,14 @@
 				id="calendar" name="date" /><br /> <br /> <label
 				for="description">Description</label>
 			<g:textArea name="description" />
-			<br /> <label for="address">Address</label>
+			<br/><br/>
+			<g:checkBox name="allCanJoin"/>
+			<label for="allCanJoin">Everybody can join this event</label>
+			<br/><br/>
+			<g:checkBox name="allCanInvite"/>
+			<label for="allCanInvite">Everybody can invite to this event</label>
+			<br /> <br/>
+			<label for="address">Address</label>
 			<g:textField name="address" placeholder=""/>
 			<br />
 			<div id="map_canvas" style="height: 350px; width: 600px"></div>

@@ -16,7 +16,7 @@
 	<div class="basic-main">
 		<div class="basic-main">
 			<div class="basic-menu">
-				<a href="<g:createLink controller="event" action="created"/>">My
+				<a href="<g:createLink controller="invitation" action="list"/>">My
 					Events</a> <br /> <a
 					href="<g:createLink controller="event" action="newEvent"/>">Create
 					Event</a> <br /> <a

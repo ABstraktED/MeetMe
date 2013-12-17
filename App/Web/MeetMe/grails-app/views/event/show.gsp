@@ -11,7 +11,7 @@
 	src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 </head>
 <body>
-	<div style="display:inline-block;">
+	<div style="display: inline-block;">
 		<div style="float: left; padding-right: 100px">
 			Title:
 			${eventInstance.title }
@@ -28,18 +28,37 @@
 			<br />
 		</div>
 		<div style="float: right">
-			<h3>Invite</h3>
-			<g:form action="invite">
-				<g:textField name="email" />
-				<g:hiddenField name="eventId" value="${eventInstance.id }" />
-				<input type="submit" value="Invite" />
-			</g:form>
-			<h3>Invited</h3>
-			<g:each in="${invited }" var="inv">
-				Username: ${inv.user.username }
-				<br/>
-				Email: ${inv.user.email }
-			</g:each>
+			<g:if test="${userInvited > 0}">
+				<div id="answerInvite">
+					<g:form controller="invitation" action="acceptInvitation">
+						<g:hiddenField name="eventId" value="${eventInstance.id }" />
+						<input type="submit" value="Accept"/>
+					</g:form>
+					<g:form controller="invitation" action="rejectInvitation">
+						<g:hiddenField name="eventId" value="${eventInstance.id }" />
+						<input type="submit" value="reject"/>
+					</g:form>
+				</div>
+			</g:if>
+			<div id="invite">
+				<h3>Invite</h3>
+				<g:form controller="Invitation" action="inviteByPortal">
+					<g:textField name="email" />
+					<g:hiddenField name="eventId" value="${eventInstance.id }" />
+					<input type="submit" value="Invite" />
+				</g:form>
+			</div>
+			<div id="googleContact">
+				<a href="<g:createLink controller="invitation" action="inviteFromGoogleContacts"/>?eventId=${eventInstance.id}">Invite from google contacts</a>
+			</div>
+			<div id="invited">
+				<h3>Invited</h3>
+				<g:each in="${invited }" var="inv">
+					Username: ${inv.user.username }
+					<br />
+					Email: ${inv.user.email }
+				</g:each>
+			</div>
 		</div>
 	</div>
 	<div style="display: inline-block;">
@@ -72,6 +91,12 @@
 	</div>
 
 	<script type="text/javascript">
+		$(document).ready(function(){
+				$("#email").autocomplete({
+							source: "${createLink(controller: 'Invitation', action: 'userList')}"
+						});
+					});
+			
       			function initialize() {
       				var pos = new google.maps.LatLng(${eventInstance.location.lat}, ${eventInstance.location.lng});
        				var mapOptions = {

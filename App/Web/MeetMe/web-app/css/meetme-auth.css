@@ -16,13 +16,13 @@ body {
 .container{
 	font-family: Calibri;
 	width: 400px;
-	margin: 50px auto 0 auto;
+	margin: 40px auto 0 auto; 
 }
 
 #logo{
-	width: 123px;
-	height: 147px;
-	background: url('../images/web_graphics/logo_white_123x147.png');
+	width: 100px;
+	height: 120px;
+	background: url('../images/web_graphics/logo_white_100x120.png');
 	margin: 0 auto 20px auto;
 	
 }

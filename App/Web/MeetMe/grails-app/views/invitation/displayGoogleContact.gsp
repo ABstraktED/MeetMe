@@ -39,14 +39,16 @@
 								value="${fieldValue(bean: contactInstance, field: "email")}" />
 							<g:if test="${emailValue != '---'}">
 								<a
-									href="<g:createLink action="inviteByEmail" controller="event"/>?email=${fieldValue(bean: contactInstance, field: "email")}&eventId=${eventId}">Invite
+									href="<g:createLink action="inviteByEmail" controller="invitation"/>?email=${fieldValue(bean: contactInstance, field: "email")}&eventId=${eventId}" 
+									onclick="return confirm('Are you sure you want do invite this contact?')">Invite
 									by email</a>
 							</g:if></td>
 						<td><g:set var="phoneValue"
 								value="${fieldValue(bean: contactInstance, field: "phone")}" />
 							<g:if test="${phoneValue != '---'}">
 								<a
-									href="<g:createLink action="inviteByPhone" controller="event"/>?phone=${fieldValue(bean: contactInstance, field: "phone")}">Invite
+									href="<g:createLink action="inviteByPhone" controller="invitation"/>?phone=${fieldValue(bean: contactInstance, field: "phone")}"
+									onclick="return confirm('Are you sure you want do invite this contact?')">Invite
 									by phone</a>
 							</g:if></td>
 					</tr>
@@ -54,7 +56,10 @@
 				
 			</tbody>
 		</table>
-		<a href="<g:createLink action="inviteFromGoogleContactsDone" controller="event"/>">Done</a>
+		<div class="pagination">
+				<g:paginate controller="invitation" action="displayGoogleContact" total="${contactsNumber}"/>
+		</div>
+		<a href="<g:createLink action="inviteFromGoogleContactsDone" controller="invitation"/>">Done</a>
 		</div>
 	</body>
 </html>

@@ -1,4 +1,4 @@
-package applicaiton;
+package pwr.itapps.meetme.application;
 
 import pwr.itapps.meetme.R;
 import android.app.Application;

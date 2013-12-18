@@ -1,10 +1,11 @@
-package adapter;
+package pwr.itapps.meetme.adapter;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
 
 import pwr.itapps.meetme.R;
-import DataModels.EventData;
+import pwr.itapps.meetme.application.MeetMeApplication;
+import pwr.itapps.meetme.data.EventData;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,9 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import applicaiton.MeetMeApplication;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
+
 
 public class EventsAdapter extends ArrayAdapter<EventData> {
 

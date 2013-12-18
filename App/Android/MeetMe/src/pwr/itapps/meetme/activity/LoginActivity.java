@@ -1,9 +1,11 @@
-package pwr.itapps.meetme;
+package pwr.itapps.meetme.activity;
 
+import pwr.itapps.meetme.R;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -81,7 +83,14 @@ public class LoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						attemptLogin();
+						if (attemptLogin()) {
+							Intent nextScreen = new Intent(getApplicationContext(),  WallActivity.class);
+			                startActivity(nextScreen);
+						}else {
+							Intent nextScreen = new Intent(getApplicationContext(),  RegisterActivity.class);
+			                startActivity(nextScreen);
+						}
+												
 					}
 				});
 	}
@@ -98,9 +107,9 @@ public class LoginActivity extends Activity {
 	 * If there are form errors (invalid email, missing fields, etc.), the
 	 * errors are presented and no actual login attempt is made.
 	 */
-	public void attemptLogin() {
+	public boolean attemptLogin() {
 		if (mAuthTask != null) {
-			return;
+			return false;
 		}
 
 		// Reset errors.
@@ -140,6 +149,7 @@ public class LoginActivity extends Activity {
 			// There was an error; don't attempt login and focus the first
 			// form field with an error.
 			focusView.requestFocus();
+			return false;
 		} else {
 			// Show a progress spinner, and kick off a background task to
 			// perform the user login attempt.
@@ -147,6 +157,7 @@ public class LoginActivity extends Activity {
 			showProgress(true);
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute((Void) null);
+			return true;
 		}
 	}
 

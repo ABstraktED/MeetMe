@@ -1,4 +1,4 @@
-package pwr.itapps.meetme;
+package pwr.itapps.meetme.activity;
 
 /*
  * Copyright 2013 The Android Open Source Project
@@ -18,7 +18,8 @@ package pwr.itapps.meetme;
 
 import java.util.Locale;
 
-import pwr.itapps.meetme.fragments.EventFragment;
+import pwr.itapps.meetme.R;
+import pwr.itapps.meetme.fragments.EventListFragment;
 
 import android.app.Activity;
 import android.app.Fragment;
@@ -148,18 +149,18 @@ public class WallActivity extends Activity {
 	}
 
 	private void selectItem(int position) {
-		// update the main content by replacing fragments
-		// Fragment fragment = new PlanetFragment();
-		// Bundle args = new Bundle();
-		// args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-		// fragment.setArguments(args);
+		Fragment fragment = null;
+		switch (position) {
+		case 7:
+			
+			break;
 
-		Fragment fragment = new EventFragment();
+		default:
+			fragment = new EventListFragment();
+		}
 		FragmentManager fragmentManager = getFragmentManager();
 		fragmentManager.beginTransaction()
 				.replace(R.id.content_frame, fragment).commit();
-
-		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mMenuOptions[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);

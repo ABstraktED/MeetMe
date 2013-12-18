@@ -1,4 +1,4 @@
-package DataModels;
+package pwr.itapps.meetme.data;
 
 public class VisitorData extends BaseData {
 

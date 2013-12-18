@@ -6,21 +6,21 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="15" />
+        android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Include next permission if you want to allow UIL to cache images on SD card -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    ...
+
     <application
-        android:name="applicaiton.MeetMeApplication"
+        android:name="pwr.itapps.meetme.application.MeetMeApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="pwr.itapps.meetme.WallActivity"
-            android:label="@string/app_name" >
+            android:name="pwr.itapps.meetme.activity.SplashActivity"
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,9 +28,21 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="pwr.itapps.meetme.LoginActivity"
+            android:name="pwr.itapps.meetme.activity.LoginActivity"
             android:label="@string/title_activity_login"
             android:windowSoftInputMode="adjustResize|stateVisible" >
+        </activity>
+        <activity
+            android:name="pwr.itapps.meetme.activity.RegisterActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="pwr.itapps.meetme.activity.WallActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="pwr.itapps.meetme.activity.EventDetailsActivity"
+            android:label="@string/app_name" >
         </activity>
     </application>
 

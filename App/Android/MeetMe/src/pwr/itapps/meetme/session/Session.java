@@ -1,12 +1,12 @@
-package Session;
+package pwr.itapps.meetme.session;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import DataModels.EventData;
-import DataModels.PersonData;
-import DataModels.PersonStatus;
+import pwr.itapps.meetme.data.EventData;
+import pwr.itapps.meetme.data.PersonData;
+import pwr.itapps.meetme.data.PersonStatus;
 
 public class Session {
 
@@ -116,9 +116,10 @@ public class Session {
 					setEventGallery(eventGallery);
 				}
 			};
-			final EventData ed2 = new EventData("This is second event to meet",
-					"Simple description, simple description.", new Date(),
-					new Date(), 18) {
+			final EventData ed2 = new EventData(
+					"This is second event to meet",
+					"Simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description, simple description.",
+					new Date(), new Date(), 18) {
 				{
 					setVisitors(visitors);
 					setOrganizators(organizators);

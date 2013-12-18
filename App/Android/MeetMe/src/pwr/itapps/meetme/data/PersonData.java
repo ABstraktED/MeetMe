@@ -1,4 +1,4 @@
-package DataModels;
+package pwr.itapps.meetme.data;
 
 import java.util.Date;
 

@@ -9,12 +9,11 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -61,18 +60,7 @@ public class LoginActivity extends Activity {
 		mEmailView.setText(mEmail);
 
 		mPasswordView = (EditText) findViewById(R.id.password);
-		mPasswordView
-				.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-					@Override
-					public boolean onEditorAction(TextView textView, int id,
-							KeyEvent keyEvent) {
-						if (id == R.id.login || id == EditorInfo.IME_NULL) {
-							attemptLogin();
-							return true;
-						}
-						return false;
-					}
-				});
+
 
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
@@ -82,14 +70,7 @@ public class LoginActivity extends Activity {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						if (attemptLogin()) {
-							Intent nextScreen = new Intent(getApplicationContext(),  WallActivity.class);
-			                startActivity(nextScreen);
-						}else {
-							Intent nextScreen = new Intent(getApplicationContext(),  RegisterActivity.class);
-			                startActivity(nextScreen);
-						}
-												
+						attemptLogin();
 					}
 				});
 	}
@@ -123,6 +104,7 @@ public class LoginActivity extends Activity {
 		View focusView = null;
 
 		// Check for a valid password.
+
 		if (TextUtils.isEmpty(mPassword)) {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
@@ -138,7 +120,8 @@ public class LoginActivity extends Activity {
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
 			cancel = true;
-		} else if (!mEmail.contains("@")) {
+		} else if (!mEmail
+				.matches("([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})")) {
 			mEmailView.setError(getString(R.string.error_invalid_email));
 			focusView = mEmailView;
 			cancel = true;
@@ -205,42 +188,55 @@ public class LoginActivity extends Activity {
 	 * Represents an asynchronous login/registration task used to authenticate
 	 * the user.
 	 */
-	public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+	// 0 - login correct, 1 - error (incorrect credintials), 2 -no such person
+	// in database
+	public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
 		@Override
-		protected Boolean doInBackground(Void... params) {
+		protected Integer doInBackground(Void... params) {
 			// TODO: attempt authentication against a network service.
 
 			try {
 				// Simulate network access.
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
-				return false;
+				return 1;
 			}
-
+			int result = 0;
 			for (String credential : DUMMY_CREDENTIALS) {
 				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail)) {
-					// Account exists, return true if the password matches.
-					return pieces[1].equals(mPassword);
+				if (pieces[0].equals(mEmail) && pieces[1].equals(mPassword)) {
+					result = 0;
+				} else {
+					result = 2;
 				}
 			}
-
-			// TODO: register the new account here.
-			return true;
+			return result;
 		}
 
 		@Override
-		protected void onPostExecute(final Boolean success) {
+		protected void onPostExecute(final Integer success) {
 			mAuthTask = null;
 			showProgress(false);
 
-			if (success) {
-				finish();
-			} else {
-				mPasswordView
-						.setError(getString(R.string.error_incorrect_password));
-				mPasswordView.requestFocus();
+			switch (success) {
+			case 0:
+				Intent i = new Intent(LoginActivity.this, WallActivity.class);
+				startActivity(i);
+				break;
+			case 1:
+				Toast.makeText(LoginActivity.this, "Wrong password or email!",
+						Toast.LENGTH_SHORT).show();
+				break;
+			case 2:
+				Intent create = new Intent(LoginActivity.this,
+						RegisterActivity.class);
+				create.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(create);
+				break;
+			default:
+				break;
 			}
+
 		}
 
 		@Override

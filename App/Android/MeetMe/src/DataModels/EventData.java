@@ -10,8 +10,8 @@ public class EventData extends BaseData {
 	private Date date;
 	private Date alarmDate;
 	private List<PersonData> organizators; // first 10 organizators
-	private int numberOfVisitors; // number of all visitors jus to display
-	private List<PersonData> visitors; // first 10 visotors
+	private int numberOfVisitors; // number of all visitors just to display
+	private List<PersonData> visitors; // first 10 visitors
 	private List<String> eventGallery;
 
 	

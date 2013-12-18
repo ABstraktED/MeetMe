@@ -16,10 +16,8 @@ package pwr.itapps.meetme;
  * limitations under the License.
  */
 
-import java.util.Locale;
-
 import pwr.itapps.meetme.fragments.EventFragment;
-
+import pwr.itapps.meetme.fragments.FriendsFragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -30,19 +28,17 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class WallActivity extends Activity {
+	
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -76,14 +72,14 @@ public class WallActivity extends Activity {
 				R.drawable.ic_drawer, R.string.drawer_open,
 				R.string.drawer_close) {
 			public void onDrawerClosed(View view) {
-				// getActionBar().setTitle(mTitle);
-				// invalidateOptionsMenu(); // creates call to
+				getActionBar().setTitle(mTitle);
+				invalidateOptionsMenu(); // creates call to
 				// onPrepareOptionsMenu()
 			}
 
 			public void onDrawerOpened(View drawerView) {
-				// getActionBar().setTitle(mDrawerTitle);
-				// invalidateOptionsMenu(); // creates call to
+				getActionBar().setTitle(mDrawerTitle);
+				invalidateOptionsMenu(); // creates call to
 				// onPrepareOptionsMenu()
 			}
 		};
@@ -137,7 +133,7 @@ public class WallActivity extends Activity {
 		}
 	}
 
-	/* The click listner for ListView in the navigation drawer */
+	/* The click listener for ListView in the navigation drawer */
 	private class DrawerItemClickListener implements
 			ListView.OnItemClickListener {
 		@Override
@@ -146,18 +142,56 @@ public class WallActivity extends Activity {
 			selectItem(position);
 		}
 	}
+	
+	
 
 	private void selectItem(int position) {
 		// update the main content by replacing fragments
 		// Fragment fragment = new PlanetFragment();
-		// Bundle args = new Bundle();
-		// args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
-		// fragment.setArguments(args);
-
-		Fragment fragment = new EventFragment();
+		//Bundle args = new Bundle();
+		//args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+		//fragment.setArguments(args);
+		
 		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
+		switch (position) {
+		
+		case 0:
+			Fragment fragment = new EventFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+			break;
+		case 1:
+			Fragment fragment1 = new EventFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment1).commit();
+			break;
+		case 2:
+			Fragment fragment2 = new EventFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment2).commit();
+			break;
+		case 3:
+			Fragment fragment3 = new EventFragment();
+			fragmentManager.beginTransaction()
+			.replace(R.id.content_frame, fragment3).commit();
+			break;
+		case 4:
+			Fragment fragment4 = new EventFragment();
+			fragmentManager.beginTransaction()
+			.replace(R.id.content_frame, fragment4).commit();
+			break;
+		case 5:
+			Fragment fragment5 = new FriendsFragment();
+			fragmentManager.beginTransaction()
+			.replace(R.id.content_frame, fragment5).commit();
+			break;
+		default:
+			Fragment fragment6 = new EventFragment();
+			fragmentManager.beginTransaction()
+			.replace(R.id.content_frame, fragment6).commit();
+			break;
+		}
+			
 
 		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
@@ -188,31 +222,4 @@ public class WallActivity extends Activity {
 		mDrawerToggle.onConfigurationChanged(newConfig);
 	}
 
-	/**
-	 * Fragment that appears in the "content_frame", shows a planet
-	 */
-	public static class PlanetFragment extends Fragment {
-		public static final String ARG_PLANET_NUMBER = "planet_number";
-
-		public PlanetFragment() {
-			// Empty constructor required for fragment subclasses
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_planet,
-					container, false);
-			int i = getArguments().getInt(ARG_PLANET_NUMBER);
-			String planet = getResources().getStringArray(R.array.menu_options)[i];
-
-			int imageId = getResources().getIdentifier(
-					planet.toLowerCase(Locale.getDefault()), "drawable",
-					getActivity().getPackageName());
-			((ImageView) rootView.findViewById(R.id.image))
-					.setImageResource(imageId);
-			getActivity().setTitle(planet);
-			return rootView;
-		}
-	}
 }

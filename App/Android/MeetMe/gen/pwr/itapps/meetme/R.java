@@ -43,7 +43,8 @@ public final class R {
         public static final int venus=0x7f020010;
     }
     public static final class id {
-        public static final int Button_OK=0x7f090019;
+        public static final int Button_Register=0x7f09001c;
+        public static final int EditText_ConfirmPassword=0x7f09001b;
         public static final int EditText_Email=0x7f090012;
         public static final int EditText_Firstname=0x7f09000e;
         public static final int EditText_Lastname=0x7f09000f;
@@ -55,21 +56,26 @@ public final class R {
         public static final int LinearLayout03=0x7f090010;
         public static final int LinearLayout04=0x7f090013;
         public static final int LinearLayout05=0x7f090016;
+        public static final int LinearLayout06=0x7f090019;
         public static final int RegisterLayout=0x7f09000a;
+        public static final int TextView_ConfirmPassword=0x7f09001a;
         public static final int TextView_Email=0x7f090011;
         public static final int TextView_Password=0x7f090017;
         public static final int TextView_Phone=0x7f090014;
-        public static final int action_forgot_password=0x7f09001f;
-        public static final int action_settings=0x7f090020;
-        public static final int action_websearch=0x7f090021;
+        public static final int action_forgot_password=0x7f090025;
+        public static final int action_settings=0x7f090026;
+        public static final int action_websearch=0x7f090027;
         public static final int content_frame=0x7f090008;
         public static final int drawer_layout=0x7f090007;
         public static final int email=0x7f090003;
-        public static final int event_row_date_tv=0x7f09001d;
-        public static final int event_row_image_iv=0x7f09001a;
-        public static final int event_row_organizators_tv=0x7f09001c;
-        public static final int event_row_title_tv=0x7f09001b;
-        public static final int image=0x7f09001e;
+        public static final int event_row_date_tv=0x7f090020;
+        public static final int event_row_image_iv=0x7f09001d;
+        public static final int event_row_organizators_tv=0x7f09001f;
+        public static final int event_row_title_tv=0x7f09001e;
+        public static final int friend_row_FirstName=0x7f090022;
+        public static final int friend_row_image=0x7f090021;
+        public static final int friend_row_lastName=0x7f090023;
+        public static final int friend_row_status=0x7f090024;
         public static final int left_drawer=0x7f090009;
         public static final int login=0x7f090005;
         public static final int login_form=0x7f090002;
@@ -85,41 +91,45 @@ public final class R {
         public static final int drawer_list_item=0x7f030003;
         public static final int event_list=0x7f030004;
         public static final int event_row=0x7f030005;
-        public static final int fragment_planet=0x7f030006;
-        public static final int splash=0x7f030007;
+        public static final int friend_list=0x7f030006;
+        public static final int friend_row=0x7f030007;
+        public static final int splash=0x7f030008;
     }
     public static final class menu {
         public static final int login=0x7f080000;
         public static final int main=0x7f080001;
     }
     public static final class string {
-        public static final int App_logo=0x7f050002;
-        public static final int Avatar_image=0x7f050003;
-        public static final int Email=0x7f050006;
-        public static final int First_name=0x7f050004;
-        public static final int Last_name=0x7f050005;
-        public static final int Ok_button=0x7f050009;
-        public static final int Password=0x7f050008;
-        public static final int Phone=0x7f050007;
-        public static final int action_forgot_password=0x7f050013;
+        public static final int App_logo=0x7f050003;
+        public static final int Avatar_image=0x7f050004;
+        public static final int ConfirmPassword=0x7f05000b;
+        public static final int ContentDescription=0x7f050005;
+        public static final int Email=0x7f050008;
+        public static final int First_name=0x7f050006;
+        public static final int Last_name=0x7f050007;
+        public static final int Password=0x7f05000a;
+        public static final int Phone=0x7f050009;
+        public static final int Register_button=0x7f05000c;
+        public static final int action_forgot_password=0x7f050016;
         public static final int action_settings=0x7f050001;
-        public static final int action_sign_in_register=0x7f050011;
-        public static final int action_sign_in_short=0x7f050012;
-        public static final int action_websearch=0x7f05000c;
+        public static final int action_sign_in_register=0x7f050014;
+        public static final int action_sign_in_short=0x7f050015;
+        public static final int action_websearch=0x7f05000f;
         public static final int app_name=0x7f050000;
-        public static final int app_not_available=0x7f05000d;
-        public static final int drawer_close=0x7f05000b;
-        public static final int drawer_open=0x7f05000a;
-        public static final int error_field_required=0x7f050018;
-        public static final int error_incorrect_password=0x7f050017;
-        public static final int error_invalid_email=0x7f050015;
-        public static final int error_invalid_password=0x7f050016;
-        public static final int login_progress_signing_in=0x7f050014;
+        public static final int app_not_available=0x7f050010;
+        public static final int drawer_close=0x7f05000e;
+        public static final int drawer_open=0x7f05000d;
+        public static final int error_field_required=0x7f05001b;
+        public static final int error_incorrect_password=0x7f05001a;
+        public static final int error_invalid_email=0x7f050018;
+        public static final int error_invalid_password=0x7f050019;
+        public static final int login_progress_signing_in=0x7f050017;
         /**  Strings related to login 
          */
-        public static final int prompt_email=0x7f05000f;
-        public static final int prompt_password=0x7f050010;
-        public static final int title_activity_login=0x7f05000e;
+        public static final int prompt_email=0x7f050012;
+        public static final int prompt_password=0x7f050013;
+        public static final int title_activity_login=0x7f050011;
+        public static final int title_activity_register=0x7f050002;
     }
     public static final class style {
         /** 

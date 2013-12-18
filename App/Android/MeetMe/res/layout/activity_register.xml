@@ -16,8 +16,8 @@
 
         <ImageButton
             android:id="@+id/ImageButton_Avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="81dp"
+            android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:contentDescription="@string/Avatar_image"
             android:src="@android:drawable/ic_dialog_info" />
@@ -126,12 +126,37 @@
         </EditText>
     </LinearLayout>
 
+        <LinearLayout
+        android:id="@+id/LinearLayout06"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/TextView_ConfirmPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ConfirmPassword"
+            android:textSize="20sp"
+            android:textStyle="bold" >
+        </TextView>
+
+        <EditText
+            android:id="@+id/EditText_ConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textVisiblePassword"
+            android:maxLines="1" >
+        </EditText>
+    </LinearLayout>
+    
     <Button
-        android:id="@+id/Button_OK"
+        android:id="@+id/Button_Register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#7979F2"
         android:layout_marginBottom="2dp"
-        android:text="@string/Ok_button" />
+        android:text="@string/Register_button" />
 
 </LinearLayout>

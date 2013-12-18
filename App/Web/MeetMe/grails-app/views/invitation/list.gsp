@@ -1,13 +1,11 @@
 <%@ page import="pwr.itapp.meetme.Invitation" %>
-<!DOCTYPE html>
-<html>
+<g:applyLayout name="event_layout">
 	<head>
-		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'invitation.label', default: 'Invitation')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
-	<body>
-		<b>${invitationInstanceTotal}</b> event(s) found.
+	<content tag="event_content">
+		You have <b>${invitationInstanceTotal}</b> invitation(s).
 		<g:if test="${invitationInstanceTotal > 0 }">
 		<div>
 			<table style="border-spacing: 20px;">
@@ -36,5 +34,5 @@
 			</div>
 		</div>
 		</g:if>
-	</body>
-</html>
+</content>
+</g:applyLayout>

@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
+<g:applyLayout name="event_layout">
 <head>
-<meta name="layout" content="main">
 <title>Invite from Google Contacts</title>
 </head>
-<body>
+<content tag="event_content">
 	<div>
 		<form action="${postUrl}">
 			<h1>Invite from Google Contacts</h1>
@@ -26,7 +24,7 @@
 			<g:hiddenField name="eventId" value="${eventId}"/>
 		</form>
 	</div>
-</body>
-</html>
+</content>
+</g:applyLayout>
 
 

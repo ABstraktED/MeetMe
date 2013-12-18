@@ -9,7 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException
 import pwr.itapp.meetme.auth.User
 
 
-@Secured(['ROLE_ADMIN'])
+@Secured(['isFullyAuthenticated()'])
 class EventController {
 
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
@@ -39,9 +39,10 @@ class EventController {
 			error: "Could not save"
 			return
 		}
-		return [
-			test: "Event ${params.title} successfully created"
-		]
+//		return [
+//			test: "Event ${params.title} successfully created"
+//		]
+		redirect(action:"list", params:params)
 	}
 
 	def search(){
@@ -74,11 +75,10 @@ class EventController {
 
 	def show(Long id) {
 		def eventInstance = Event.get(id)
-		println eventInstance.getDate()
 		def discussion = Comment.findAll("from Comment c where c.event = :theid", [theid: eventInstance])
 		def invited = Invitation.findAll("from Invitation i where i.event = :theid", [theid: eventInstance])
 		def userInvited = Invitation.find("from Invitation i where i.event = :theid and i.user = :user", [theid: eventInstance, user: currentUser])
-		def countUserInvited = (userInvited == null) ? 0 : userInvited.count
+
 		if (!eventInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [
 				message(code: 'event.label', default: 'Event'),
@@ -87,7 +87,7 @@ class EventController {
 			redirect(action: "list")
 			return
 		}
-		[eventInstance: eventInstance, discussion: discussion, invited: invited, userInvited: countUserInvited]
+		[eventInstance: eventInstance, discussion: discussion, invited: invited, userInvited: userInvited]
 	}
 
 

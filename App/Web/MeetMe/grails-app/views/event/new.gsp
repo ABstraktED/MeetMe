@@ -1,7 +1,5 @@
-<!doctype html>
-<html>
+<g:applyLayout name="event_layout">
 <head>
-<meta name="layout" content="main" />
 <r:require module="jquery" />
 <r:require module="jquery-ui" />
 <r:layoutResources />
@@ -13,7 +11,7 @@
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 </head>
 
-<body>
+<content tag="event_content">
 	<g:form action="processEvent">
 		<div>
 			<label for="title">Title</label>
@@ -131,6 +129,5 @@
 		//}
 		    //google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
-
-</body>
-</html>
+</content>
+</g:applyLayout>

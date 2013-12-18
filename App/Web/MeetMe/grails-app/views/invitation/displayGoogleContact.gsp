@@ -1,11 +1,9 @@
 <%@ page import="pwr.itapp.meetme.auth.User" %>
-<!DOCTYPE html>
-<html>
+<g:applyLayout name="event_layout">
 	<head>
-		<meta name="layout" content="main">
 		<title>Invite from Google Contacts</title>
 	</head>
-	<body>
+	<content tag="event_content">
 		<div id="list-user" class="content scaffold-list" role="main">
 			<h1>Invite from Google Contacts</h1>
 			<g:if test="${flash.message}">
@@ -61,8 +59,8 @@
 		</div>
 		<a href="<g:createLink action="inviteFromGoogleContactsDone" controller="invitation"/>">Done</a>
 		</div>
-	</body>
-</html>
+</content>
+</g:applyLayout>
 
 
 		

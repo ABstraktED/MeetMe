@@ -3,7 +3,7 @@ package pwr.itapp.meetme
 import pwr.itapp.meetme.auth.User;
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured(['ROLE_ADMIN'])
+@Secured(['isFullyAuthenticated()'])
 class InvitationController {
 	static allowedMethods = [save: "POST", update: "POST", delete: "POST"]
 	
@@ -31,12 +31,7 @@ class InvitationController {
 		inv.setConfirmation(true)
 		redirect(controller: "event", action: "show", id: params.eventId)
 	}
-	
-	def rejectInvitation(){
-		def inv = Invitation.findByUserAndEvent(currentUser, Event.get(params.eventId))
-		inv.setConfirmation(false)
-		redirect(controller: "event", action: "show", id: params.eventId)
-	}
+
 	
 	def userListJSON(){
 		

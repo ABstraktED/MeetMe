@@ -13,7 +13,7 @@
 		<g:message code="user.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password" required="" value="${userInstance?.password}"/>
+	<g:passwordField name="password" value="${userInstance?.password}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: password2, field: 'password', 'error')} required">
@@ -21,7 +21,7 @@
 		<g:message code="password2.label" default="Repeat password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password2" required="" value="${password2}"/>
+	<g:passwordField name="password2" value="${password2}"/>
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'email', 'error')} ">
@@ -48,14 +48,6 @@
 	<g:textField name="phone" value="${userInstance?.phone}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'status', 'error')} ">
-	<label for="status">
-		<g:message code="user.status.label" default="Status" />
-		
-	</label>
-	<g:checkBox name="status" value="${userInstance?.status}" />
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: userInstance, field: 'image', 'error')} ">
 	<label for="image">
 		<g:message code="user.image.label" default="Image" />
@@ -64,11 +56,4 @@
 	<g:textField name="image" value="${userInstance?.image}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'location', 'error')} ">
-	<label for="location">
-		<g:message code="user.location.label" default="Location" />
-		
-	</label>
-	<g:select id="location" name="location.id" from="${pwr.itapp.meetme.Location.list()}" optionKey="id" value="${userInstance?.location?.id}" class="many-to-one" noSelection="['null': '']"/>
-</div>
 

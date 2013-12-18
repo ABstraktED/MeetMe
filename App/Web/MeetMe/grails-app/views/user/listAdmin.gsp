@@ -1,13 +1,11 @@
 
 <%@ page import="pwr.itapp.meetme.auth.User" %>
-<!DOCTYPE html>
-<html>
+<g:applyLayout name="event_layout">
 	<head>
-		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
 		<title><g:message code="default.list.label" args="[entityName]" /></title>
 	</head>
-	<body>
+	<content tag="event_content">
 		<div id="list-user" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -50,5 +48,5 @@
 				<g:paginate total="${userInstanceTotal}" />
 			</div>
 		</div>
-	</body>
-</html>
+</content>
+</g:applyLayout>

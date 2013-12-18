@@ -1,12 +1,10 @@
 <%@ page import="pwr.itapp.meetme.auth.User" %>
-<!DOCTYPE html>
-<html>
+<g:applyLayout name="event_layout">
 	<head>
-		<meta name="layout" content="main">
 		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
 		<title><g:message code="default.edit.label" args="[entityName]" /></title>
 	</head>
-	<body>
+	<content tag="event_content">
 		<div id="edit-user" class="content scaffold-edit" role="main">
 			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -30,5 +28,5 @@
 				</fieldset>
 			</g:form>
 		</div>
-	</body>
-</html>
+</content>
+</g:applyLayout>

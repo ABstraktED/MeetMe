@@ -1,11 +1,9 @@
-<!doctype html>
-<html>
+<g:applyLayout name="event_layout">
 <head>
-	<meta name="layout" content="main" />
 	<link rel="stylesheet" href="${resource(dir: 'css', file: 'meetme-index.css')}" type="text/css">
 </head>
 
-<body>
+<content tag="event_content">
 	<div id="welcome">
 		<div id="title">
 		Welcome!
@@ -24,5 +22,6 @@
 		persons who want to track latecomers
 		</div>
 	</div>
-</body>
-</html>
+</content>
+	
+</g:applyLayout>

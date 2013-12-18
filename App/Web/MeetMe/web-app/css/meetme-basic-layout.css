@@ -22,7 +22,7 @@ body {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	
+		
 }
 
 #basic-content{
@@ -104,6 +104,7 @@ body {
 	background: rgba(0,0,0, 0.07);
 	position: absolute;
 	bottom: 0px;
+	border: none;
 }
 
 #menu {
@@ -113,13 +114,13 @@ body {
 	
 	font-size: 18px;
 	text-align: center;
-	white-space: nowrap
+	white-space: nowrap;
 }
 #menu li {
   	display: inline;
   	margin: 0 30px;
 }
-#menu li a {
+#a1, #a2, #a3, #a4{
   	text-decoration: none;
 	color: rgba(0,0,0, 0.4);
 	

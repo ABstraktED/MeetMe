@@ -18,12 +18,12 @@
 			</ul>
 			</g:hasErrors>
 			<g:form action="save" >
-				<fieldset class="form">
+				<div class="form">
 					<g:render template="createForm"/>
-				</fieldset>
-				<fieldset class="buttons">
+				</div>
+				<div class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-				</fieldset>
+				</div>
 			</g:form>
 		</div>
 </content>

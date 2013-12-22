@@ -20,12 +20,14 @@
 			<g:form method="post" >
 				<g:hiddenField name="id" value="${userInstance?.id}" />
 				<g:hiddenField name="version" value="${userInstance?.version}" />
-				<fieldset class="form">
+				<div class="form">
 					<g:render template="form"/>
-				</fieldset>
-				<fieldset class="buttons">
+				</div>
+				<div class="buttons">
 					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-				</fieldset>
+					<a
+					href="<g:createLink controller="user" action="changePassword"/>/${userInstance?.id}">Change password</a>
+				</div>
 			</g:form>
 		</div>
 </content>

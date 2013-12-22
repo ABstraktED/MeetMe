@@ -22,13 +22,13 @@
 			<g:form method="post" >
 				<g:hiddenField name="id" value="${userInstance?.id}" />
 				<g:hiddenField name="version" value="${userInstance?.version}" />
-				<fieldset class="form">
+				<div class="form">
 					<g:render template="formAdmin"/>
-				</fieldset>
-				<fieldset class="buttons">
+				</div>
+				<div class="buttons">
 					<g:actionSubmit class="saveAdmin" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" formnovalidate="" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
+				</div>
 			</g:form>
 		</div>
 	</body>

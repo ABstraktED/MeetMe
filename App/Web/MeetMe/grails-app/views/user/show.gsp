@@ -18,13 +18,9 @@
 					${message(code: 'lbl.user.username')}
 				</td>
 				<td><g:if test="${userInstance?.username}">
-
 						<g:fieldValue bean="${userInstance}" field="username" />
-
 					</g:if> <g:if test="${!userInstance?.username}">
-
 						${message(code: 'lbl.user.novalue')}
-
 					</g:if></td>
 			</tr>
 			<tr>

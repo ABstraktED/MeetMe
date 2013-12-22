@@ -52,24 +52,39 @@
 						</td>
 
 						<td><g:if test="${!userInstance.status}">
-							Deactivate-><g:message code='msg.meetme.activate'/>
+						
+						<g:link action="activate" id="${userInstance.id}">
+								${message(code: 'msg.meetme.activate')}
+							</g:link>
 						</g:if> <g:if test="${userInstance.status}">
-							Activate-><g:message code='msg.meetme.deactivate'/>
+						<g:link action="deactivate" id="${userInstance.id}">
+								${message(code: 'msg.meetme.deactivate')}
+							</g:link>
 						</g:if></td>
 						<td><g:if test="${userInstance.accountLocked}">
-							Locked-><g:message code='msg.meetme.unlock'/>
+							<g:link action="unlock" id="${userInstance.id}">
+								${message(code: 'msg.meetme.unlock')}
+							</g:link>
 						</g:if> <g:if test="${!userInstance.accountLocked}">
-							Unlocked-><g:message code='msg.meetme.lock'/>
+							<g:link action="lock" id="${userInstance.id}">
+								${message(code: 'msg.meetme.lock')}
+							</g:link>
 						</g:if></td>
 						<td><g:if test="${userInstance.accountExpired}">
-							Expired->..
+							<g:link action="extend" id="${userInstance.id}">
+								${message(code: 'msg.meetme.extend')}
+							</g:link>
 						</g:if> <g:if test="${!userInstance.accountExpired}">
-							OK->...
+							OK
 						</g:if></td>
 						<td><g:if test="${!userInstance.enabled}">
-							Disabled-><g:message code='msg.meetme.enable'/>
+							<g:link action="enable" id="${userInstance.id}">
+								${message(code: 'msg.meetme.enable')}
+							</g:link>
 						</g:if> <g:if test="${userInstance.enabled}">
-							Enabled-<g:message code='msg.meetme.disable'/>
+							<g:link action="disable" id="${userInstance.id}">
+								${message(code: 'msg.meetme.disable')}
+							</g:link>
 						</g:if></td>
 
 

@@ -2,14 +2,12 @@
 <%@ page import="pwr.itapp.meetme.auth.User"%>
 <g:applyLayout name="event_layout">
 	<head>
-<g:set var="entityName"
-	value="${message(code: 'user.label', default: 'User')}" />
-<title><g:message code="default.show.label" args="[entityName]" /></title>
+<title>${message(code: 'title.user.changePassword')}</title>
 	</head>
 	<content tag="event_content">
 	<div id="show-user" class="content scaffold-show" role="main">
 		<h1>
-			<g:message code="default.show.label" args="[entityName]" />
+			${message(code: 'title.user.changePassword')}
 		</h1>
 		<g:if test="${flash.message}">
 			<div class="message" role="status">
@@ -18,14 +16,14 @@
 		</g:if>
 		<table>
 			<tr>
-				<td>Current password</td>
+				<td>${message(code: 'lbl.user.currentPassword')}</td>
 				<td><input type="password" name="oldPassword" /></td>
 			</tr>
 <tr>
-				<td>New password</td>
+				<td>${message(code: 'lbl.user.newPassword')}</td>
 				<td><input type="password" name="newPassword" /></td>
 			</tr><tr>
-				<td>Repeat new password</td>
+				<td>${message(code: 'lbl.user.repeatPassword')}</td>
 				<td><input type="password" name="newPassword2" /></td>
 			</tr>
 		</table>
@@ -37,7 +35,7 @@
 		<g:form>
 			<div class="buttons">
 				<g:hiddenField name="id" value="${userInstance?.id}" />
-				<g:actionSubmit class="save" action="changePasswordPost" value="Submit" />
+				<g:actionSubmit class="save" action="changePasswordPost" value="${message(code: 'msg.meetme.change')}" />
 			</div>
 		</g:form>
 	</div>

@@ -2,15 +2,11 @@
 <%@ page import="pwr.itapp.meetme.auth.User"%>
 <g:applyLayout name="event_layout">
 	<head>
-<g:set var="entityName"
-	value="${message(code: 'user.label', default: 'User')}" />
-<title><g:message code="default.show.label" args="[entityName]" /></title>
+<title>${message(code: 'title.user.myprofile')}</title>
 	</head>
 	<content tag="event_content">
 	<div id="show-user" class="content scaffold-show" role="main">
-		<h1>
-			<g:message code="default.show.label" args="[entityName]" />
-		</h1>
+		<h1>${message(code: 'title.user.myprofile')}</h1>
 		<g:if test="${flash.message}">
 			<div class="message" role="status">
 				${flash.message}
@@ -18,56 +14,58 @@
 		</g:if>
 		<table>
 			<tr>
-				<td>User name</td>
+				<td>
+					${message(code: 'lbl.user.username')}
+				</td>
 				<td><g:if test="${userInstance?.username}">
 
 						<g:fieldValue bean="${userInstance}" field="username" />
 
 					</g:if> <g:if test="${!userInstance?.username}">
-					
-						---
-					
-				</g:if></td>
+
+						${message(code: 'lbl.user.novalue')}
+
+					</g:if></td>
 			</tr>
-
-
 			<tr>
-				<td>Email</td>
+				<td>
+					${message(code: 'lbl.user.email')}
+				</td>
 				<td><g:if test="${userInstance?.email}">
 						<g:fieldValue bean="${userInstance}" field="email" />
 					</g:if> <g:if test="${!userInstance?.email}">
-				---
-				</g:if></td>
+						${message(code: 'lbl.user.novalue')}
+					</g:if></td>
 			</tr>
-
 			<tr>
-				<td>Name</td>
+				<td>
+					${message(code: 'lbl.user.name')}
+				</td>
 				<td><g:if test="${userInstance?.name}">
 						<g:fieldValue bean="${userInstance}" field="name" />
 					</g:if> <g:if test="${!userInstance?.name}">
-			---
-		</g:if></td>
+						${message(code: 'lbl.user.novalue')}
+					</g:if></td>
 			</tr>
-
-
-
-
-
 			<tr>
-				<td>Phone</td>
+				<td>
+					${message(code: 'lbl.user.phone')}
+				</td>
 				<td><g:if test="${userInstance?.phone}">
 						<g:fieldValue bean="${userInstance}" field="phone" />
 					</g:if> <g:if test="${!userInstance?.phone}">
-			---
-		</g:if></td>
+						${message(code: 'lbl.user.novalue')}
+					</g:if></td>
 			</tr>
 			<tr>
-				<td>Image</td>
+				<td>
+					${message(code: 'lbl.user.image')}
+				</td>
 				<td><g:if test="${userInstance?.image}">
 						<g:fieldValue bean="${userInstance}" field="image" />
 					</g:if> <g:if test="${!userInstance?.image}">
-			---
-		</g:if></td>
+						${message(code: 'lbl.user.novalue')}
+					</g:if></td>
 			</tr>
 		</table>
 
@@ -79,7 +77,7 @@
 			<div class="buttons">
 				<g:hiddenField name="id" value="${userInstance?.id}" />
 				<g:link class="edit" action="edit" id="${userInstance?.id}">
-					<g:message code="default.button.edit.label" default="Edit" />
+					${message(code: 'msg.meetme.edit')}
 				</g:link>
 			</div>
 		</g:form>

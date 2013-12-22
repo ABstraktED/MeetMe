@@ -1,12 +1,11 @@
 <%@ page import="pwr.itapp.meetme.auth.User" %>
 <g:applyLayout name="event_layout">
 	<head>
-		<g:set var="entityName" value="${message(code: 'user.label', default: 'User')}" />
-		<title><g:message code="default.edit.label" args="[entityName]" /></title>
+		<title>${message(code: 'title.user.editProfile')}</title>
 	</head>
 	<content tag="event_content">
 		<div id="edit-user" class="content scaffold-edit" role="main">
-			<h1><g:message code="default.edit.label" args="[entityName]" /></h1>
+			<h1>${message(code: 'title.user.editProfile')}</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -24,9 +23,9 @@
 					<g:render template="form"/>
 				</div>
 				<div class="buttons">
-					<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+					<g:actionSubmit class="save" action="update" value="Update" />
 					<a
-					href="<g:createLink controller="user" action="changePassword"/>/${userInstance?.id}">Change password</a>
+					href="<g:createLink controller="user" action="changePassword"/>/${userInstance?.id}">${message(code: 'msg.meetme.changePassword')}</a>
 				</div>
 			</g:form>
 		</div>

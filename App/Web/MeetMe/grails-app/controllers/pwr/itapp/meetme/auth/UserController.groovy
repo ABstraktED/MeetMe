@@ -7,6 +7,37 @@ class UserController {
 
     static allowedMethods = [save: "POST", saveAdmin: "POST", update: "POST", updateAdmin: "POST", delete: "POST", changePasswordPost : "POST"]
 
+	def activate(Long id)
+	{
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+			redirect(action: "list")
+			return
+		}
+		
+		if(userInstance.status)
+		{
+			flash.message = message(code:'msg.user.activate.alreadyActivated')
+			redirect(action: "list")
+		}
+		else
+		{
+			userInstance.status = true;
+			if(userInstance.save(flush: true))
+			{
+			flash.message = message(code:'msg.user.activate.Activated')
+			}
+			else
+			{
+				flash.message = message(code:'msg.meetme.error');
+			}
+			
+			redirect(action: "list")
+		}
+		
+	}
+	
 	def changePassword(Long id) {
 		def userInstance = User.get(id)
 		if (!userInstance) {
@@ -28,6 +59,37 @@ class UserController {
 	def create ()
 	{
 		[userInstance: new User(params), password2 : ""]
+	}
+	
+	def deactivate(Long id)
+	{
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'msg.meetme.error')
+			redirect(action: "list")
+			return
+		}
+		
+		if(!userInstance.status)
+		{
+			flash.message = message(code: 'msg.user.deactivate.alreadyDeactivated')
+			redirect(action: "list")
+		}
+		else
+		{
+			userInstance.status = false;
+			if(userInstance.save(flush: true))
+			{
+			flash.message =  message(code: 'msg.user.deactivate.Deactivated')
+			}
+			else
+			{
+				flash.message = message(code: 'msg.meetme.error')
+			}
+			
+			redirect(action: "list")
+		}
+		
 	}
 	
 	def delete(Long id) {

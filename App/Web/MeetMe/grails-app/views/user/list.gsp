@@ -2,13 +2,11 @@
 <%@ page import="pwr.itapp.meetme.auth.User"%>
 <g:applyLayout name="event_layout">
 	<head>
-<g:set var="entityName"
-	value="${message(code: 'user.label', default: 'User')}" />
-<title><g:message code="default.list.label" args="[entityName]" /></title>
+<title>${message(code: 'title.user.UserManagementConsole')}</title>
 	</head>
 	<content tag="event_content">
 	<div id="list-user" class="content scaffold-list" role="main">
-		<h1>User management console</h1>
+		<h1>${message(code: 'title.user.UserManagementConsole')}</h1>
 		<g:if test="${flash.message}">
 			<div class="message" role="status">
 				${flash.message}
@@ -18,22 +16,22 @@
 			<thead>
 				<tr>
 					<g:sortableColumn property="name"
-						title="${message(code: 'user.name.label', default: 'Name')}" />
+						title="${message(code: 'lbl.user.name')}" />
 
 					<g:sortableColumn property="email"
-						title="${message(code: 'user.email.label', default: 'Email')}" />
+						title="${message(code: 'lbl.user.email')}" />
 
 					<g:sortableColumn property="username"
-						title="${message(code: 'user.username.label', default: 'Username')}" />
+						title="${message(code: 'lbl.user.username', default: 'Username')}" />
 
 					<g:sortableColumn property="phone"
-						title="${message(code: 'user.phone.label', default: 'Phone')}" />
+						title="${message(code: 'lbl.user.phone')}" />
 
-					<td>Status</td>
-					<td>Lock</td>
-					<td>Expire</td>
-					<td>Enable</td>
-					<td>Actions</td>
+					<td>${message(code: 'lbl.user.status')}</td>
+					<td>${message(code: 'lbl.user.lock')}</td>
+					<td>${message(code: 'lbl.user.expire')}</td>
+					<td>${message(code: 'lbl.user.enable')}</td>
+					<td>${message(code: 'lbl.user.actions')}</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,24 +52,24 @@
 						</td>
 
 						<td><g:if test="${!userInstance.status}">
-							Deactivate
+							Deactivate-><g:message code='msg.meetme.activate'/>
 						</g:if> <g:if test="${userInstance.status}">
-							Activate
+							Activate-><g:message code='msg.meetme.deactivate'/>
 						</g:if></td>
 						<td><g:if test="${userInstance.accountLocked}">
-							Locked
+							Locked-><g:message code='msg.meetme.unlock'/>
 						</g:if> <g:if test="${!userInstance.accountLocked}">
-							Unlocked
+							Unlocked-><g:message code='msg.meetme.lock'/>
 						</g:if></td>
 						<td><g:if test="${userInstance.accountExpired}">
-							Expired
+							Expired->..
 						</g:if> <g:if test="${!userInstance.accountExpired}">
-							OK
+							OK->...
 						</g:if></td>
 						<td><g:if test="${!userInstance.enabled}">
-							Disabled
+							Disabled-><g:message code='msg.meetme.enable'/>
 						</g:if> <g:if test="${userInstance.enabled}">
-							Enabled
+							Enabled-<g:message code='msg.meetme.disable'/>
 						</g:if></td>
 
 
@@ -80,7 +78,7 @@
 
 
 						<td><g:link action="show" id="${userInstance.id}">
-								Display
+								${message(code: 'msg.meetme.display')}
 							</g:link></td>
 
 					</tr>

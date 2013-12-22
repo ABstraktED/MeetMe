@@ -50,7 +50,6 @@
 						<td>
 							${fieldValue(bean: userInstance, field: "phone")}
 						</td>
-
 						<td><g:if test="${!userInstance.status}">
 						
 						<g:link action="activate" id="${userInstance.id}">
@@ -75,7 +74,9 @@
 								${message(code: 'msg.meetme.extend')}
 							</g:link>
 						</g:if> <g:if test="${!userInstance.accountExpired}">
-							OK
+							<g:link action="expire" id="${userInstance.id}">
+								${message(code: 'msg.meetme.expire')}
+							</g:link>
 						</g:if></td>
 						<td><g:if test="${!userInstance.enabled}">
 							<g:link action="enable" id="${userInstance.id}">

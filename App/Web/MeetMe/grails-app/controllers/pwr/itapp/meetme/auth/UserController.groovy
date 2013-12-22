@@ -111,6 +111,35 @@ class UserController {
 		}
 	}
 	
+	def disable(Long id){
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'msg.meetme.error')
+			redirect(action: "list")
+			return
+		}
+		
+		if(!userInstance.enabled)
+		{
+			flash.message = message(code: 'msg.user.disable.alreadyDisabled')
+			redirect(action: "list")
+		}
+		else
+		{
+			userInstance.enabled = false;
+			if(userInstance.save(flush: true))
+			{
+			flash.message =  message(code: 'msg.user.disable.Disabled')
+			}
+			else
+			{
+				flash.message = message(code: 'msg.meetme.error')
+			}
+			
+			redirect(action: "list")
+		}
+	}
+	
 	def edit(Long id) {
 		def userInstance = User.get(id)
 		if (!userInstance) {
@@ -122,6 +151,91 @@ class UserController {
 		[userInstance: userInstance]
 	}
 	
+	def enable(Long id){
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'msg.meetme.error')
+			redirect(action: "list")
+			return
+		}
+		
+		if(userInstance.enabled)
+		{
+			flash.message = message(code: 'msg.user.enable.alreadyEnabled')
+			redirect(action: "list")
+		}
+		else
+		{
+			userInstance.enabled = true;
+			if(userInstance.save(flush: true))
+			{
+			flash.message =  message(code: 'msg.user.enable.Enabled')
+			}
+			else
+			{
+				flash.message = message(code: 'msg.meetme.error')
+			}
+			
+			redirect(action: "list")
+		}
+	}
+	def expire(Long id){
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'msg.meetme.error')
+			redirect(action: "list")
+			return
+		}
+		
+		if(userInstance.accountExpired)
+		{
+			flash.message = message(code: 'msg.user.expire.alreadyExpired')
+			redirect(action: "list")
+		}
+		else
+		{
+			userInstance.accountExpired = true;
+			if(userInstance.save(flush: true))
+			{
+			flash.message =  message(code: 'msg.user.expire.Expired')
+			}
+			else
+			{
+				flash.message = message(code: 'msg.meetme.error')
+			}
+			
+			redirect(action: "list")
+		}
+	}
+	
+	def extend(Long id){
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'msg.meetme.error')
+			redirect(action: "list")
+			return
+		}
+		
+		if(!userInstance.accountExpired)
+		{
+			flash.message = message(code: 'msg.user.extend.notExpired')
+			redirect(action: "list")
+		}
+		else
+		{
+			userInstance.accountExpired = false;
+			if(userInstance.save(flush: true))
+			{
+			flash.message =  message(code: 'msg.user.extend.Extended')
+			}
+			else
+			{
+				flash.message = message(code: 'msg.meetme.error')
+			}
+			
+			redirect(action: "list")
+		}
+	}
 	
     def index() {
         redirect(action: "create", params: params)
@@ -133,6 +247,35 @@ class UserController {
         [userInstanceList: User.list(params), userInstanceTotal: User.count()]
     }
 
+	def lock(Long id){
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'msg.meetme.error')
+			redirect(action: "list")
+			return
+		}
+		
+		if(userInstance.accountLocked)
+		{
+			flash.message = message(code: 'msg.user.lock.alreadyLocked')
+			redirect(action: "list")
+		}
+		else
+		{
+			userInstance.accountLocked = true;
+			if(userInstance.save(flush: true))
+			{
+			flash.message =  message(code: 'msg.user.lock.Locked')
+			}
+			else
+			{
+				flash.message = message(code: 'msg.meetme.error')
+			}
+			
+			redirect(action: "list")
+		}
+	}
+	
     def save() {
 		println 'SAVE'
         def userInstance = new User(params)
@@ -169,7 +312,35 @@ class UserController {
         [userInstance: userInstance]
     }
 
-
+	def unlock(Long id){
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'msg.meetme.error')
+			redirect(action: "list")
+			return
+		}
+		
+		if(!userInstance.accountLocked)
+		{
+			flash.message = message(code: 'msg.user.unlock.alreadyUnlocked')
+			redirect(action: "list")
+		}
+		else
+		{
+			userInstance.accountLocked = false;
+			if(userInstance.save(flush: true))
+			{
+			flash.message =  message(code: 'msg.user.unlock.Unlocked')
+			}
+			else
+			{
+				flash.message = message(code: 'msg.meetme.error')
+			}
+			
+			redirect(action: "list")
+		}
+	}
+	
     def update(Long id, Long version) {
 		println 'UPDATE'
         def userInstance = User.get(id)

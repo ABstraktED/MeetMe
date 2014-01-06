@@ -70,7 +70,9 @@ class UserController {
 		}
 		else
 		{
-			throw new Exception("Cannot update user from invitation because he is not existing")
+			//throw new Exception("Cannot update user from invitation because he is not existing")
+			flash.message = "Cannot update user from invitation because he is not existing"
+			redirect(action: "index")
 		}
 	}
 	def deactivate(Long id)
@@ -345,7 +347,7 @@ class UserController {
 		}
 
 		flash.message = message(code: 'msg.user.create.created')
-		redirect(action: "show", id: userInstance.id)
+		redirect(action: "show", id: currentUserInstance.id)
 	}
 
     def show(Long id) {

@@ -43,7 +43,9 @@ class InvitationController {
 		}
 		else
 		{
-			throw Exception("This invitation was already served or user is active")
+			//throw Exception("This invitation was already served or user is active")
+			flash.message = "This invitation was already served or user is active"
+			redirect(action: "index");
 		}
 	}
 	
@@ -136,11 +138,17 @@ class InvitationController {
 		{
 			if(invitedUser.status)
 			{
-				throw Exception("You are trying to invite via email existing, ACTIVE user - implement adding him a inviatation")
+				//TODO implementation of adding invitation to active user
+				//throw Exception("You are trying to invite via email existing, ACTIVE user - implement adding him a inviatation")
+				flash.message = "You are trying to invite via email existing, ACTIVE user - implement adding him a invitation"
+				redirect(action: "index");
 			}
 			else
 			{
-				throw Exception("You are trying to invite via email existing, INACTIVE user - implement adding him a inviatation")
+				//TODO implementation of adding invitation to active user
+				//throw Exception("You are trying to invite via email existing, INACTIVE user - implement adding him a inviatation")
+				flash.message = "You are trying to invite via email existing, INACTIVE user - implement adding him a invitation"
+				redirect(action: "index");
 			}
 		}
 		
@@ -156,9 +164,13 @@ class InvitationController {
 		// to be changed during registration
 		newInactiveUser.password = guid
 		newInactiveUser.username = guid
+		newInactiveUser.status = false;
 		
 		if (!newInactiveUser.save(flush: true)) {
-			throw Exception("Creating new Inactive User failed")
+			
+			//throw Exception("Creating new Inactive User failed")
+			flash.message = "Creating new user failed"
+			redirect(action: "index");
 		}
 		
 		
@@ -171,7 +183,9 @@ class InvitationController {
 		
 		
 		if (!newInvitation.save(flush: true)) {
-			throw Exception("Creating new Invitation failed")
+			//throw Exception("Creating new Invitation failed")
+			flash.message = "Creating new invitation failed"
+			redirect(action: "index");
 		}
 		
 		// generate link

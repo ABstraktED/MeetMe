@@ -39,8 +39,8 @@ class BootStrap {
 		assert Role.count() == 2
 		assert UserRole.count() == 6
 
-		def testLocation = new Location(address: 'place 1', lat: 1, lng: 1)
-		testLocation.save(flush: true)
+		//def testLocation = new Location(address: 'place 1', lat: 1, lng: 1)
+		//testLocation.save(flush: true)
 	}
 	def destroy = {
 	}

@@ -61,6 +61,18 @@ class UserController {
 		[userInstance: new User(params), password2 : ""]
 	}
 	
+	def createFromInvitation()
+	{
+		User user = User.findByGuid(params.guid);
+		if(user != null)
+		{
+			[userInstance: user, password2 : ""]
+		}
+		else
+		{
+			throw new Exception("Cannot update user from invitation because he is not existing")
+		}
+	}
 	def deactivate(Long id)
 	{
 		def userInstance = User.get(id)
@@ -297,9 +309,44 @@ class UserController {
 			return
 		}
 
-        flash.message = message(code: 'default.created.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
+        flash.message = message(code: 'msg.user.create.created')
         redirect(action: "show", id: userInstance.id)
     }
+	
+	def saveFromInvitation() {
+		println 'SAVE FROM INVITATION'
+		def newUserInstance = new User(params)
+		def currentUserInstance = User.findByGuid(params.guid)
+		
+		if(newUserInstance.password == params.password2)
+		{
+			currentUserInstance.passwordExpired = false
+			currentUserInstance.accountExpired = false
+			currentUserInstance.accountLocked = false
+			currentUserInstance.enabled = true
+			currentUserInstance.status = true
+			
+			currentUserInstance.username = newUserInstance.username
+			currentUserInstance.password = newUserInstance.password
+			currentUserInstance.guid = "";
+			currentUserInstance.name = newUserInstance.name
+			currentUserInstance.phone = newUserInstance.phone
+			
+			if (!currentUserInstance.save(flush: true)) {
+				render(view: "create", model: [userInstance: currentUserInstance])
+				return
+			}
+		}
+		else
+		{
+			flash.message = 'Password not matching'
+			render(view: "create", model: [userInstance: userInstance])
+			return
+		}
+
+		flash.message = message(code: 'msg.user.create.created')
+		redirect(action: "show", id: userInstance.id)
+	}
 
     def show(Long id) {
         def userInstance = User.get(id)

@@ -32,6 +32,20 @@ class InvitationController {
 		redirect(controller: "event", action: "show", id: params.eventId)
 	}
 
+	def acceptUnregisteredInvitation(String guid)
+ 	{
+ 		def inactiveUser = User.findByGuid(guid);
+		
+		if(inactiveUser != null)
+		{
+			// there exists inactive user in database
+			redirect(controller: "user", action: "createFromInvitation", params: [guid: guid]);
+		}
+		else
+		{
+			throw Exception("This invitation was already served or user is active")
+		}
+	}
 	
 	def userListJSON(){
 		
@@ -53,7 +67,7 @@ class InvitationController {
 		def eventInstance = Event.get(params.eventId)
 		def dateString = eventInstance.date.format("dd/MM/yyyy hh:mm");
 		sendMail {
-			to "folque@gmail.com" //params.email
+			to "lukasz.p.czarny@gmail.com" //params.email
 			subject "[MeetMe Client] You have new invitation"
 			html g.render(template:"invitationByMailTemplate",
 			model:[event: eventInstance.title,
@@ -116,16 +130,64 @@ class InvitationController {
 		}
 
 		def eventInstance = Event.get(eventId)
-		def dateString = eventInstance.date.format("dd/MM/yyyy hh:mm");//new SimpleDateFormat("dd/MM/yyyy hh:mm").parse(eventInstance.date)
+		def dateString = eventInstance.date.format("dd/MM/yyyy hh:mm");
+		def invitedUser = User.findByEmail(params.email)
+		if(invitedUser != null )
+		{
+			if(invitedUser.status)
+			{
+				throw Exception("You are trying to invite via email existing, ACTIVE user - implement adding him a inviatation")
+			}
+			else
+			{
+				throw Exception("You are trying to invite via email existing, INACTIVE user - implement adding him a inviatation")
+			}
+		}
+		
+		
+		// generate GUID
+		def guid = UUID.randomUUID().toString();
+		
+		// creating new inactive user 
+		def newInactiveUser = new User();
+		newInactiveUser.email = params.email;
+		newInactiveUser.guid = guid;
+		// considering fact that constrains dont allows for creating user with empty username and password we set temporary values
+		// to be changed during registration
+		newInactiveUser.password = guid
+		newInactiveUser.username = guid
+		
+		if (!newInactiveUser.save(flush: true)) {
+			throw Exception("Creating new Inactive User failed")
+		}
+		
+		
+		def newInvitation = new Invitation();
+		newInvitation.event = eventInstance;
+		// TODO check if status and confirmation values are OK
+		newInvitation.status = true;
+		newInvitation.confirmation = false;
+		newInvitation.user = newInactiveUser;
+		
+		
+		if (!newInvitation.save(flush: true)) {
+			throw Exception("Creating new Invitation failed")
+		}
+		
+		// generate link
+		def g = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
+		def inviteUrl = g.createLink(controller: 'invitation', action: 'acceptUnregisteredInvitation', absolute: 'true') + "?guid=" + guid;
+		// send email
+		
 		sendMail {
-			to "folque@gmail.com" //params.email
+			to "lukasz.p.czarny@gmail.com" //params.email
 			subject "[MeetMe Client] You have new invitation"
 			html g.render(template:"invitationByMailTemplate",
 			model:[event: eventInstance.title,
 				invitedBy :eventInstance.user.name,
 				description: eventInstance.description,
 				eventDate : dateString,
-				link: 'http://www.wp.pl',
+				link: inviteUrl,
 				eventId:eventId,
 				recipientEmail: params.email])
 		}

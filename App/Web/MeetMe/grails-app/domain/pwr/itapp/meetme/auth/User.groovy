@@ -19,11 +19,13 @@ class User {
 	boolean status
 	String image
 	Location location
+	String guid
 
 	static transients = ['springSecurityService']
 
 	static constraints = {
-		username blank: false, unique: true, nullable: false
+		//TODO : for now validation of users with empty username and password are allowed
+		username blank: false, nullable: false, unique: true
 		password blank: false, nullable: false
 
 		email email: true, blank: false, unique: true

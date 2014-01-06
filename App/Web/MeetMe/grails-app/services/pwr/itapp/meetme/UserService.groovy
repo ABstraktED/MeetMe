@@ -17,7 +17,7 @@ class UserService {
 				if(usersInvitations.size() == 0)
 				{
 					println "delete user " + user.email
-					//user.delete();
+					user.delete();
 				}
 				
 			}
@@ -44,7 +44,7 @@ class UserService {
 				if(!item.user.status && item.event.date.before(cal.getTime()))
 				{
 					println "delete invitation " + item.event.date + " for " + item.user.email + " with status = " + item.user.status
-					//item.delete();
+					item.delete();
 				} 
 				
 			}

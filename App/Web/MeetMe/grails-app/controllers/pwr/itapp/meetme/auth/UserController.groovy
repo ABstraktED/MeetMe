@@ -5,126 +5,123 @@ import grails.plugin.springsecurity.annotation.Secured
 
 class UserController {
 
-    static allowedMethods = [save: "POST", saveAdmin: "POST", update: "POST", updateAdmin: "POST", delete: "POST", changePasswordPost : "POST"]
+	static allowedMethods = [save: "POST", saveAdmin: "POST", update: "POST", updateAdmin: "POST", delete: "POST", changePasswordPost : "POST"]
 
-	def activate(Long id)
-	{
+	def activate(Long id) {
 		def userInstance = User.get(id)
 		if (!userInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'user.label', default: 'User'),
+				id
+			])
 			redirect(action: "list")
 			return
 		}
-		
-		if(userInstance.status)
-		{
+
+		if(userInstance.status) {
 			flash.message = message(code:'msg.user.activate.alreadyActivated')
 			redirect(action: "list")
 		}
-		else
-		{
+		else {
 			userInstance.status = true;
-			if(userInstance.save(flush: true))
-			{
-			flash.message = message(code:'msg.user.activate.Activated')
+			if(userInstance.save(flush: true)) {
+				flash.message = message(code:'msg.user.activate.Activated')
 			}
-			else
-			{
+			else {
 				flash.message = message(code:'msg.meetme.error');
 			}
-			
+
 			redirect(action: "list")
 		}
-		
 	}
-	
+
 	def changePassword(Long id) {
 		def userInstance = User.get(id)
 		if (!userInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'user.label', default: 'User'),
+				id
+			])
 			redirect(action: "list")
 			return
 		}
 
 		[userInstance: userInstance]
 	}
-	
-	def changePasswordPost()
-	{
+
+	def changePasswordPost() {
 		flash.message = "Password changed";
 		redirect(action: "index")
-		
 	}
-	
-	def create ()
-	{
+
+	def create () {
 		[userInstance: new User(params), password2 : ""]
 	}
-	
-	def createFromInvitation()
-	{
+
+	def createFromInvitation() {
 		User user = User.findByGuid(params.guid);
-		if(user != null)
-		{
+		if(user != null) {
 			[userInstance: user, password2 : ""]
 		}
-		else
-		{
+		else {
 			//throw new Exception("Cannot update user from invitation because he is not existing")
 			flash.message = "Cannot update user from invitation because he is not existing"
 			redirect(action: "index")
 		}
 	}
-	def deactivate(Long id)
-	{
+	def deactivate(Long id) {
 		def userInstance = User.get(id)
 		if (!userInstance) {
 			flash.message = message(code: 'msg.meetme.error')
 			redirect(action: "list")
 			return
 		}
-		
-		if(!userInstance.status)
-		{
+
+		if(!userInstance.status) {
 			flash.message = message(code: 'msg.user.deactivate.alreadyDeactivated')
 			redirect(action: "list")
 		}
-		else
-		{
+		else {
 			userInstance.status = false;
-			if(userInstance.save(flush: true))
-			{
-			flash.message =  message(code: 'msg.user.deactivate.Deactivated')
+			if(userInstance.save(flush: true)) {
+				flash.message =  message(code: 'msg.user.deactivate.Deactivated')
 			}
-			else
-			{
+			else {
 				flash.message = message(code: 'msg.meetme.error')
 			}
-			
+
 			redirect(action: "list")
 		}
-		
 	}
-	
+
 	def delete(Long id) {
 		def userInstance = User.get(id)
 		if (!userInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'user.label', default: 'User'),
+				id
+			])
 			redirect(action: "list")
 			return
 		}
 
 		try {
 			userInstance.delete(flush: true)
-			flash.message = message(code: 'default.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+			flash.message = message(code: 'default.deleted.message', args: [
+				message(code: 'user.label', default: 'User'),
+				id
+			])
 			redirect(action: "list")
 		}
 		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'user.label', default: 'User'), id])
+			flash.message = message(code: 'default.not.deleted.message', args: [
+				message(code: 'user.label', default: 'User'),
+				id
+			])
 			redirect(action: "show", id: id)
 		}
 	}
-	
+
 	def disable(Long id){
 		def userInstance = User.get(id)
 		if (!userInstance) {
@@ -132,39 +129,38 @@ class UserController {
 			redirect(action: "list")
 			return
 		}
-		
-		if(!userInstance.enabled)
-		{
+
+		if(!userInstance.enabled) {
 			flash.message = message(code: 'msg.user.disable.alreadyDisabled')
 			redirect(action: "list")
 		}
-		else
-		{
+		else {
 			userInstance.enabled = false;
-			if(userInstance.save(flush: true))
-			{
-			flash.message =  message(code: 'msg.user.disable.Disabled')
+			if(userInstance.save(flush: true)) {
+				flash.message =  message(code: 'msg.user.disable.Disabled')
 			}
-			else
-			{
+			else {
 				flash.message = message(code: 'msg.meetme.error')
 			}
-			
+
 			redirect(action: "list")
 		}
 	}
-	
+
 	def edit(Long id) {
 		def userInstance = User.get(id)
 		if (!userInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'user.label', default: 'User'),
+				id
+			])
 			redirect(action: "list")
 			return
 		}
 
 		[userInstance: userInstance]
 	}
-	
+
 	def enable(Long id){
 		def userInstance = User.get(id)
 		if (!userInstance) {
@@ -172,24 +168,20 @@ class UserController {
 			redirect(action: "list")
 			return
 		}
-		
-		if(userInstance.enabled)
-		{
+
+		if(userInstance.enabled) {
 			flash.message = message(code: 'msg.user.enable.alreadyEnabled')
 			redirect(action: "list")
 		}
-		else
-		{
+		else {
 			userInstance.enabled = true;
-			if(userInstance.save(flush: true))
-			{
-			flash.message =  message(code: 'msg.user.enable.Enabled')
+			if(userInstance.save(flush: true)) {
+				flash.message =  message(code: 'msg.user.enable.Enabled')
 			}
-			else
-			{
+			else {
 				flash.message = message(code: 'msg.meetme.error')
 			}
-			
+
 			redirect(action: "list")
 		}
 	}
@@ -200,28 +192,24 @@ class UserController {
 			redirect(action: "list")
 			return
 		}
-		
-		if(userInstance.accountExpired)
-		{
+
+		if(userInstance.accountExpired) {
 			flash.message = message(code: 'msg.user.expire.alreadyExpired')
 			redirect(action: "list")
 		}
-		else
-		{
+		else {
 			userInstance.accountExpired = true;
-			if(userInstance.save(flush: true))
-			{
-			flash.message =  message(code: 'msg.user.expire.Expired')
+			if(userInstance.save(flush: true)) {
+				flash.message =  message(code: 'msg.user.expire.Expired')
 			}
-			else
-			{
+			else {
 				flash.message = message(code: 'msg.meetme.error')
 			}
-			
+
 			redirect(action: "list")
 		}
 	}
-	
+
 	def extend(Long id){
 		def userInstance = User.get(id)
 		if (!userInstance) {
@@ -229,37 +217,33 @@ class UserController {
 			redirect(action: "list")
 			return
 		}
-		
-		if(!userInstance.accountExpired)
-		{
+
+		if(!userInstance.accountExpired) {
 			flash.message = message(code: 'msg.user.extend.notExpired')
 			redirect(action: "list")
 		}
-		else
-		{
+		else {
 			userInstance.accountExpired = false;
-			if(userInstance.save(flush: true))
-			{
-			flash.message =  message(code: 'msg.user.extend.Extended')
+			if(userInstance.save(flush: true)) {
+				flash.message =  message(code: 'msg.user.extend.Extended')
 			}
-			else
-			{
+			else {
 				flash.message = message(code: 'msg.meetme.error')
 			}
-			
+
 			redirect(action: "list")
 		}
 	}
-	
-    def index() {
-        redirect(action: "create", params: params)
-    }
-	
+
+	def index() {
+		redirect(action: "create", params: params)
+	}
+
 	@Secured(['ROLE_ADMIN'])
-    def list(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-        [userInstanceList: User.list(params), userInstanceTotal: User.count()]
-    }
+	def list(Integer max) {
+		params.max = Math.min(max ?: 10, 100)
+		[userInstanceList: User.list(params), userInstanceTotal: User.count()]
+	}
 
 	def lock(Long id){
 		def userInstance = User.get(id)
@@ -268,58 +252,62 @@ class UserController {
 			redirect(action: "list")
 			return
 		}
-		
-		if(userInstance.accountLocked)
-		{
+
+		if(userInstance.accountLocked) {
 			flash.message = message(code: 'msg.user.lock.alreadyLocked')
 			redirect(action: "list")
 		}
-		else
-		{
+		else {
 			userInstance.accountLocked = true;
-			if(userInstance.save(flush: true))
-			{
-			flash.message =  message(code: 'msg.user.lock.Locked')
+			if(userInstance.save(flush: true)) {
+				flash.message =  message(code: 'msg.user.lock.Locked')
 			}
-			else
-			{
+			else {
 				flash.message = message(code: 'msg.meetme.error')
 			}
-			
+
 			redirect(action: "list")
 		}
 	}
-	
-    def save() {
+
+	def save() {
 		println 'SAVE'
-        def userInstance = new User(params)
-		if(userInstance.password == params.password2)
-		{
-			userInstance.passwordExpired = false
-			userInstance.accountExpired = false
-			userInstance.accountLocked = false
-			userInstance.enabled = true
-	        if (!userInstance.save(flush: true)) {
-	            render(view: "create", model: [userInstance: userInstance])
-	            return
-	        }
+		def userInstance = new User(params)
+		if (userInstance.validate()) {
+			// do something with user
+
+
+			if(userInstance.password == params.password2)
+			{
+				userInstance.passwordExpired = false
+				userInstance.accountExpired = false
+				userInstance.accountLocked = false
+				userInstance.enabled = true
+				if (!userInstance.save(flush: true)) {
+					render(view: "create", model: [userInstance: userInstance])
+					return
+				}
+			}
+			else
+			{
+				flash.message = 'Password not matching'
+				render(view: "create", model: [userInstance: userInstance])
+				return
+			}
 		}
-		else
-		{
-			flash.message = 'Password not matching'
-			render(view: "create", model: [userInstance: userInstance])
-			return
+		else {
+			userInstance.errors.allErrors.each { println it }
 		}
 
-        flash.message = message(code: 'msg.user.create.created')
-        redirect(action: "show", id: userInstance.id)
-    }
-	
+		flash.message = message(code: 'msg.user.create.created')
+		redirect(action: "show", id: userInstance.id)
+	}
+
 	def saveFromInvitation() {
 		println 'SAVE FROM INVITATION'
 		def newUserInstance = new User(params)
 		def currentUserInstance = User.findByGuid(params.guid)
-		
+
 		if(newUserInstance.password == params.password2)
 		{
 			currentUserInstance.passwordExpired = false
@@ -327,13 +315,13 @@ class UserController {
 			currentUserInstance.accountLocked = false
 			currentUserInstance.enabled = true
 			currentUserInstance.status = true
-			
+
 			currentUserInstance.username = newUserInstance.username
 			currentUserInstance.password = newUserInstance.password
 			currentUserInstance.guid = "";
 			currentUserInstance.name = newUserInstance.name
 			currentUserInstance.phone = newUserInstance.phone
-			
+
 			if (!currentUserInstance.save(flush: true)) {
 				render(view: "create", model: [userInstance: currentUserInstance])
 				return
@@ -350,16 +338,19 @@ class UserController {
 		redirect(action: "show", id: currentUserInstance.id)
 	}
 
-    def show(Long id) {
-        def userInstance = User.get(id)
-        if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
-            return
-        }
+	def show(Long id) {
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'user.label', default: 'User'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
 
-        [userInstance: userInstance]
-    }
+		[userInstance: userInstance]
+	}
 
 	def unlock(Long id){
 		def userInstance = User.get(id)
@@ -368,7 +359,7 @@ class UserController {
 			redirect(action: "list")
 			return
 		}
-		
+
 		if(!userInstance.accountLocked)
 		{
 			flash.message = message(code: 'msg.user.unlock.alreadyUnlocked')
@@ -379,49 +370,56 @@ class UserController {
 			userInstance.accountLocked = false;
 			if(userInstance.save(flush: true))
 			{
-			flash.message =  message(code: 'msg.user.unlock.Unlocked')
+				flash.message =  message(code: 'msg.user.unlock.Unlocked')
 			}
 			else
 			{
 				flash.message = message(code: 'msg.meetme.error')
 			}
-			
+
 			redirect(action: "list")
 		}
 	}
-	
-    def update(Long id, Long version) {
+
+	def update(Long id, Long version) {
 		println 'UPDATE'
-        def userInstance = User.get(id)
-        if (!userInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'user.label', default: 'User'), id])
-            redirect(action: "list")
-            return
-        }
+		def userInstance = User.get(id)
+		if (!userInstance) {
+			flash.message = message(code: 'default.not.found.message', args: [
+				message(code: 'user.label', default: 'User'),
+				id
+			])
+			redirect(action: "list")
+			return
+		}
 
-        if (version != null) {
-            if (userInstance.version > version) {
-                userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
-                          [message(code: 'user.label', default: 'User')] as Object[],
-                          "Another user has updated this User while you were editing")
-                render(view: "edit", model: [userInstance: userInstance])
-                return
-            }
-        }
+		if (version != null) {
+			if (userInstance.version > version) {
+				userInstance.errors.rejectValue("version", "default.optimistic.locking.failure",
+						[
+							message(code: 'user.label', default: 'User')] as Object[],
+						"Another user has updated this User while you were editing")
+				render(view: "edit", model: [userInstance: userInstance])
+				return
+			}
+		}
 
-        userInstance.properties = params
+		userInstance.properties = params
 
-        if (!userInstance.save(flush: true)) {
-            render(view: "edit", model: [userInstance: userInstance])
-            return
-        }
+		if (!userInstance.save(flush: true)) {
+			render(view: "edit", model: [userInstance: userInstance])
+			return
+		}
 
-        flash.message = message(code: 'default.updated.message', args: [message(code: 'user.label', default: 'User'), userInstance.id])
-        redirect(action: "show", id: userInstance.id)
-    }
+		flash.message = message(code: 'default.updated.message', args: [
+			message(code: 'user.label', default: 'User'),
+			userInstance.id
+		])
+		redirect(action: "show", id: userInstance.id)
+	}
 
 
 
-	
+
 
 }

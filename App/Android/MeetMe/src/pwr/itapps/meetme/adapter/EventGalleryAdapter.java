@@ -1,6 +1,5 @@
 package pwr.itapps.meetme.adapter;
 
-import java.sql.Array;
 import java.util.List;
 
 import com.nostra13.universalimageloader.core.ImageLoader;

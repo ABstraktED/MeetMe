@@ -6,14 +6,16 @@
 
     <string-array name="menu_options">
         <item>Main</item>
-        <item>Week</item>
+        <item>Map</item>
+        <item>Events</item>
         <item>Today</item>
         <item>Accepted</item>
-        <item>Resigned</item>
         <item>Friends</item>
+        <item>Settings</item>
     </string-array>
 	
     <string name="title_activity_register">Sign up</string>
+    <string name="title_activity_map">Map</string>
 	<string name="App_logo">Application logo</string>
 	<string name="Avatar_image">Avatar</string>
 	<string name="ContentDescription">blabla</string>

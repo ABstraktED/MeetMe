@@ -2,7 +2,6 @@ package pwr.itapps.meetme.data;
 
 import java.util.Date;
 
-import android.graphics.drawable.Drawable;
 
 public class PersonData extends BaseData {
 

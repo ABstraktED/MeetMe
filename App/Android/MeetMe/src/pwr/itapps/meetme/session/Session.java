@@ -12,6 +12,7 @@ public class Session {
 
 	private static Session session;
 	private List<EventData> events = ev;
+	private List<PersonData> persons = friends;
 
 	private Session() {
 		super();
@@ -26,12 +27,21 @@ public class Session {
 	public List<EventData> getEvents() {
 		return events;
 	}
+	
+	public List<PersonData> getPersons() {
+		return persons;
+	}
 
 	// ****************************************************************
 	// ********************* testing data ****************************
 	// ****************************************************************
 
 	private static ArrayList<EventData> ev = new ArrayList<EventData>() {
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
 		{
 
 			final PersonData person0 = new PersonData("AAAA0", "AaAaAaA0",
@@ -60,6 +70,11 @@ public class Session {
 					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
 
 			final ArrayList<PersonData> visitors = new ArrayList<PersonData>() {
+				/**
+				 * 
+				 */
+				private static final long serialVersionUID = 1L;
+
 				{
 					add(person0);
 					add(person1);
@@ -73,6 +88,7 @@ public class Session {
 			};
 
 			final ArrayList<PersonData> organizators = new ArrayList<PersonData>() {
+				private static final long serialVersionUID = 1L;
 				{
 					add(person0);
 					add(person1);
@@ -86,6 +102,7 @@ public class Session {
 			};
 
 			final ArrayList<String> eventGallery = new ArrayList<String>() {
+				private static final long serialVersionUID = 1L;
 				{
 					add("http://newsinfo.iu.edu/pub/libs/images/usr/4984.jpg");
 					add("http://4.bp.blogspot.com/_5BhAyLGzLmE/TBENViiN5rI/AAAAAAAAAEk/CJ0mfXP9bvg/s1600/person.jpg");
@@ -94,6 +111,7 @@ public class Session {
 			};
 
 			final ArrayList<String> eventGallery1 = new ArrayList<String>() {
+				private static final long serialVersionUID = 1L;
 				{
 					add("http://4.bp.blogspot.com/_5BhAyLGzLmE/TBENViiN5rI/AAAAAAAAAEk/CJ0mfXP9bvg/s1600/person.jpg");
 					add("http://newsinfo.iu.edu/pub/libs/images/usr/4984.jpg");
@@ -101,6 +119,7 @@ public class Session {
 				}
 			};
 			final ArrayList<String> eventGallery2 = new ArrayList<String>() {
+				private static final long serialVersionUID = 1L;
 				{
 					add("http://evenesis.com/blog//wp-content/uploads/2012/06/hitech-events.jpg");
 					add("http://newsinfo.iu.edu/pub/libs/images/usr/4984.jpg");
@@ -146,6 +165,51 @@ public class Session {
 			add(ed3);
 			add(ed1);
 			add(ed2);
+		}
+	};
+	
+	private static ArrayList<PersonData> friends = new ArrayList<PersonData>() {
+
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -5275481986366281023L;
+
+		{
+
+			final PersonData person0 = new PersonData("AAAA0", "AaAaAaA0",
+					new Date(), "mesa", PersonStatus.AVAILABLE,
+					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
+			final PersonData person1 = new PersonData("AAAA1", "AaAaAaA1",
+					new Date(), "mesa", PersonStatus.AVAILABLE,
+					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
+			final PersonData person2 = new PersonData("AAAA2", "AaAaAaA2",
+					new Date(), "mesa", PersonStatus.AVAILABLE,
+					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
+			final PersonData person3 = new PersonData("AAAA3", "AaAaAaA3",
+					new Date(), "mesa", PersonStatus.AVAILABLE,
+					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
+			final PersonData person4 = new PersonData("AAAA4", "AaAaAaA4",
+					new Date(), "mesa", PersonStatus.AVAILABLE,
+					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
+			final PersonData person5 = new PersonData("AAAA5", "AaAaAaA5",
+					new Date(), "mesa", PersonStatus.AVAILABLE,
+					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
+			final PersonData person6 = new PersonData("AAAA6", "AaAaAaA6",
+					new Date(), "mesa", PersonStatus.AVAILABLE,
+					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
+			final PersonData person7 = new PersonData("AAAA7", "AaAaAaA7",
+					new Date(), "mesa", PersonStatus.AVAILABLE,
+					"http://bestclipartblog.com/clipart-pics/person-clip-art-13.gif");
+
+			add(person0);
+			add(person1);
+			add(person2);
+			add(person3);
+			add(person4);
+			add(person5);
+			add(person6);
+			add(person7);
 		}
 	};
 

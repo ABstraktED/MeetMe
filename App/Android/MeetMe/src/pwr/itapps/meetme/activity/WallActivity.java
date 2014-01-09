@@ -16,11 +16,10 @@ package pwr.itapps.meetme.activity;
  * limitations under the License.
  */
 
-import java.util.Locale;
-
 import pwr.itapps.meetme.R;
 import pwr.itapps.meetme.fragments.EventListFragment;
-import android.app.Activity;
+import pwr.itapps.meetme.fragments.FriendsFragment;
+import pwr.itapps.meetme.fragments.MapsFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.SearchManager;
@@ -28,21 +27,23 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.google.android.gms.maps.SupportMapFragment;
 
-public class WallActivity extends Activity {
+
+public class WallActivity extends FragmentActivity {
+
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerList;
 	private ActionBarDrawerToggle mDrawerToggle;
@@ -76,14 +77,14 @@ public class WallActivity extends Activity {
 				R.drawable.ic_drawer, R.string.drawer_open,
 				R.string.drawer_close) {
 			public void onDrawerClosed(View view) {
-				// getActionBar().setTitle(mTitle);
-				// invalidateOptionsMenu(); // creates call to
+				getActionBar().setTitle(mTitle);
+				invalidateOptionsMenu(); // creates call to
 				// onPrepareOptionsMenu()
 			}
 
 			public void onDrawerOpened(View drawerView) {
-				// getActionBar().setTitle(mDrawerTitle);
-				// invalidateOptionsMenu(); // creates call to
+				getActionBar().setTitle(mDrawerTitle);
+				invalidateOptionsMenu(); // creates call to
 				// onPrepareOptionsMenu()
 			}
 		};
@@ -148,18 +149,63 @@ public class WallActivity extends Activity {
 	}
 
 	private void selectItem(int position) {
+
 		Fragment fragment = null;
+		FragmentManager fragmentManager = getFragmentManager();
+
 		switch (position) {
-		case 7:
-			
+
+		case 0:
+			fragment = new EventListFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
 			break;
-                              
+		case 1:
+			// TODO map fragment
+			FragmentTransaction mTransaction = getSupportFragmentManager()
+					.beginTransaction();
+			SupportMapFragment mapFragment = new MapsFragment();
+			mTransaction.replace(R.id.content_frame, mapFragment);
+			mTransaction.commit();
+
+			// try {
+			// MapsInitializer.initialize(this);
+			// } catch (GooglePlayServicesNotAvailableException e) {
+			// e.printStackTrace();
+			// }
+			break;
+		case 2:
+			fragment = new EventListFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+			break;
+		case 3:
+			fragment = new EventListFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+			break;
+		case 4:
+			fragment = new EventListFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+			break;
+		case 5:
+			fragment = new FriendsFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+			break;
+		case 6:
+			fragment = new EventListFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
+			break;
 		default:
 			fragment = new EventListFragment();
+			fragmentManager.beginTransaction()
+					.replace(R.id.content_frame, fragment).commit();
 		}
-		FragmentManager fragmentManager = getFragmentManager();
-		fragmentManager.beginTransaction()
-				.replace(R.id.content_frame, fragment).commit();
+
+		// update selected item and title, then close the drawer
 		mDrawerList.setItemChecked(position, true);
 		setTitle(mMenuOptions[position]);
 		mDrawerLayout.closeDrawer(mDrawerList);
@@ -191,28 +237,28 @@ public class WallActivity extends Activity {
 	/**
 	 * Fragment that appears in the "content_frame", shows a planet
 	 */
-	public static class PlanetFragment extends Fragment {
-		public static final String ARG_PLANET_NUMBER = "planet_number";
-
-		public PlanetFragment() {
-			// Empty constructor required for fragment subclasses
-		}
-
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_planet,
-					container, false);
-			int i = getArguments().getInt(ARG_PLANET_NUMBER);
-			String planet = getResources().getStringArray(R.array.menu_options)[i];
-
-			int imageId = getResources().getIdentifier(
-					planet.toLowerCase(Locale.getDefault()), "drawable",
-					getActivity().getPackageName());
-			((ImageView) rootView.findViewById(R.id.image))
-					.setImageResource(imageId);
-			getActivity().setTitle(planet);
-			return rootView;
-		}
-	}
+	// public static class PlanetFragment extends Fragment {
+	// public static final String ARG_PLANET_NUMBER = "planet_number";
+	//
+	// public PlanetFragment() {
+	// // Empty constructor required for fragment subclasses
+	// }
+	//
+	// @Override
+	// public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	// Bundle savedInstanceState) {
+	// View rootView = inflater.inflate(R.layout.fragment_planet,
+	// container, false);
+	// int i = getArguments().getInt(ARG_PLANET_NUMBER);
+	// String planet = getResources().getStringArray(R.array.menu_options)[i];
+	//
+	// int imageId = getResources().getIdentifier(
+	// planet.toLowerCase(Locale.getDefault()), "drawable",
+	// getActivity().getPackageName());
+	// ((ImageView) rootView.findViewById(R.id.image))
+	// .setImageResource(imageId);
+	// getActivity().setTitle(planet);
+	// return rootView;
+	// }
+	// }
 }

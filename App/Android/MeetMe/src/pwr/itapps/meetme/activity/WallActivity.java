@@ -20,7 +20,6 @@ import java.util.Locale;
 
 import pwr.itapps.meetme.R;
 import pwr.itapps.meetme.fragments.EventListFragment;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -154,7 +153,7 @@ public class WallActivity extends Activity {
 		case 7:
 			
 			break;
-
+                              
 		default:
 			fragment = new EventListFragment();
 		}

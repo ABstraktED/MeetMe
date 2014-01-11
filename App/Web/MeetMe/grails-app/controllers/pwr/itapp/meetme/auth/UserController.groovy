@@ -332,6 +332,33 @@ class UserController {
 
 	def save() {
 		def userInstance = new User(params)
+
+		if(params.username == null || params.username.isEmpty())
+		{
+			flash.error = message(code: 'val.msg.user.usernameNullOrEmpty')
+			render(view: "create", model: [userInstance: userInstance])
+			return
+		}
+		if(params.password == null || params.password.isEmpty())
+		{
+			flash.error = message(code: 'val.msg.user.passwordNullOrEmpty')
+			render(view: "create", model: [userInstance: userInstance])
+			return
+		}
+		if(params.name == null || params.name.isEmpty())
+		{
+			flash.error = message(code: 'val.msg.user.nameNullOrEmpty')
+			render(view: "create", model: [userInstance: userInstance])
+			return
+		}
+		if(params.phone == null || params.phone.isEmpty())
+		{
+			flash.error = message(code: 'val.msg.user.phoneNullOrEmpty')
+			render(view: "create", model: [userInstance: userInstance])
+			return
+		}
+		
+		
 		if (userInstance.validate()) {
 			if(userInstance.password == params.password2)
 			{

@@ -36,7 +36,7 @@ class EventController {
 		params.put("user", currentUser)
 		def eventInstance = new Event(params)
 		if(!eventInstance.save(flush:true)){
-			error: "Could not save"
+			flash.error = message(code: "val.msg.event.couldNotSave")
 			return
 		}
 //		return [
@@ -56,7 +56,7 @@ class EventController {
 	}
 
 	def create() {
-		[eventInstance: new Event(params)]
+		[eventInstance:  new Event(params)]
 	}
 
 	def save() {
@@ -80,7 +80,7 @@ class EventController {
 		def userInvited = Invitation.find("from Invitation i where i.event = :theid and i.user = :user", [theid: eventInstance, user: currentUser])
 
 		if (!eventInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
+			flash.error = message(code: 'default.not.found.message', args: [
 				message(code: 'event.label', default: 'Event'),
 				id
 			])
@@ -98,7 +98,7 @@ class EventController {
 		params.put("event", Event.get(params.eventId))
 		def commentInstance = new Comment(params)
 		if(!commentInstance.save(flush:true)){
-			error: "Could not save"
+			flash.error = message(code: "val.msg.event.couldNotSave")
 			return
 		}
 		redirect(action: "show", id: params.eventId)
@@ -107,7 +107,7 @@ class EventController {
 	def edit(Long id) {
 		def eventInstance = Event.get(id)
 		if (!eventInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
+			flash.error = message(code: 'default.not.found.message', args: [
 				message(code: 'event.label', default: 'Event'),
 				id
 			])
@@ -121,7 +121,7 @@ class EventController {
 	def update(Long id, Long version) {
 		def eventInstance = Event.get(id)
 		if (!eventInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
+			flash.error = message(code: 'default.not.found.message', args: [
 				message(code: 'event.label', default: 'Event'),
 				id
 			])
@@ -157,7 +157,7 @@ class EventController {
 	def delete(Long id) {
 		def eventInstance = Event.get(id)
 		if (!eventInstance) {
-			flash.message = message(code: 'default.not.found.message', args: [
+			flash.error = message(code: 'default.not.found.message', args: [
 				message(code: 'event.label', default: 'Event'),
 				id
 			])
@@ -174,7 +174,7 @@ class EventController {
 			redirect(action: "list")
 		}
 		catch (DataIntegrityViolationException e) {
-			flash.message = message(code: 'default.not.deleted.message', args: [
+			flash.error = message(code: 'default.not.deleted.message', args: [
 				message(code: 'event.label', default: 'Event'),
 				id
 			])

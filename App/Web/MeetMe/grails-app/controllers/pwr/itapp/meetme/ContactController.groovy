@@ -33,7 +33,7 @@ class ContactController {
     def show(Long id) {
         def contactInstance = Contact.get(id)
         if (!contactInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), id])
+            flash.error = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), id])
             redirect(action: "list")
             return
         }
@@ -44,7 +44,7 @@ class ContactController {
     def edit(Long id) {
         def contactInstance = Contact.get(id)
         if (!contactInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), id])
+            flash.error = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), id])
             redirect(action: "list")
             return
         }
@@ -55,7 +55,7 @@ class ContactController {
     def update(Long id, Long version) {
         def contactInstance = Contact.get(id)
         if (!contactInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), id])
+            flash.error = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), id])
             redirect(action: "list")
             return
         }
@@ -84,7 +84,7 @@ class ContactController {
     def delete(Long id) {
         def contactInstance = Contact.get(id)
         if (!contactInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), id])
+            flash.error = message(code: 'default.not.found.message', args: [message(code: 'contact.label', default: 'Contact'), id])
             redirect(action: "list")
             return
         }
@@ -95,7 +95,7 @@ class ContactController {
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'contact.label', default: 'Contact'), id])
+            flash.error = message(code: 'default.not.deleted.message', args: [message(code: 'contact.label', default: 'Contact'), id])
             redirect(action: "show", id: id)
         }
     }

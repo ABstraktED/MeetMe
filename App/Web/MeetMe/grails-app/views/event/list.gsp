@@ -1,17 +1,14 @@
 
 <%@ page import="pwr.itapp.meetme.Event"%>
 <g:applyLayout name="event_layout">
-<head>
+	<head>
 
 <g:set var="entityName"
 	value="${message(code: 'event.label', default: 'Event')}" />
 <title><g:message code="default.list.label" args="[entityName]" /></title>
-</head>
-<content tag="event_content">
-	<b>
-		${eventInstanceTotal}
-	</b> event(s) found.
-	<g:if test="${eventInstanceTotal > 0 }">
+	</head>
+	<content tag="event_content"> <b> ${eventInstanceTotal}
+	</b> event(s) found. <g:if test="${eventInstanceTotal > 0 }">
 		<div>
 			<table style="border-spacing: 20px;">
 				<thead>
@@ -44,6 +41,5 @@
 				<g:paginate total="${eventInstanceTotal}" />
 			</div>
 		</div>
-	</g:if>
-</content>
+	</g:if> </content>
 </g:applyLayout>

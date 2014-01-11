@@ -30,6 +30,12 @@ class InvitationController {
 	}
 
 	def acceptInvitation(){
+		if(params.eventId == null || params.eventId.isEmpty())
+		{
+			flash.error = message(code: 'val.msg.user.emptyEventIdValue')
+			redirect(url:"/");
+			return
+		}
 		def inv = Invitation.findByUserAndEvent(currentUser, Event.get(params.eventId))
 		inv.setConfirmation(true)
 		redirect(controller: "event", action: "show", id: params.eventId)
@@ -48,7 +54,7 @@ class InvitationController {
 		else
 		{
 			//throw Exception("This invitation was already served or user is active")
-			flash.message = message(code: "val.msg.invitation.userNotFoundByGuid")
+			flash.error = message(code: "val.msg.invitation.userNotFoundByGuid")
 			redirect(action: "index");
 			return
 		}
@@ -93,7 +99,7 @@ class InvitationController {
 		// Validation
 		if(eventId==null || eventId.isEmpty() || !eventId.isNumber())
 		{
-			flash.message = message(code: "val.msg.invitation.eventNotSelected")
+			flash.error = message(code: "val.msg.invitation.eventNotSelected")
 			redirect(action: "list");
 			return
 		}
@@ -111,23 +117,23 @@ class InvitationController {
 
 		// Validation
 		if(username.trim().isEmpty() || username == null) {
-			flash.message = message(code: "val.msg.loginCannotBeEmpty");
+			flash.error = message(code: "val.msg.loginCannotBeEmpty");
 			redirect(action: "inviteFromGoogleContacts")
 			return
 		}
 		if(username.contains("@")) {
-			flash.message = message(code: "val.msg.emailContainsAt");
+			flash.error = message(code: "val.msg.emailContainsAt");
 			redirect(action: "inviteFromGoogleContacts")
 			return
 		}
 		if(password.trim().isEmpty() || password == null) {
-			flash.message = message(code: "val.msg.passwordCannotBeEmpty");
+			flash.error = message(code: "val.msg.passwordCannotBeEmpty");
 			redirect(action: "inviteFromGoogleContacts")
 			return
 		}
 		if(eventId==null || eventId.isEmpty() || !eventId.isNumber())
 		{
-			flash.message = message(code: "val.msg.invitation.eventNotSelected")
+			flash.error = message(code: "val.msg.invitation.eventNotSelected")
 			redirect(action: "index");
 			return
 		}
@@ -146,12 +152,12 @@ class InvitationController {
 		def eventId = session["eventId"]
 		
 		if(user == null || user.contains("@") || user.trim().isEmpty()) {
-			flash.message = message(code: "val.msg.invitation.incorrectEmail");
+			flash.error = message(code: "val.msg.invitation.incorrectEmail");
 			redirect(action: "list")
 			return
 		}
 		if(password.trim().isEmpty() || password == null) {
-			flash.message = message(code: "passwordCannotBeEmpty");
+			flash.error = message(code: "passwordCannotBeEmpty");
 			redirect(action: "list")
 			return
 		}
@@ -167,18 +173,18 @@ class InvitationController {
 
 		// Validation
 		if(user == null || pass == null || eventId== null) {
-			flash.message = message(code: "val.msg.invitation.gmailSessionExpired")
+			flash.error = message(code: "val.msg.invitation.gmailSessionExpired")
 			redirect(action: "list");
 			return
 		}
 		if(eventId==null || eventId.isEmpty() || !eventId.isNumber())
 		{
-			flash.message = message(code: "val.msg.invitation.eventNotSelected")
+			flash.error = message(code: "val.msg.invitation.eventNotSelected")
 			redirect(action: "list");
 			return
 		}
 		if(params.email.trim().isEmpty() || params.email == null) {
-			flash.message = message(code: "val.msg.invitation.inviteByGmail.InviteesEmailNotSpecified");
+			flash.error = message(code: "val.msg.invitation.inviteByGmail.InviteesEmailNotSpecified");
 			redirect(action: "inviteFromGoogleContacts")
 			return
 		}
@@ -188,7 +194,7 @@ class InvitationController {
 		if(eventInstance == null )
 		{
 
-			flash.message = message(code: "val.msg.invitation.eventNotFoundById");
+			flash.error = message(code: "val.msg.invitation.eventNotFoundById");
 			redirect(action: "list");
 			return
 		}
@@ -201,7 +207,7 @@ class InvitationController {
 			{
 				//TODO implementation of adding invitation to active user
 				//throw Exception("You are trying to invite via email existing, ACTIVE user - implement adding him a inviatation")
-				flash.message = "You are trying to invite via email existing, ACTIVE user - implement adding him a invitation"
+				flash.error = "You are trying to invite via email existing, ACTIVE user - implement adding him a invitation"
 				redirect(action: "list");
 				return
 			}
@@ -209,7 +215,7 @@ class InvitationController {
 			{
 				//TODO implementation of adding invitation to active user
 				//throw Exception("You are trying to invite via email existing, INACTIVE user - implement adding him a inviatation")
-				flash.message = "You are trying to invite via email existing, INACTIVE user - implement adding him a invitation"
+				flash.error = "You are trying to invite via email existing, INACTIVE user - implement adding him a invitation"
 				redirect(action: "list");
 				return
 			}
@@ -217,7 +223,7 @@ class InvitationController {
 		else
 		{
 		
-			flash.message = message(code: "val.msg.invitation.inviteeNotFoundByEmail");
+			flash.error = message(code: "val.msg.invitation.inviteeNotFoundByEmail");
 			redirect(action: "list");
 			return
 		}
@@ -239,7 +245,7 @@ class InvitationController {
 		if (!newInactiveUser.save(flush: true)) {
 
 			//throw Exception("Creating new Inactive User failed")
-			flash.message = message(code: "val.msg.invitation.createNewUserFailed");
+			flash.error = message(code: "val.msg.invitation.createNewUserFailed");
 			redirect(action: "list");
 			return
 		}
@@ -255,7 +261,7 @@ class InvitationController {
 
 		if (!newInvitation.save(flush: true)) {
 			//throw Exception("Creating new Invitation failed")
-			flash.message = message(code:"val.msg.invitation.createNewInvitationFailed");
+			flash.error = message(code:"val.msg.invitation.createNewInvitationFailed");
 			redirect(action: "list");
 			return
 		}

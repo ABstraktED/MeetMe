@@ -36,7 +36,7 @@ class LocationController {
     def show(Long id) {
         def locationInstance = Location.get(id)
         if (!locationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), id])
+            flash.error = message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), id])
             redirect(action: "list")
             return
         }
@@ -47,7 +47,7 @@ class LocationController {
     def edit(Long id) {
         def locationInstance = Location.get(id)
         if (!locationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), id])
+            flash.error = message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), id])
             redirect(action: "list")
             return
         }
@@ -58,7 +58,7 @@ class LocationController {
     def update(Long id, Long version) {
         def locationInstance = Location.get(id)
         if (!locationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), id])
+            flash.error = message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), id])
             redirect(action: "list")
             return
         }
@@ -87,7 +87,7 @@ class LocationController {
     def delete(Long id) {
         def locationInstance = Location.get(id)
         if (!locationInstance) {
-            flash.message = message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), id])
+            flash.error = message(code: 'default.not.found.message', args: [message(code: 'location.label', default: 'Location'), id])
             redirect(action: "list")
             return
         }
@@ -98,7 +98,7 @@ class LocationController {
             redirect(action: "list")
         }
         catch (DataIntegrityViolationException e) {
-            flash.message = message(code: 'default.not.deleted.message', args: [message(code: 'location.label', default: 'Location'), id])
+            flash.error = message(code: 'default.not.deleted.message', args: [message(code: 'location.label', default: 'Location'), id])
             redirect(action: "show", id: id)
         }
     }

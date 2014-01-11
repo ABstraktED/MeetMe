@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="3" >
+
+    <Gallery
+        android:id="@+id/event_details_gallery_g"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="2dp"
+        android:background="#888888" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp" >
+
+            <TextView
+                android:id="@+id/event_details_alarm_date_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="10dp"
+                android:gravity="right|center_vertical"
+                android:text="21.20.2013"
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/event_details_description_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_details_alarm_date_tv"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                android:text="Romeo and Juliet is a tragedy written early in the career of William Shakespeare about two young star-crossed lovers whose deaths ultimately reconcile their feuding families. It was among Shakespeare&apos;s most popular plays during his lifetime and, along with Hamlet, is one of his most frequently performed plays. Today, the title characters are regarded as archetypal young lovers."
+                android:textColor="#666666"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/events_details_alarm_separator2_v"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/event_details_description_tv"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="20dp"
+                android:background="#888888" />
+
+            <TextView
+                android:id="@+id/event_details_invited_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/events_details_alarm_separator2_v"
+                android:layout_gravity="left|center_vertical"
+                android:text="Invited:"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+            <Gallery
+                android:id="@+id/event_details_invited_g"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/event_details_invited_tv" />
+
+            <TextView
+                android:id="@+id/event_details_confirmed_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_details_invited_g"
+                android:layout_gravity="left|center_vertical"
+                android:text="Confirmed:"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+            <Gallery
+                android:id="@+id/event_details_confirmed_g"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/event_details_confirmed_tv" />
+
+            <TextView
+                android:id="@+id/event_details_notconfirmed_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/event_details_confirmed_g"
+                android:layout_gravity="left|center_vertical"
+                android:text="Not confirmed:"
+                android:textColor="#666666"
+                android:textSize="14sp" />
+
+            <Gallery
+                android:id="@+id/event_details_notconfirmed_g"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@id/event_details_notconfirmed_tv" />
+        </RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

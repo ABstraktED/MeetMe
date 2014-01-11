@@ -13,7 +13,6 @@
         android:layout_centerHorizontal="true"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        android:contentDescription="@string/ContentDescription"
         android:src="@drawable/mars" />
 
     <TextView
@@ -21,11 +20,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@id/event_row_image_iv"
+        android:layout_weight="1"
         android:background="#aa666666"
         android:ellipsize="marquee"
         android:gravity="left"
         android:lines="2"
-        android:text=""
+        android:text="Super event for the first time"
         android:textColor="#ececec"
         android:textSize="20sp"
         android:textStyle="bold" />
@@ -45,7 +45,7 @@
             android:layout_weight="1"
             android:ellipsize="end"
             android:lines="1"
-            android:text=""
+            android:text="By Adam Sandler, Gay Muriano, Tomasz Hola, Andrzej Golota"
             android:textColor="#666666" />
 
         <TextView
@@ -55,7 +55,7 @@
             android:layout_gravity="center_vertical|right"
             android:layout_weight="1"
             android:lines="1"
-            android:text=""
+            android:text="06.10.2013"
             android:textColor="#666666" />
     </LinearLayout>
 

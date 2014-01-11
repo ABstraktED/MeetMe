@@ -1,5 +1,7 @@
 package pwr.itapp.meetme
 
+import grails.plugin.springsecurity.annotation.Secured
+
 import org.springframework.dao.DataIntegrityViolationException
 
 class LocationController {
@@ -10,6 +12,7 @@ class LocationController {
         redirect(action: "list", params: params)
     }
 
+	@Secured(['isFullyAuthenticated()'])
     def list(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         [locationInstanceList: Location.list(params), locationInstanceTotal: Location.count()]

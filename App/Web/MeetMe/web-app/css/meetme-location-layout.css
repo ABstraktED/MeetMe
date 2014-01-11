@@ -1,0 +1,55 @@
+#content-left{
+	width: 15%;
+	min-width: 100px;
+	float: left;
+	margin: 3px 10px;
+}
+	
+#content-right{
+	width: 75%;
+	min-width: 450px;
+	float: left;
+	margin: 3px 10px;
+}
+
+#a2{
+	color: rgb(255,255,255);
+	text-shadow: -2px 2px 5px rgba(0,0,0, 0.3);
+	font-weight: bold;
+}
+
+#menu-h-2{
+	background: rgb(56,186,90);
+}
+
+
+.current{
+	text-decoration: none;
+	font-weight: bold;
+}
+
+
+/*-------------------- clearfix --------------------  */
+.clearfix:before,.clearfix:after {
+	content: ".";
+	display: block;
+	position: relative;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1px;
+}
+
+.clearfix {
+	display: block;
+}
+
+
+

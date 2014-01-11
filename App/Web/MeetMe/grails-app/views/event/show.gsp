@@ -1,45 +1,64 @@
 
 <%@ page import="pwr.itapp.meetme.Event"%>
-<!DOCTYPE html>
-<html>
+<g:applyLayout name="event_layout">
 <head>
-<meta name="layout" content="main">
 <g:set var="entityName"
 	value="${message(code: 'event.label', default: 'Event')}" />
 <title><g:message code="default.show.label" args="[entityName]" /></title>
 <script type="text/javascript"
 	src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 </head>
-<body>
-	<div style="display:inline-block;">
+<content tag="event_content">
+	<div style="display: inline-block;">
 		<div style="float: left; padding-right: 100px">
-			Title:
+			<g:message code="lbl.event.title"/>
 			${eventInstance.title }
-			<br /> Date:
+			<br /> <g:message code="lbl.event.date"/>
 			<g:formatDate format="dd/MM/yyyy" date="${eventInstance.date }" />
-			<br /> Time:
+			<br /> <g:message code="lbl.event.time"/>
 			<g:formatDate format="hh:mm" date="${eventInstance.date }" />
-			<br /> Description:
+			<br /> <g:message code="lbl.event.description"/>
 			${eventInstance.description }
-			<br /> Location:
+			<br /> <g:message code="lbl.event.location"/>
 			${eventInstance.location.address }
-			<br /> Created by:
+			<br /> <g:message code="lbl.event.creator"/>
 			${eventInstance.user.username }
 			<br />
 		</div>
 		<div style="float: right">
-			<h3>Invite</h3>
-			<g:form action="invite">
-				<g:textField name="email" />
-				<g:hiddenField name="eventId" value="${eventInstance.id }" />
-				<input type="submit" value="Invite" />
-			</g:form>
-			<h3>Invited</h3>
-			<g:each in="${invited }" var="inv">
-				Username: ${inv.user.username }
-				<br/>
-				Email: ${inv.user.email }
-			</g:each>
+			<g:if test="${userInvited != null && !userInvited.confirmation}">
+				<div id="answerInvite">
+					<g:message code="msg.event.invitedToAttend"/>
+					<g:form controller="invitation" action="acceptInvitation">
+						<g:hiddenField name="eventId" value="${eventInstance.id }" />
+						<input type="submit" value="Accept" />
+					</g:form>
+				</div>
+			</g:if>
+			<g:if test="${userInvited != null && userInvited.confirmation }">
+				<g:message code="msg.event.willAttend"/>
+			</g:if>
+			<div id="invite">
+				<h3><g:message code="lbl.event.invite"/></h3>
+				<g:form controller="Invitation" action="inviteByPortal">
+					<g:textField name="email" />
+					<g:hiddenField name="eventId" value="${eventInstance.id }" />
+					<input type="submit" value="Invite" />
+				</g:form>
+			</div>
+			<div id="googleContact">
+				<a
+					href="<g:createLink controller="invitation" action="inviteFromGoogleContacts"/>?eventId=${eventInstance.id}">
+					<g:message code="value.event.inviteGoogleContact"/></a>
+			</div>
+			<div id="invited">
+				<h3><g:message code="lbl.event.invited"/></h3>
+				<g:each in="${invited }" var="inv">
+					<g:message code="lbl.event.userName"/> ${inv.user.username }
+					<br />
+					<g:message code="lbl.event.email"/> ${inv.user.email }
+				</g:each>
+			</div>
 		</div>
 	</div>
 	<div style="display: inline-block;">
@@ -47,7 +66,7 @@
 		<hr />
 	</div>
 	<div>
-		<h3>Discussion</h3>
+		<h3><g:message code="lbl.event.discussion"/></h3>
 		<br />
 		<g:if test="${discussion != null }">
 			<g:each in="${discussion}" var="disc">
@@ -61,17 +80,24 @@
 			</g:each>
 		</g:if>
 		<g:else>
-					No comments yet.
-				</g:else>
+			<g:message code="value.event.noComment"/>
+		</g:else>
 		<br />
 		<g:form action="newComment">
-			<g:textArea name="content" placeholder="Insert comment here" />
+			<g:set var="pholder" value="${message(code: 'placeholder.event.insertComment')}"/>
+			<g:textArea name="content" placeholder="[pholder]" />
 			<g:hiddenField name="eventId" value="${eventInstance.id }" />
 			<input type="submit" value="Submit" />
 		</g:form>
 	</div>
 
 	<script type="text/javascript">
+		$(document).ready(function(){
+				$("#email").autocomplete({
+							source: "${createLink(controller: 'Invitation', action: 'userList')}"
+						});
+					});
+			
       			function initialize() {
       				var pos = new google.maps.LatLng(${eventInstance.location.lat}, ${eventInstance.location.lng});
        				var mapOptions = {
@@ -92,5 +118,5 @@
       		google.maps.event.addDomListener(window, 'load', initialize);
    		 </script>
 	</div>
-</body>
-</html>
+</content>
+</g:applyLayout>

@@ -1,0 +1,49 @@
+@CHARSET "UTF-8";
+
+#welcome{
+	width: 720px;
+	margin: 0 auto;
+	
+	background: rgb(245,245,245);
+	color: rgb(56,186,90);
+	box-shadow: -2px 2px 5px rgba(0,0,0, 0.3);
+	border-radius: 2px;
+	padding: 20px 30px;
+}
+
+#title{
+	margin: 30px 0px;
+	font-size: 24px;
+	font-family: Calibri;	
+}
+
+#text{
+	font-size: 16px;
+	text-align: justify;
+	font-family: Calibri;
+}
+
+/*-------------------- clearfix --------------------  */
+.clearfix:before,.clearfix:after {
+	content: ".";
+	display: block;
+	position: relative;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix {
+	display: inline-block;
+}
+
+* html .clearfix {
+	height: 1px;
+}
+
+.clearfix {
+	display: block;
+}
+
+
+

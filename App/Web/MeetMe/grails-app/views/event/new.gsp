@@ -1,7 +1,5 @@
-<!doctype html>
-<html>
+<g:applyLayout name="event_layout">
 <head>
-<meta name="layout" content="main" />
 <r:require module="jquery" />
 <r:require module="jquery-ui" />
 <r:layoutResources />
@@ -13,7 +11,7 @@
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 </head>
 
-<body>
+<content tag="event_content">
 	<g:form action="processEvent">
 		<div>
 			<label for="title">Title</label>
@@ -22,7 +20,14 @@
 				id="calendar" name="date" /><br /> <br /> <label
 				for="description">Description</label>
 			<g:textArea name="description" />
-			<br /> <label for="address">Address</label>
+			<br/><br/>
+			<g:checkBox name="allCanJoin"/>
+			<label for="allCanJoin">Everybody can join this event</label>
+			<br/><br/>
+			<g:checkBox name="allCanInvite"/>
+			<label for="allCanInvite">Everybody can invite to this event</label>
+			<br /> <br/>
+			<label for="address">Address</label>
 			<g:textField name="address" placeholder=""/>
 			<br />
 			<div id="map_canvas" style="height: 350px; width: 600px"></div>
@@ -124,6 +129,5 @@
 		//}
 		    //google.maps.event.addDomListener(window, 'load', initialize);
 	</script>
-
-</body>
-</html>
+</content>
+</g:applyLayout>

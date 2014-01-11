@@ -11,6 +11,8 @@ class Event {
 	String title
 	String description
 	Date date
+	Boolean allCanJoin // true = everybody can join the event
+	Boolean allCanInvite // true = everybody can invite
 
     static constraints = {
     }

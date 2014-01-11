@@ -1,27 +1,9 @@
 package pwr.itapp.meetme
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.concurrent.CountDownLatch;
-
-import com.google.gdata.client.contacts.ContactsService;
-import com.google.gdata.data.Link;
-import com.google.gdata.data.PlainTextConstruct;
-import com.google.gdata.data.contacts.ContactEntry;
-import com.google.gdata.data.contacts.ContactFeed;
-import com.google.gdata.data.contacts.GroupMembershipInfo;
-import com.google.gdata.data.contacts.Nickname;
-import com.google.gdata.data.contacts.ShortName;
-import com.google.gdata.data.extensions.Email;
-import com.google.gdata.data.extensions.ExtendedProperty;
-import com.google.gdata.data.extensions.FamilyName;
-import com.google.gdata.data.extensions.FullName;
-import com.google.gdata.data.extensions.GivenName;
-import com.google.gdata.data.extensions.Im;
-import com.google.gdata.data.extensions.Name;
-import com.google.gdata.data.extensions.PhoneNumber;
-import com.google.gdata.util.ServiceException;
+import com.google.gdata.client.Query
+import com.google.gdata.client.contacts.ContactsService
+import com.google.gdata.data.contacts.ContactEntry
+import com.google.gdata.data.contacts.ContactFeed
 
 class GoogleContactService {
 
@@ -29,11 +11,14 @@ class GoogleContactService {
 		def results = []
 
 		try{
-			ContactsService contactService = new ContactsService("RupalMindfire-AddressApp");
+			ContactsService contactService = new ContactsService("MeetMe");
 			contactService.setUserCredentials(userid, password);
 
 			URL feedUrl = new URL("https://www.google.com/m8/feeds/contacts/default/full");
-			ContactFeed resultFeed = contactService.getFeed(feedUrl, ContactFeed.class);
+			Query myQuery = new Query(feedUrl);
+			myQuery.setMaxResults(100);
+			ContactFeed resultFeed = contactService.getFeed(myQuery, ContactFeed.class);
+
 			for (int i = 0; i < resultFeed.getEntries().size(); i++) {
 				ContactEntry entry = resultFeed.getEntries().get(i);
 

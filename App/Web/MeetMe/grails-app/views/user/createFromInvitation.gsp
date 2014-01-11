@@ -1,11 +1,11 @@
 <%@ page import="pwr.itapp.meetme.auth.User" %>
 <g:applyLayout name="event_layout">
 	<head>
-		<title>${message(code: 'title.user.editProfile')}</title>
+		<title>${message(code: 'title.user.createNewUser')}</title>
 	</head>
 	<content tag="event_content">
-		<div id="edit-user" class="content scaffold-edit" role="main">
-			<h1>${message(code: 'title.user.editProfile')}</h1>
+		<div id="create-user" class="content scaffold-create" role="main">
+			<h1>${message(code: 'title.user.createNewUser')}</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -16,16 +16,12 @@
 				</g:eachError>
 			</ul>
 			</g:hasErrors>
-			<g:form method="post" >
-				<g:hiddenField name="id" value="${userInstance?.id}" />
-				<g:hiddenField name="version" value="${userInstance?.version}" />
+			<g:form action="saveFromInvitation" >
 				<div class="form">
-					<g:render template="form"/>
+					<g:render template="createFromInvitationForm"/>
 				</div>
 				<div class="buttons">
-					<g:actionSubmit class="save" action="update" value="Update" />
-					<a
-					href="<g:createLink controller="user" action="changePassword"/>/${userInstance?.id}">${message(code: 'msg.meetme.changePassword')}</a>
+					<g:submitButton name="create" class="save" value="${message(code: 'msg.meetme.create')}" />
 				</div>
 			</g:form>
 		</div>

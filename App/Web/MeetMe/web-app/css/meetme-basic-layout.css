@@ -22,7 +22,13 @@ body {
 	position: fixed;
 	top: 0px;
 	left: 0px;
-	
+		
+}
+
+#basic-content{
+	position: relative;
+	top: 160px;
+	width: 100%;
 }
 
 #logo{
@@ -32,6 +38,65 @@ body {
 	margin: 7px auto 0px auto;
 }
 
+#login-panel{
+	position: absolute;
+	top: 10px;
+	right: 30px;
+}
+
+#login-user{
+	color: rgb(255,255,255);
+	font-size: 14px;
+	float: left;
+	margin-top: 3px;
+	text-shadow: -2px 2px 5px rgba(0,0,0, 0.3);
+}
+
+#login-separator{
+	width: 2px;
+	height: 16px;
+	background: rgba(0,0,0,0.4);
+	float: left;
+	margin: 4px 18px 4px 16px;
+}
+
+.black-btn{
+	box-shadow: -2px 2px 5px rgba(0,0,0, 0.3);
+	border: none;
+	border-radius: 2px;
+	background: rgb(0,0,0);
+	color: rgb(255,255,255);
+	text-align: center;
+	
+	float: left;
+}
+
+.black-btn:hover{
+	background: rgb(30,30,30);
+	cursor: hand;
+}
+
+#logout{
+	display: inline-block;
+    width: 100px;
+    padding: 3px 0px;
+	color: rgb(255,255,255);
+	
+	text-decoration: none;
+	font-size: 14px;
+	
+	
+}
+
+
+
+#login-icon{
+	width: 22px;
+	height: 22px;
+	background: url('../images/web_graphics/basic_layout/login_icon.png');
+	float: left;
+	margin: 0px 5px;
+}
 
 #menu-container{
 	width: 100%;
@@ -39,6 +104,7 @@ body {
 	background: rgba(0,0,0, 0.07);
 	position: absolute;
 	bottom: 0px;
+	border: none;
 }
 
 #menu {
@@ -48,38 +114,58 @@ body {
 	
 	font-size: 18px;
 	text-align: center;
-	white-space: nowrap
+	white-space: nowrap;
 }
 #menu li {
   	display: inline;
-	margin: 0 30px;
+  	margin: 0 30px;
 }
-#menu li a {
+#a1, #a2, #a3, #a4{
   	text-decoration: none;
 	color: rgba(0,0,0, 0.4);
-}
-#menu li a:hover {
-	color: rgb(255,255,255);
+	
 }
 
-#hello{
-	color: rgb(255,255,255);
-	font-size: 14px;
-	position: absolute;
-	top: 50%;
-	left: 30px;
-	margin-top: -7px;
-}
+
 
 #menu-highlight{
-	width: 100%;
+	width: 466px;
 	height: 2px;
-	margin: 6px 0px;
-	background: rgb(255,255,255);
+	margin: 5px auto;
 	
 	position: fixed;
 	top: 140px;
-	left: 0px;
+	left: 50%;
+	margin-left: -233px;
+}
+
+#menu-h-1{
+	height: 2px;
+	width: 68px;
+	margin: 0px 14px;
+	float: left;
+}
+
+#menu-h-2{
+	height: 2px;
+	width: 87px;
+	margin: 0px 30px;
+	float: left;
+	
+}
+
+#menu-h-3{
+	height: 2px;
+	width: 83px;
+	margin: 0px 14px;
+	float: left;
+}
+
+#menu-h-4{
+	height: 2px;
+	width: 68px;
+	margin: 0px 0px 0px 30px;
+	float: left;
 }
 
 	

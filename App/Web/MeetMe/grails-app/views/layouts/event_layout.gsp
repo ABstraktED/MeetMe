@@ -1,4 +1,6 @@
 <!doctype html>
+<%@ taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
 <html>
 <head>
 <head>
@@ -8,6 +10,7 @@
 	href="${resource(dir: 'css', file: 'meetme-event-layout.css')}"
 	type="text/css">
 <g:set var="userId" value="${sec.loggedInUserInfo(field:'id')}" />
+
 <g:layoutHead />
 </head>
 
@@ -24,21 +27,23 @@
 			<a href="<g:createLink controller="event" action="list"/>">Find
 				Events</a>
 			<br />
-			<a href="<g:createLink controller="user" action="create"/>">Create
-				user (as Everyone) </a>
-			<br />
-			<a href="<g:createLink controller="user" action="list"/>">User
-				console (as Admin)</a>
-			<br />
-
 			<a href="<g:createLink controller="user" action="edit"/>/${userId}">
-				Edit (myself) </a>
+				Edit profile </a>
 			<br />
 			<a href="<g:createLink controller="user" action="show"/>/${userId}">
-				Show (myself) </a>
+				Show profile</a>
 			<br />
 
 		</sec:ifLoggedIn>
+		<sec:ifAnyGranted roles="ROLE_ADMIN">
+			<label><b>Administrative tools</b></label><br/>
+			<a href="<g:createLink controller="user" action="list"/>">User
+				console</a>
+			<br />
+			<a href="<g:createLink controller="user" action="create"/>">Create
+				new user</a>
+			<br />
+		</sec:ifAnyGranted>
 		<sec:ifNotLoggedIn>
 			<a href="<g:createLink controller="authentication" action="login"/>">Login</a>
 		</sec:ifNotLoggedIn>

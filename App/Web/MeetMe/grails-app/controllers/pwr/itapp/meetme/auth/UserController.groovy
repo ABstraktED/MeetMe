@@ -5,6 +5,8 @@ import grails.plugin.springsecurity.annotation.Secured
 
 class UserController {
 
+	def passwordEncoder;
+	
 	static allowedMethods = [save: "POST", saveAdmin: "POST", update: "POST", updateAdmin: "POST", delete: "POST", changePasswordPost : "POST"]
 
 	def activate(Long id) {
@@ -47,13 +49,13 @@ class UserController {
 		if(id == null)
 		{
 			flash.error = message(code: 'val.msg.user.emptyIdValue')
-			redirect(action: "list")
+			redirect(url: "/")
 			return
 		}
 		def userInstance = User.get(id)
 		if (!userInstance) {
 			flash.error = message(code: 'val.msg.user.userNotFoundById')
-			redirect(action: "list")
+			redirect(url: "/")
 			return
 		}
 
@@ -61,10 +63,70 @@ class UserController {
 	}
 
 	def changePasswordPost() {
-		//TODO Password change
-		throw new Exception("Password not changed")
-		flash.message = "Password changed";
-		redirect(action: "index")
+
+		// Validation
+		if(params.id == null || params.id.isEmpty() || !params.id.isNumber())
+		{
+			flash.error = message(code: 'val.msg.user.emptyIdValue')
+			redirect(url: "/")
+			return
+		}
+		if(params.oldPassword == null || params.oldPassword.isEmpty())
+		{
+			flash.error = message(code: 'val.msg.user.emptyOldPasswordValue')
+			redirect(action: "show", id: params.id)
+			return
+		}
+		if(params.newPassword == null || params.newPassword.isEmpty())
+		{
+			flash.error = message(code: 'val.msg.user.emptyNewPasswordValue')
+			redirect(action: "show", id: params.id)
+			return
+		}
+		if(params.newPassword2 == null || params.newPassword2.isEmpty())
+		{
+			flash.error = message(code: 'val.msg.user.emptyNewPassword2Value')
+			redirect(action: "show", id: params.id)
+			return
+		}
+
+		
+		def userInstance = User.get(params.id)
+		if (!userInstance) {
+			flash.error = message(code: 'val.msg.user.userNotFoundById')
+			redirect(action: "show", id: params.id)
+			return
+		}
+
+		if (!passwordEncoder.isPasswordValid(userInstance.password, params.oldPassword, null /*salt*/)) {
+			flash.error = message(code:'val.msg.user.oldPasswordIsIncorrect');
+			render view: 'changePassword', model: [userInstance: userInstance]
+			return
+		}
+
+		if (passwordEncoder.isPasswordValid(userInstance.password, params.newPassword, null /*salt*/)) {
+			flash.error = message(code: 'val.msg.user.oldAndNewPasswordAreSame')
+			render view: 'changePassword', model: [userInstance: userInstance]
+			return
+		}
+
+		if(params.newPassword != params.newPassword2)
+		{
+			flash.error = message(code: 'val.msg.user.passwordMismatch')
+			render view: 'changePassword', model: [userInstance: userInstance]
+			return
+		}
+		userInstance.password = params.newPassword
+		userInstance.passwordExpired = false
+		if (!userInstance.save(flush: true)) {
+			flash.message = message(code: 'val.msg.user.passwordNotChanged')
+		}
+		else
+		{
+			flash.message = message(code: 'val.msg.user.passwordChanged')
+		}
+		
+		redirect(action: "show", id: params.id)
 	}
 
 	def create () {
@@ -357,8 +419,8 @@ class UserController {
 			render(view: "create", model: [userInstance: userInstance])
 			return
 		}
-		
-		
+
+
 		if (userInstance.validate()) {
 			if(userInstance.password == params.password2)
 			{

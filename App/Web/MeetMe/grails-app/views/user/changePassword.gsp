@@ -5,6 +5,7 @@
 	</head>
 	<content tag="event_content">
 	<div id="show-user" class="content scaffold-show" role="main">
+		<g:form>
 		<h1>
 			${message(code: 'title.user.changePassword')}
 		</h1>
@@ -21,7 +22,7 @@
 		<table>
 			<tr>
 				<td>${message(code: 'lbl.user.currentPassword')}</td>
-				<td><input type="password" name="oldPassword" /></td>
+				<td><input type="password" name="oldPassword"/></td>
 			</tr>
 <tr>
 				<td>${message(code: 'lbl.user.newPassword')}</td>
@@ -31,12 +32,6 @@
 				<td><input type="password" name="newPassword2" /></td>
 			</tr>
 		</table>
-
-
-
-
-
-		<g:form>
 			<div class="buttons">
 				<g:hiddenField name="id" value="${userInstance?.id}" />
 				<g:actionSubmit class="save" action="changePasswordPost" value="${message(code: 'msg.meetme.change')}" />

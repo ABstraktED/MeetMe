@@ -1,7 +1,6 @@
 package pwr.itapps.meetme.activity;
 
 import pwr.itapps.meetme.R;
-import pwr.itapps.meetme.activity.WallActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

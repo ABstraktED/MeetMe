@@ -1,7 +1,7 @@
 package pwr.itapps.meetme.fragments;
 
-import pwr.itapps.meetme.session.Session;
 import pwr.itapps.meetme.adapter.FriendsAdapter;
+import pwr.itapps.meetme.session.Session;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;

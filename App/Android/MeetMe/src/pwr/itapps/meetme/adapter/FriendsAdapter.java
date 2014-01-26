@@ -1,7 +1,9 @@
 package pwr.itapps.meetme.adapter;
 
 import java.util.List;
+
 import pwr.itapps.meetme.R;
+import pwr.itapps.meetme.application.MeetMeApplication;
 import pwr.itapps.meetme.data.PersonData;
 import android.app.Activity;
 import android.content.Context;
@@ -11,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import pwr.itapps.meetme.application.MeetMeApplication;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 

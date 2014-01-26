@@ -7,8 +7,10 @@ import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
-public class MeetMeApplication extends Application {
+public class MeetMe extends Application {
 
+	public static String SERVICE_SERVER_ADDRESS = "http://meetmepwrrest.aws.af.cm/api/";
+	
 	@Override
 	public void onCreate() {
 		super.onCreate();

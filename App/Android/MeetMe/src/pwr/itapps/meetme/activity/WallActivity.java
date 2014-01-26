@@ -40,6 +40,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.MapFragment;
 
 public class WallActivity extends FragmentActivity {
 
@@ -163,7 +164,7 @@ public class WallActivity extends FragmentActivity {
 			// TODO map fragment
 			FragmentTransaction mTransaction = getSupportFragmentManager()
 					.beginTransaction();
-			SupportMapFragment mapFragment = new MapsFragment();
+			android.support.v4.app.Fragment mapFragment = new MapsFragment();
 			mTransaction.replace(R.id.content_frame, mapFragment);
 			mTransaction.commit();
 

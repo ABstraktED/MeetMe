@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 import pwr.itapps.meetme.R;
-import pwr.itapps.meetme.application.MeetMeApplication;
+import pwr.itapps.meetme.application.MeetMe;
 import pwr.itapps.meetme.data.EventData;
 import android.app.Activity;
 import android.content.Context;
@@ -46,10 +46,10 @@ public class EventsAdapter extends ArrayAdapter<EventData> {
 		List<String> gallery = event.getEventGallery();
 		if (gallery.size() > 0)
 			ImageLoader.getInstance().displayImage(gallery.get(0), tag.image,
-					MeetMeApplication.OPTIONS);
+					MeetMe.OPTIONS);
 		else
 			ImageLoader.getInstance().displayImage("", tag.image,
-					MeetMeApplication.OPTIONS);
+					MeetMe.OPTIONS);
 		tag.title.setText(event.getName());
 		tag.organizators.setText(event.getOrganizators().get(0).toString()); // to
 																				// change

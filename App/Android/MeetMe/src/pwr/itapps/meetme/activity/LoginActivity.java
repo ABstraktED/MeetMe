@@ -1,11 +1,16 @@
 package pwr.itapps.meetme.activity;
 
 
+import java.util.List;
+
 import pwr.itapps.meetme.R;
+import pwr.itapps.meetme.helper.CommunicationHelper;
+import pwr.itapps.meetmee.model.entity.Event;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -139,7 +144,7 @@ public class LoginActivity extends Activity {
 			// perform the user login attempt.
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 			showProgress(true);
-			mAuthTask = new UserLoginTask();
+			mAuthTask = new UserLoginTask(this);
 			mAuthTask.execute((Void) null);
 			return true;
 		}
@@ -193,14 +198,23 @@ public class LoginActivity extends Activity {
 	// 0 - login correct, 1 - error (incorrect credintials), 2 -no such person
 	// in database
 	public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
+		
+		CommunicationHelper comm;
+		
+		public UserLoginTask(Context context) {
+			super();
+			comm = new CommunicationHelper(context);
+		}
+
 		@Override
 		protected Integer doInBackground(Void... params) {
 			// TODO: attempt authentication against a network service.
 
 			try {
-				// Simulate network access.
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
+				List<Event> response = comm.test();
+				response.get(0).getAll_can_join();
+			} catch (Exception e) {
+				e.printStackTrace();
 				return 1;
 			}
 			int result = 0;

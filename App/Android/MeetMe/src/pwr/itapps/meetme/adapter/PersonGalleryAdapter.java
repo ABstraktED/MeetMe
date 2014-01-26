@@ -3,7 +3,7 @@ package pwr.itapps.meetme.adapter;
 import java.util.List;
 
 import pwr.itapps.meetme.R;
-import pwr.itapps.meetme.application.MeetMeApplication;
+import pwr.itapps.meetme.application.MeetMe;
 import pwr.itapps.meetme.data.PersonData;
 import android.app.Activity;
 import android.content.Context;
@@ -31,7 +31,7 @@ public class PersonGalleryAdapter extends ArrayAdapter<PersonData> {
 		}
 		String imageAdd = getItem(position).getAvatar();
 		ImageLoader.getInstance().displayImage(imageAdd, row,
-				MeetMeApplication.OPTIONS);
+				MeetMe.OPTIONS);
 		return row;
 	}
 

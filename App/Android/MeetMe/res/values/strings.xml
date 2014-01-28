@@ -44,5 +44,9 @@
     <string name="action_createEvent">Create Event</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
     <string name="MainThreadOperationException">Attempting to run async operations on main thread.</string>
-
+	
+    <string name="error_invalid_date">This date is invalid</string>
+    <string name="error_invalid_time">This time format is invalid</string>
+    <string name="creating_event">Creating event&#8230;</string>
+    <string name="creating_event_task">Creation</string>
 </resources>

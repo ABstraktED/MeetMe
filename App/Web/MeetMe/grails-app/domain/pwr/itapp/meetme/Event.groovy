@@ -1,8 +1,9 @@
 package pwr.itapp.meetme
 
-import java.sql.Timestamp
+
 
 import pwr.itapp.meetme.auth.User
+
 
 class Event {
 	

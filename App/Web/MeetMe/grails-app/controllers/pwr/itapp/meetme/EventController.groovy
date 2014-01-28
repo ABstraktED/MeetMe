@@ -39,9 +39,6 @@ class EventController {
 			flash.error = message(code: "val.msg.event.couldNotSave")
 			return
 		}
-//		return [
-//			test: "Event ${params.title} successfully created"
-//		]
 		redirect(action:"list", params:params)
 	}
 

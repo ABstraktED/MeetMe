@@ -29,6 +29,7 @@ environments {
             dbCreate = "update"
             url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
             pooled = true
+			driverClassName = "com.mysql.jdbc.Driver"
             properties {
                maxActive = -1
                minEvictableIdleTimeMillis=1800000

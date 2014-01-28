@@ -15,7 +15,8 @@
     </string-array>
 	
     <string name="title_activity_register">Sign up</string>
-    <string name="title_activity_map">Map</string>
+    <string name="title_activity_map">MeetMe</string>
+    <string name="title_activity_creatEvent">Create Event</string>
 	<string name="App_logo">Application logo</string>
 	<string name="Avatar_image">Avatar</string>
 	<string name="ContentDescription">blabla</string>
@@ -26,9 +27,18 @@
     <string name="Password">Password</string>
     <string name="ConfirmPassword">Confirm Password</string>
     <string name="Register_button">Register</string>
+    <string name="Event_name">Name of event</string>
+    <string name="Event_decritption">Description</string>
+    <string name="Event_date">Date</string>
+    <string name="Event_time">Time</string>
+    <string name="Event_address">Address</string>
+    <string name="Event_image">Image</string>
+    <string name="Create_button">Create Event</string>
+    <string name="Choose_image">Choose image&#8230;</string>
 	<string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="action_websearch">Web search</string>
+    <string name="action_createEvent">Create Event</string>
     <string name="app_not_available">Sorry, there\'s no web browser available</string>
 
 </resources>

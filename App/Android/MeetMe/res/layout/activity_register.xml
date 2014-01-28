@@ -3,57 +3,61 @@
     android:id="@+id/RegisterLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:padding="10dp" >
 
     <LinearLayout
         android:id="@+id/LinearLayout01"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:layout_marginBottom="15dp"
-        android:orientation="horizontal" >
+        android:orientation="vertical" >
 
-        <ImageButton
-            android:id="@+id/ImageButton_Avatar"
-            android:layout_width="81dp"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/Avatar_image"
-            android:src="@android:drawable/ic_dialog_info" />
+        <TextView
+            android:id="@+id/TextView_First_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/First_name"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/LinearLayout02"
+        <EditText
+            android:id="@+id/EditText_Firstname"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <EditText
-                android:id="@+id/EditText_Firstname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/First_name"
-                android:inputType="textPersonName"
-                android:maxLength="20"
-                android:maxLines="1" >
-            </EditText>
-
-            <EditText
-                android:id="@+id/EditText_Lastname"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/Last_name"
-                android:inputType="textPersonName"
-                android:maxLength="20"
-                android:maxLines="1" >
-            </EditText>
-        </LinearLayout>
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:maxLines="1" >
+        </EditText>
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/LinearLayout03"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/TextView_Lastname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Last_name"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/EditText_Lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:maxLength="20"
+            android:maxLines="1" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/LinearLayout04"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -77,7 +81,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/LinearLayout04"
+        android:id="@+id/LinearLayout05"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -102,7 +106,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/LinearLayout05"
+        android:id="@+id/LinearLayout06"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -126,8 +130,8 @@
         </EditText>
     </LinearLayout>
 
-        <LinearLayout
-        android:id="@+id/LinearLayout06"
+    <LinearLayout
+        android:id="@+id/LinearLayout07"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -150,13 +154,13 @@
             android:maxLines="1" >
         </EditText>
     </LinearLayout>
-    
+
     <Button
         android:id="@+id/Button_Register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#7979F2"
         android:layout_marginBottom="2dp"
+        android:background="#7979F2"
         android:text="@string/Register_button" />
 
 </LinearLayout>

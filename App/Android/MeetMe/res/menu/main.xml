@@ -10,4 +10,11 @@
           android:icon="@drawable/action_search"
           android:title="@string/action_websearch"
           android:showAsAction="ifRoom|withText" />
+        
+        <item android:id="@+id/action_createEvent"
+          android:icon="@android:drawable/ic_input_add"
+          android:title="@string/action_createEvent"
+          android:showAsAction="ifRoom|withText" />
+        
+        
 </menu>

@@ -112,6 +112,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/favicon.ico':                ['permitAll'],
 	'/**/Authentication/**':		  ['permitAll'],
 	'/**/User/**':		  			  ['permitAll'],
+	'/**/api/**':					  ['permitAll'],
 ]
 grails.plugin.springsecurity.failureHandler.defaultFailureUrl = '/authentication/error'
 grails.plugin.springsecurity.auth.loginFormUrl = '/authentication/login/'
@@ -125,7 +126,8 @@ grails {
 		port = 465
 		username = "meetme.notify@gmail.com"
 		password = "nmjkio90()"
-		props = ["mail.smtp.auth":"true",
+		props = [
+			"mail.smtp.auth":"true",
 			"mail.smtp.socketFactory.port":"465",
 			"mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
 			"mail.smtp.socketFactory.fallback":"false"]

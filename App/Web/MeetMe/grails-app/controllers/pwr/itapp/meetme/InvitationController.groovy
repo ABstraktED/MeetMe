@@ -16,7 +16,7 @@ class InvitationController {
 
 	def list() {
 		def query = Event.executeQuery("select e from Event e, Invitation i where i.user = :user and i.event = e",
-				[user: getAuthenticatedUser(), max: 10, offset: 5])
+				[user: currentUser, max: 10, offset: 5])
 		def q = Invitation.findAllByUser(User.get(6))
 		def qsize = (q==null) ? 0 : q.size()
 
@@ -80,7 +80,7 @@ class InvitationController {
 		def eventInstance = Event.get(params.eventId)
 		def dateString = eventInstance.date.format("dd/MM/yyyy hh:mm");
 		sendMail {
-			to "lukasz.p.czarny@gmail.com" //params.email
+			/*to ""*/ params.email
 			subject "[MeetMe Client] You have new invitation"
 			html g.render(template:"invitationByMailTemplate",
 			model:[event: eventInstance.title,
@@ -156,7 +156,7 @@ class InvitationController {
 			redirect(action: "list")
 			return
 		}
-		if(password.trim().isEmpty() || password == null) {
+		if(pass.trim().isEmpty() || pass == null) {
 			flash.error = message(code: "passwordCannotBeEmpty");
 			redirect(action: "list")
 			return

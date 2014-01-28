@@ -32,6 +32,7 @@ grails.project.dependency.resolution = {
         mavenLocal()
         mavenCentral()
 		mavenRepo "http://repo.spring.io/milestone/"
+		mavenRepo "http://maven.restlet.org/"
 		
         // uncomment these (or add new ones) to enable remote dependency resolution from public Maven repositories
         mavenRepo "http://snapshots.repository.codehaus.org"
@@ -57,6 +58,7 @@ grails.project.dependency.resolution = {
 		compile ":jquery-ui:1.10.3"
 		compile ":twitter-bootstrap:3.0.2"
 		compile ":jquery-ui-timepicker:0.9.8.1"
+		compile ":jaxrs:0.8"
 
         // Uncomment these (or add new ones) to enable additional resources capabilities
         //runtime ":zipped-resources:1.0"

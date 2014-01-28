@@ -80,7 +80,6 @@ public class RegisterActivity<MyAndroidAppActivity> extends Activity {
 			}
 
 		});
-
 	}
 
 	private boolean attemptRegister() {

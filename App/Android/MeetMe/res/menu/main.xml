@@ -7,6 +7,12 @@
         android:showAsAction="always"
         android:title="Refresh"/>
     <item
+        android:id="@+id/action_createEvent"
+        android:icon="@drawable/ic_add_new"
+        android:orderInCategory="1"
+        android:showAsAction="ifRoom|withText"
+        android:title="Add event"/>
+    <item
         android:id="@+id/action_websearch"
         android:icon="@drawable/action_search"
         android:showAsAction="ifRoom|withText"

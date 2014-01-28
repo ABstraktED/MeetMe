@@ -15,6 +15,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsFragment extends SupportMapFragment {
 
+
 	GoogleMap mapView;
 
 	@Override

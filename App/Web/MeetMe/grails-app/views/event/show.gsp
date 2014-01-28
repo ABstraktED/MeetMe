@@ -117,10 +117,10 @@
 
 	<script type="text/javascript">
 		$(document).ready(function(){
-				$("#email").autocomplete({
-							source: "${createLink(controller: 'Invitation', action: 'userList')}"
-						});
-					});
+				//$("#email").autocomplete({
+						//	source: "${createLink(controller: 'Invitation', action: 'userList')}"
+						//});
+					//});
 			
       			function initialize() {
       				var pos = new google.maps.LatLng(${eventInstance.location.lat}, ${eventInstance.location.lng});

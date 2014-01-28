@@ -43,9 +43,9 @@
 		<div id="menu-container" class="ui-widget-content ui-corner-all">
 
 			<ul id="menu">
-				<li><a href="#" id="a1">events</a></li>
+				<li><a href="<g:createLink action="list" controller="event"/>" id="a1">events</a></li>
 				<li><a href="#" id="a2">locations</a></li>
-				<li><a href="#" id="a3">contacts</a></li>
+				<li><a href="<g:createLink action="list" controller="contact"/>" id="a3">contacts</a></li>
 				<li><a href="#" id="a4">profile</a></li>
 			</ul>
 		</div>

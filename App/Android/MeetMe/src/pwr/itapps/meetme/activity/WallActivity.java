@@ -110,6 +110,7 @@ public class WallActivity extends FragmentActivity {
 		// view
 		boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
 		menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+		menu.findItem(R.id.action_createEvent).setVisible(!drawerOpen);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -117,6 +118,8 @@ public class WallActivity extends FragmentActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// The action bar home/up action should open or close the drawer.
 		// ActionBarDrawerToggle will take care of this.
+		Intent intent;
+
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
@@ -124,7 +127,7 @@ public class WallActivity extends FragmentActivity {
 		switch (item.getItemId()) {
 		case R.id.action_websearch:
 			// create intent to perform web search for this planet
-			Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
+			intent = new Intent(Intent.ACTION_WEB_SEARCH);
 			intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
 			// catch event that there's no activity to handle intent
 			if (intent.resolveActivity(getPackageManager()) != null) {
@@ -140,6 +143,19 @@ public class WallActivity extends FragmentActivity {
 				((FriendsFragment) f).downloadContacs();
 			} else if (f instanceof EventListFragment) {
 				((EventListFragment) f).runRefresh();
+			}
+			return true;
+		case R.id.action_createEvent:
+			// create intent to perform web search for this planet
+			intent = new Intent(getApplicationContext(),
+					CreateEventActivity.class);
+
+			// catch event that there's no activity to handle intent
+			if (intent.resolveActivity(getPackageManager()) != null) {
+				startActivity(intent);
+			} else {
+				Toast.makeText(this, R.string.app_not_available,
+						Toast.LENGTH_LONG).show();
 			}
 			return true;
 		default:

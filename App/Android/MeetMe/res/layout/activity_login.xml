@@ -2,8 +2,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".LoginActivity" >
 
-    <!-- Login progress -->
-
     <LinearLayout
         android:id="@+id/login_status"
         android:layout_width="wrap_content"
@@ -28,7 +26,6 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
-    <!-- Login form -->
 
     <ScrollView
         android:id="@+id/login_form"
@@ -60,15 +57,43 @@
                 android:maxLines="1"
                 android:singleLine="true" />
 
-            <Button
-                android:id="@+id/sign_in_button"
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <CheckBox
+                    android:id="@+id/remember_CB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="left"
+                    android:clickable="true"
+                    android:lines="2"
+                    android:paddingLeft="10dp"
+                    android:text="@string/action_remember_me"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/sign_in_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="32dp"
+                    android:paddingRight="32dp"
+                    android:text="@string/action_sign_in_short" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/register_TV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="right"
+                android:layout_gravity="left"
                 android:layout_marginTop="16dp"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:text="@string/action_sign_in_register" />
+                android:clickable="true"
+                android:lines="2"
+                android:paddingLeft="10dp"
+                android:text="@string/action_register" />
         </LinearLayout>
     </ScrollView>
 

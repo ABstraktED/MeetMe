@@ -16,18 +16,21 @@ package pwr.itapps.meetme.activity;
  * limitations under the License.
  */
 
+import java.util.List;
+
 import pwr.itapps.meetme.R;
 import pwr.itapps.meetme.fragments.EventListFragment;
 import pwr.itapps.meetme.fragments.FriendsFragment;
 import pwr.itapps.meetme.fragments.MapsFragment;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import pwr.itapps.meetme.fragments.SettingsFragment;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -35,12 +38,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.MapFragment;
 
 public class WallActivity extends FragmentActivity {
 
@@ -55,8 +57,9 @@ public class WallActivity extends FragmentActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_main);
-
+		setProgressBarIndeterminateVisibility(false);
 		mTitle = mDrawerTitle = getTitle();
 		mMenuOptions = getResources().getStringArray(R.array.menu_options);
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -102,8 +105,6 @@ public class WallActivity extends FragmentActivity {
 		return super.onCreateOptionsMenu(menu);
 	}
 
-	/* Called whenever we call invalidateOptionsMenu() */
-	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// If the nav drawer is open, hide action items related to the content
 		// view
@@ -133,9 +134,27 @@ public class WallActivity extends FragmentActivity {
 						Toast.LENGTH_LONG).show();
 			}
 			return true;
+		case R.id.services_download:
+			Fragment f = getActiveFragment();
+			if (f instanceof FriendsFragment) {
+				((FriendsFragment) f).downloadContacs();
+			} else if (f instanceof EventListFragment) {
+				((EventListFragment) f).runRefresh();
+			}
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	public Fragment getActiveFragment() {
+		FragmentManager fragmentManager = this.getSupportFragmentManager();
+		List<Fragment> fragments = fragmentManager.getFragments();
+		for (Fragment fragment : fragments) {
+			if (fragment.isVisible())
+				return fragment;
+		}
+		return null;
 	}
 
 	/* The click listner for ListView in the navigation drawer */
@@ -151,7 +170,7 @@ public class WallActivity extends FragmentActivity {
 	private void selectItem(int position) {
 
 		Fragment fragment = null;
-		FragmentManager fragmentManager = getFragmentManager();
+		FragmentManager fragmentManager = getSupportFragmentManager();
 
 		switch (position) {
 
@@ -195,7 +214,7 @@ public class WallActivity extends FragmentActivity {
 					.replace(R.id.content_frame, fragment).commit();
 			break;
 		case 6:
-			fragment = new EventListFragment();
+			fragment = new SettingsFragment();
 			fragmentManager.beginTransaction()
 					.replace(R.id.content_frame, fragment).commit();
 			break;

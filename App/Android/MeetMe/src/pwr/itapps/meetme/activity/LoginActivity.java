@@ -1,11 +1,13 @@
 package pwr.itapps.meetme.activity;
 
-
-import java.util.List;
-
 import pwr.itapps.meetme.R;
 import pwr.itapps.meetme.helper.CommunicationHelper;
-import pwr.itapps.meetmee.model.entity.Event;
+import pwr.itapps.meetme.helper.SharedPreferencesHelper;
+import pwr.itapps.meetmee.model.Model;
+import pwr.itapps.meetmee.model.UserModel;
+import pwr.itapps.meetmee.model.in.dto.UserInDto;
+import pwr.itapps.meetmee.model.mapper.OwnerMapper;
+import pwr.itapps.meetmee.model.out.dto.LoginOutDto;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
@@ -18,42 +20,31 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-/**
- * Activity which displays a login screen to the user, offering registration as
- * well.
- */
 public class LoginActivity extends Activity {
-	/**
-	 * A dummy authentication store containing known user names and passwords.
-	 * TODO: remove after connecting to a real authentication system.
-	 */
-	private static final String[] DUMMY_CREDENTIALS = new String[] {
-			"foo@example.com:a", "bar@example.com:b", "efdouk@yahoo.gr:c" };
+	public static final String EXTRA_EMAIL = "email";
 
-	/**
-	 * The default email to populate the email field with.
-	 */
-	public static final String EXTRA_EMAIL = "com.example.android.authenticatordemo.extra.EMAIL";
-
-	/**
-	 * Keep track of the login task to ensure we can cancel it if requested.
-	 */
 	private UserLoginTask mAuthTask = null;
 
 	// Values for email and password at the time of the login attempt.
 	private String mEmail;
 	private String mPassword;
+	private boolean mRememberUser = false;
 
 	// UI references.
 	private EditText mEmailView;
 	private EditText mPasswordView;
 	private View mLoginFormView;
 	private View mLoginStatusView;
+	private CheckBox mRememberCb;
 	private TextView mLoginStatusMessageView;
+	SharedPreferencesHelper helper;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +59,19 @@ public class LoginActivity extends Activity {
 
 		mPasswordView = (EditText) findViewById(R.id.password);
 
-
 		mLoginFormView = findViewById(R.id.login_form);
 		mLoginStatusView = findViewById(R.id.login_status);
 		mLoginStatusMessageView = (TextView) findViewById(R.id.login_status_message);
+
+		findViewById(R.id.register_TV).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent i = new Intent(LoginActivity.this,
+								RegisterActivity.class);
+						startActivity(i);
+					}
+				});
 
 		findViewById(R.id.sign_in_button).setOnClickListener(
 				new View.OnClickListener() {
@@ -80,6 +80,24 @@ public class LoginActivity extends Activity {
 						attemptLogin();
 					}
 				});
+		helper = SharedPreferencesHelper.getInstance();
+		mRememberCb = ((CheckBox) findViewById(R.id.remember_CB));
+		mRememberCb.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				mRememberUser = isChecked;
+			}
+		});
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		mRememberUser = helper.getBoolean(
+				SharedPreferencesHelper.REMEMBER_USER,
+				SharedPreferencesHelper.REMEMBER_USER_DEF, LoginActivity.this);
+		mRememberCb.setChecked(mRememberUser);
 	}
 
 	@Override
@@ -89,11 +107,6 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 
-	/**
-	 * Attempts to sign in or register the account specified by the login form.
-	 * If there are form errors (invalid email, missing fields, etc.), the
-	 * errors are presented and no actual login attempt is made.
-	 */
 	public boolean attemptLogin() {
 		if (mAuthTask != null) {
 			return false;
@@ -116,7 +129,7 @@ public class LoginActivity extends Activity {
 			mPasswordView.setError(getString(R.string.error_field_required));
 			focusView = mPasswordView;
 			cancel = true;
-		} else if (mPassword.length() < 4) {
+		} else if (mPassword.length() < 3) {
 			mPasswordView.setError(getString(R.string.error_invalid_password));
 			focusView = mPasswordView;
 			cancel = true;
@@ -127,12 +140,13 @@ public class LoginActivity extends Activity {
 			mEmailView.setError(getString(R.string.error_field_required));
 			focusView = mEmailView;
 			cancel = true;
-		} else if (!mEmail
-				.matches("([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})")) {
-			mEmailView.setError(getString(R.string.error_invalid_email));
-			focusView = mEmailView;
-			cancel = true;
 		}
+		// } else if (!mEmail
+		// .matches("([\\w-\\.]+)@((?:[\\w]+\\.)+)([a-zA-Z]{2,4})")) {
+		// mEmailView.setError(getString(R.string.error_invalid_email));
+		// focusView = mEmailView;
+		// cancel = true;
+		// }
 
 		if (cancel) {
 			// There was an error; don't attempt login and focus the first
@@ -145,17 +159,13 @@ public class LoginActivity extends Activity {
 			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
 			showProgress(true);
 			mAuthTask = new UserLoginTask(this);
-			mAuthTask.execute((Void) null);
+			mAuthTask.execute(mEmail, mPassword);
 			return true;
 		}
 	}
 
-	/**
-	 * Shows the progress UI and hides the login form.
-	 */
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showProgress(final boolean show) {
-		// On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
 		// for very easy animations. If available, use these APIs to fade-in
 		// the progress spinner.
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
@@ -197,62 +207,56 @@ public class LoginActivity extends Activity {
 	 */
 	// 0 - login correct, 1 - error (incorrect credintials), 2 -no such person
 	// in database
-	public class UserLoginTask extends AsyncTask<Void, Void, Integer> {
-		
+	public class UserLoginTask extends AsyncTask<String, Void, Boolean> {
+
 		CommunicationHelper comm;
-		
+
 		public UserLoginTask(Context context) {
 			super();
 			comm = new CommunicationHelper(context);
 		}
 
 		@Override
-		protected Integer doInBackground(Void... params) {
-			// TODO: attempt authentication against a network service.
-
+		protected Boolean doInBackground(String... params) {
+			Boolean result = null;
+			LoginOutDto dto = new LoginOutDto(params[0], params[1]);
 			try {
-				List<Event> response = comm.test();
-				response.get(0).getAll_can_join();
+				UserInDto user = comm.logIn(dto);
+				if (user != null) {
+					Model.dropDatabase();
+					Model.createDatabase();
+					OwnerMapper mapper = new OwnerMapper();
+					UserModel model = new UserModel(LoginActivity.this);
+					model.saveAction(mapper.mapDtoToEntity(user));
+					return true;
+				} else {
+					return false;
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				return 1;
+				return null;
 			}
-			int result = 0;
-			for (String credential : DUMMY_CREDENTIALS) {
-				String[] pieces = credential.split(":");
-				if (pieces[0].equals(mEmail) && pieces[1].equals(mPassword)) {
-					result = 0;
-				} else {
-					result = 2;
-				}
-			}
-			return result;
 		}
 
 		@Override
-		protected void onPostExecute(final Integer success) {
+		protected void onPostExecute(final Boolean success) {
 			mAuthTask = null;
 			showProgress(false);
 
-			switch (success) {
-			case 0:
+			if (success == null) {
+				Toast.makeText(LoginActivity.this,
+						"Problems with communication", Toast.LENGTH_SHORT)
+						.show();
+			} else if (success) {
+				helper.putBoolean(SharedPreferencesHelper.REMEMBER_USER,
+						mRememberUser, LoginActivity.this);
 				Intent i = new Intent(LoginActivity.this, WallActivity.class);
 				startActivity(i);
-				break;
-			case 1:
+				LoginActivity.this.finish();
+			} else {
 				Toast.makeText(LoginActivity.this, "Wrong password or email!",
 						Toast.LENGTH_SHORT).show();
-				break;
-			case 2:
-				Intent create = new Intent(LoginActivity.this,
-						RegisterActivity.class);
-				create.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				startActivity(create);
-				break;
-			default:
-				break;
 			}
-
 		}
 
 		@Override

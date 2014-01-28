@@ -22,6 +22,7 @@
     <string name="First_name">First name</string>
     <string name="Last_name">Last name</string>
     <string name="Email">Email</string>
+    <string name="Username">Username</string>
     <string name="Phone">Phone</string>
     <string name="Password">Password</string>
     <string name="ConfirmPassword">Confirm Password</string>

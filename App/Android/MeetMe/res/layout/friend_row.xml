@@ -3,60 +3,57 @@
     android:layout_width="match_parent"
     android:layout_height="80dp"
     android:background="@drawable/event_background"
-    android:padding="2dp" >
+    android:padding="8dp" >
 
     <ImageView
         android:id="@+id/friend_row_image"
         android:layout_width="80dp"
         android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:adjustViewBounds="true"
-        android:scaleType="centerCrop"
         android:contentDescription="@string/ContentDescription"
+        android:scaleType="centerInside"
         android:src="@drawable/earth" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <TextView
+        android:id="@+id/friend_row_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_margin="0dp"
         android:layout_toRightOf="@id/friend_row_image"
-        android:orientation="vertical" >
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:padding="0dp"
+        android:text="Jan Kowalski"
+        android:textColor="#666666"
+        android:textSize="20sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/friend_row_FirstName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ellipsize="marquee"
-            android:gravity="left"
-            android:lines="1"
-            android:text=""
-            android:textColor="#666666"
-            android:textSize="25sp"
-            android:textStyle="bold" />
+    <TextView
+        android:id="@+id/friend_row_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/friend_row_name"
+        android:layout_toRightOf="@id/friend_row_image"
+        android:ellipsize="marquee"
+        android:lines="1"
+        android:text="email"
+        android:textColor="#666666"
+        android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/friend_row_lastName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ellipsize="marquee"
-            android:gravity="left"
-            android:lines="1"
-            android:text=""
-            android:textColor="#666666"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/friend_row_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|left"
-            android:layout_weight="1"
-            android:ellipsize="end"
-            android:lines="1"
-            android:text=""
-            android:textColor="#666666" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/friend_row_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/friend_row_email"
+        android:layout_gravity="center_vertical|left"
+        android:layout_toRightOf="@id/friend_row_image"
+        android:ellipsize="end"
+        android:lines="1"
+        android:text="phone"
+        android:textColor="#666666"
+        android:textSize="18sp" />
 
 </RelativeLayout>

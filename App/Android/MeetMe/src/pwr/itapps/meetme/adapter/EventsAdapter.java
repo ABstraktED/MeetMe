@@ -1,11 +1,14 @@
 package pwr.itapps.meetme.adapter;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import pwr.itapps.meetme.R;
 import pwr.itapps.meetme.application.MeetMe;
-import pwr.itapps.meetme.data.EventData;
+import pwr.itapps.meetmee.model.entity.Event;
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,10 +20,9 @@ import android.widget.TextView;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+public class EventsAdapter extends ArrayAdapter<Event> {
 
-public class EventsAdapter extends ArrayAdapter<EventData> {
-
-	public EventsAdapter(Context context, List<EventData> data) {
+	public EventsAdapter(Context context, List<Event> data) {
 		super(context, R.layout.event_row, data);
 	}
 
@@ -41,25 +43,33 @@ public class EventsAdapter extends ArrayAdapter<EventData> {
 			row.setTag(holder);
 
 		}
-		EventData event = getItem(position);
+		Event event = getItem(position);
 		Holder tag = (Holder) row.getTag();
-		List<String> gallery = event.getEventGallery();
-		if (gallery.size() > 0)
-			ImageLoader.getInstance().displayImage(gallery.get(0), tag.image,
-					MeetMe.OPTIONS);
-		else
-			ImageLoader.getInstance().displayImage("", tag.image,
-					MeetMe.OPTIONS);
-		tag.title.setText(event.getName());
-		tag.organizators.setText(event.getOrganizators().get(0).toString()); // to
-																				// change
-																				// in
-																				// future
-																				// for
-																				// every
-																				// organizator
-		tag.date.setText(new SimpleDateFormat("dd.MM.yyyy").format(event
-				.getDate()));
+		// List<String> gallery = event.getEventGallery();
+		// if (gallery.size() > 0)
+		// ImageLoader.getInstance().displayImage(gallery.get(0), tag.image,
+		// MeetMe.OPTIONS);
+		// else
+		ImageLoader.getInstance().displayImage("", tag.image, MeetMe.OPTIONS);
+		tag.title.setText(event.getTitle());
+		if (event.getUser() != null)
+			tag.organizators.setText(event.getUser().getName()); // to
+																	// change
+																	// in
+																	// future
+																	// for
+																	// every
+																	// organizator
+		DateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+		DateFormat df1 = new SimpleDateFormat("dd-MM-yyyy");
+		Date today = null;
+		try {
+			today = df.parse(event.getDate());
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if (today != null)
+			tag.date.setText(df1.format(today));
 		return row;
 	}
 

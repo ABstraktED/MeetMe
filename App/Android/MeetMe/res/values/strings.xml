@@ -20,7 +20,6 @@
     <string name="App_logo">Application logo</string>
     <string name="Avatar_image">Avatar</string>
     <string name="ContentDescription">blabla</string>
-    <string name="ContentDescription">blabla</string>
     <string name="First_name">First name</string>
     <string name="Last_name">Last name</string>
     <string name="Email">Email</string>
@@ -29,7 +28,6 @@
     <string name="Password">Password</string>
     <string name="ConfirmPassword">Confirm Password</string>
     <string name="Register_button">Register</string>
-    <string name="drawer_open">Open navigation drawer</string>
     <string name="Event_name">Name of event</string>
     <string name="Event_decritption">Description</string>
     <string name="Event_date">Date</string>

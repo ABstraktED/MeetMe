@@ -9,9 +9,11 @@ import pwr.itapps.meetme.application.MeetMe;
 import pwr.itapps.meetme.exception.MainThreadOperationException;
 import pwr.itapps.meetmee.model.entity.Event;
 import pwr.itapps.meetmee.model.in.dto.EventInDto;
+import pwr.itapps.meetmee.model.in.dto.InvitationInDto;
 import pwr.itapps.meetmee.model.in.dto.UserInDto;
 import pwr.itapps.meetmee.model.out.dto.EventsOutDto;
 import pwr.itapps.meetmee.model.out.dto.FriendsOutDto;
+import pwr.itapps.meetmee.model.out.dto.InvitationOutDto;
 import pwr.itapps.meetmee.model.out.dto.LoginOutDto;
 import pwr.itapps.meetmee.model.out.dto.UserOutDto;
 import android.content.Context;
@@ -54,7 +56,6 @@ public class CommunicationHelper extends AbstractCommunicationHelper {
 			TimeoutException, IOException {
 		String request = gson.toJson("");
 		String response = sendRequest("", "event");
-		Log.d(TAG, response);
 		Type collectionType = new TypeToken<List<Event>>() {
 		}.getType();
 		return gson.fromJson(response, collectionType);
@@ -64,17 +65,24 @@ public class CommunicationHelper extends AbstractCommunicationHelper {
 			throws MainThreadOperationException, TimeoutException, IOException {
 		String request = gson.toJson(dto);
 		String response = sendRequest(request, "user/events");
-		Log.d(TAG, response);
 		Type collectionType = new TypeToken<List<EventInDto>>() {
 		}.getType();
 		return gson.fromJson(response, collectionType);
 	}
 
+	public List<InvitationInDto> getInvitations(InvitationOutDto dto)
+			throws MainThreadOperationException, TimeoutException, IOException {
+		String request = gson.toJson(dto);
+		String response = sendRequest(request, "event/invitations");
+		Type collectionType = new TypeToken<List<InvitationInDto>>() {
+		}.getType();
+		return gson.fromJson(response, collectionType);
+	}
+	
 	public List<UserInDto> getFriends(FriendsOutDto dto)
 			throws MainThreadOperationException, TimeoutException, IOException {
 		String request = gson.toJson(dto);
 		String response = sendRequest(request, "user/contacts");
-		Log.d(TAG, response);
 		Type collectionType = new TypeToken<List<Event>>() {
 		}.getType();
 		return gson.fromJson(response, collectionType);

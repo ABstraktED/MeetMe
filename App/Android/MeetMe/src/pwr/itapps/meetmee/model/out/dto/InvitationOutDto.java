@@ -2,18 +2,18 @@ package pwr.itapps.meetmee.model.out.dto;
 
 public class InvitationOutDto {
 
-	Boolean eventId;
+	Long eventId;
 
-	public InvitationOutDto(Boolean eventId) {
+	public InvitationOutDto(Long eventId) {
 		super();
 		this.eventId = eventId;
 	}
 
-	public Boolean getEventId() {
+	public Long getEventId() {
 		return eventId;
 	}
 
-	public void setEventId(Boolean eventId) {
+	public void setEventId(Long eventId) {
 		this.eventId = eventId;
 	}
 

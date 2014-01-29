@@ -56,10 +56,14 @@ public class InvitationModel extends Model<Invitation> {
 	@Override
 	public long saveAction(Invitation invitation) {
 		ContentValues values = new ContentValues();
-		if (invitation.getEvent() != null)
+		if (invitation.getEvent() != null) {
 			values.put(TableInfo.EVENT_ID, invitation.getEvent().getId());
-		if (invitation.getUser() != null)
+			eventModel.saveAction(invitation.getEvent());
+		}
+		if (invitation.getUser() != null) {
 			values.put(TableInfo.USER_ID, invitation.getUser().getId());
+			userModel.saveAction(invitation.getUser());
+		}
 
 		values.put(TableInfo.CONFIRMED, invitation.getConfirmation() ? true
 				: false);

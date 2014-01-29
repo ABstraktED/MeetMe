@@ -67,7 +67,7 @@ public class EventListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 		Intent i = new Intent(getActivity(), EventDetailsActivity.class);
-		i.putExtra(EVENT_ID, position);
+		i.putExtra(EVENT_ID, adapter.getItem(position).getId());
 		startActivity(i);
 	}
 

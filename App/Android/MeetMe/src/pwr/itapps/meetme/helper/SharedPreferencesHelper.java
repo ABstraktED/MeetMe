@@ -14,6 +14,8 @@ public class SharedPreferencesHelper {
 	public static final boolean SYNCHRONIZE_USERS_DEF = true;
 	public static final String EVENTS_SYNCH = "eventSynch";
 	public static final long EVENTS_SYNCH_DEF = 0l;
+	public static final String INVITATION_SYNCH = "invitationSynch";
+	public static final long INVITATION_SYNCH_DEF = 0l;
 	private static SharedPreferencesHelper instance;
 
 	private SharedPreferencesHelper() {

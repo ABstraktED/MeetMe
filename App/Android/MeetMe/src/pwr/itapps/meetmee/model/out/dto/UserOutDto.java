@@ -1,5 +1,6 @@
 package pwr.itapps.meetmee.model.out.dto;
 
+
 public class UserOutDto {
 
 	private String name;

@@ -80,16 +80,15 @@ class InvitationController {
 		def eventInstance = Event.get(params.eventId)
 		def dateString = eventInstance.date.format("dd/MM/yyyy hh:mm");
 		sendMail {
-			/*to ""*/ params.email
-			subject "[MeetMe Client] You have new invitation"
+			to params.email
+			subject "[" + userInstance.username + "] You have new invitation"
 			html g.render(template:"invitationByMailTemplate",
 			model:[event: eventInstance.title,
-				invitedBy :eventInstance.user.name,
+				invitedBy :eventInstance.user.username,
 				description: eventInstance.description,
 				eventDate : dateString,
-				link: 'http://www.wp.pl',
-				eventId:params.eventId,
-				recipientEmail: params.email])
+				link: createLink(absolute: true, action: "show", controller: "event", id: params.eventId),
+				recipientUsername: userInstance.username])
 		}
 		redirect(controller: "event", action: "show", id: params.eventId)
 	}
@@ -150,7 +149,7 @@ class InvitationController {
 		def user = session["user"]
 		def pass = session["pass"]
 		def eventId = session["eventId"]
-		
+
 		if(user == null || user.contains("@") || user.trim().isEmpty()) {
 			flash.error = message(code: "val.msg.invitation.incorrectEmail");
 			redirect(action: "list")
@@ -198,7 +197,7 @@ class InvitationController {
 			redirect(action: "list");
 			return
 		}
-		
+
 		def dateString = eventInstance.date.format("dd/MM/yyyy hh:mm");
 		def invitedUser = User.findByEmail(params.email)
 		if(invitedUser != null )
@@ -222,69 +221,65 @@ class InvitationController {
 		}
 		else
 		{
-		
-			flash.error = message(code: "val.msg.invitation.inviteeNotFoundByEmail");
-			redirect(action: "list");
-			return
+
+
+
+			// generate GUID
+			def guid = UUID.randomUUID().toString();
+
+			// creating new inactive user
+			def newInactiveUser = new User();
+			newInactiveUser.email = params.email;
+			newInactiveUser.guid = guid;
+			// considering fact that constrains dont allows for creating user with empty username and password we set temporary values
+			// to be changed during registration
+			newInactiveUser.password = guid
+			newInactiveUser.username = guid
+			newInactiveUser.status = false;
+
+			if (!newInactiveUser.save(flush: true)) {
+
+				//throw Exception("Creating new Inactive User failed")
+				flash.error = message(code: "val.msg.invitation.createNewUserFailed");
+				redirect(action: "list");
+				return
+			}
+
+
+			def newInvitation = new Invitation();
+			newInvitation.event = eventInstance;
+			// TODO check if status and confirmation values are OK
+			newInvitation.status = true;
+			newInvitation.confirmation = false;
+			newInvitation.user = newInactiveUser;
+
+
+			if (!newInvitation.save(flush: true)) {
+				//throw Exception("Creating new Invitation failed")
+				flash.error = message(code:"val.msg.invitation.createNewInvitationFailed");
+				redirect(action: "list");
+				return
+			}
+
+			// generate link
+			def g = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
+			def inviteUrl = g.createLink(controller: 'invitation', action: 'acceptUnregisteredInvitation', absolute: 'true') + "?guid=" + guid;
+			// send email
+
+			sendMail {
+				to params.email
+				subject "[ MeetMe ] You have a new invitation"
+				html g.render(template:"invitationByMailTemplate",
+				model:[event: eventInstance.title,
+					invitedBy :eventInstance.user.username,
+					description: eventInstance.description,
+					eventDate : dateString,
+					link: inviteUrl,
+					recipientUsername: params.email])
+			}
+			flash.message = "Email successfully sent"
+			redirect(action: "displayGoogleContact");
 		}
-
-
-		// generate GUID
-		def guid = UUID.randomUUID().toString();
-
-		// creating new inactive user
-		def newInactiveUser = new User();
-		newInactiveUser.email = params.email;
-		newInactiveUser.guid = guid;
-		// considering fact that constrains dont allows for creating user with empty username and password we set temporary values
-		// to be changed during registration
-		newInactiveUser.password = guid
-		newInactiveUser.username = guid
-		newInactiveUser.status = false;
-
-		if (!newInactiveUser.save(flush: true)) {
-
-			//throw Exception("Creating new Inactive User failed")
-			flash.error = message(code: "val.msg.invitation.createNewUserFailed");
-			redirect(action: "list");
-			return
-		}
-
-
-		def newInvitation = new Invitation();
-		newInvitation.event = eventInstance;
-		// TODO check if status and confirmation values are OK
-		newInvitation.status = true;
-		newInvitation.confirmation = false;
-		newInvitation.user = newInactiveUser;
-
-
-		if (!newInvitation.save(flush: true)) {
-			//throw Exception("Creating new Invitation failed")
-			flash.error = message(code:"val.msg.invitation.createNewInvitationFailed");
-			redirect(action: "list");
-			return
-		}
-
-		// generate link
-		def g = new org.codehaus.groovy.grails.plugins.web.taglib.ApplicationTagLib()
-		def inviteUrl = g.createLink(controller: 'invitation', action: 'acceptUnregisteredInvitation', absolute: 'true') + "?guid=" + guid;
-		// send email
-
-		sendMail {
-			to "lukasz.p.czarny@gmail.com" //params.email
-			subject "[MeetMe Client] You have new invitation"
-			html g.render(template:"invitationByMailTemplate",
-			model:[event: eventInstance.title,
-				invitedBy :eventInstance.user.name,
-				description: eventInstance.description,
-				eventDate : dateString,
-				link: inviteUrl,
-				eventId:eventId,
-				recipientEmail: params.email])
-		}
-		flash.message = "Email successfully sent"
-		redirect(action: "displayGoogleContact");
 	}
 
 	def inviteByPhone() {

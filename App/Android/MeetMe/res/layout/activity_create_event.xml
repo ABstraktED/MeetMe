@@ -1,94 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/RegisterLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp" >
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".CreateEventActivity" >
 
-    <ImageView
-        android:id="@+id/imageView_EventImage"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:contentDescription="@string/ContentDescription"
-        android:src="@drawable/empty" />
+    <!-- Create event progress -->
 
-    <Button
-        android:id="@+id/button_ChooseImage"
+    <LinearLayout
+        android:id="@+id/createEvent_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView_EventImage"
-        android:layout_alignRight="@+id/imageView_EventImage"
-        android:alpha="0.5"
-        android:text="@string/Choose_image"
-        android:textSize="@dimen/chooseImage_button" />
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
 
-    <EditText
-        android:id="@+id/editText_EventName"
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <TextView
+            android:id="@+id/createEvent_status_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/creating_event"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/createEvent_form"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/imageView_EventImage"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/Event_name"
-        android:maxLength="20"
-        android:maxLines="1"
-        android:paddingBottom="25dp" >
-    </EditText>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp" >
 
-    <EditText
-        android:id="@+id/editText_EventDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_EventName"
-        android:layout_marginBottom="5dp"
-        android:ems="10"
-        android:hint="@string/Event_date"
-        android:inputType="date" >
-    </EditText>
+        <ImageView
+            android:id="@+id/imageView_EventImage"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/ContentDescription"
+            android:src="@drawable/empty" />
 
-    <EditText
-        android:id="@+id/editText_EventTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_EventName"
-        android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@+id/editText_EventDate"
-        android:ems="10"
-        android:hint="@string/Event_time"
-        android:inputType="time" />
+        <Button
+            android:id="@+id/button_ChooseImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView_EventImage"
+            android:layout_alignRight="@+id/imageView_EventImage"
+            android:alpha="0.5"
+            android:text="@string/Choose_image"
+            android:textSize="@dimen/chooseImage_button" />
 
-    <EditText
-        android:id="@+id/editText_EventAddress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_EventDate"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
-        android:hint="@string/Event_address"
-        android:inputType="textPostalAddress" />
+        <EditText
+            android:id="@+id/editText_EventName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView_EventImage"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/Event_name"
+            android:maxLength="20"
+            android:maxLines="1" >
+        </EditText>
 
-    <EditText
-        android:id="@+id/editText_EventDecritption"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/editText_EventAddress"
-        android:layout_marginBottom="10dp"
-        android:hint="@string/Event_decritption"
-        android:inputType="textMultiLine"
-        android:maxLength="100"
-        android:maxLines="4"
-        android:paddingBottom="25dp" >
-    </EditText>
+        <EditText
+            android:id="@+id/editText_EventDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_EventName"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/Event_date"
+            android:inputType="date" >
+        </EditText>
 
-    <Button
-        android:id="@+id/button_Create"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="2dp"
-        android:background="#7979F2"
-        android:text="@string/Create_button" />
+        <EditText
+            android:id="@+id/editText_EventTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_EventName"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@+id/editText_EventDate"
+            android:ems="10"
+            android:hint="@string/Event_time"
+            android:inputType="time" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/editText_EventAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_EventDate"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/Event_address"
+            android:inputType="textPostalAddress" />
+
+        <EditText
+            android:id="@+id/editText_EventDecritption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editText_EventAddress"
+            android:layout_marginBottom="10dp"
+            android:hint="@string/Event_decritption"
+            android:inputType="textMultiLine"
+            android:maxLength="100"
+            android:maxLines="4" >
+        </EditText>
+
+        <Button
+            android:id="@+id/button_CreateEvent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/apptheme_btn_default_holo_light"
+            android:text="@string/Create_button" />
+    </RelativeLayout>
+
+</merge>

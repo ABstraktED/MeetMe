@@ -3,22 +3,19 @@
 <body>
 	<h1>
 		Welcome,
-		${recipientEmail}
+		${recipientUsername}
 	</h1>
 	<br />
 	<p>
-		We would like to invite you to participate in meeting :
+		Your were invited to the event 
 		${event}
-		, arranged by
-		${invitedBy}. Meeting starts at
-		${eventDate}. <br /> Description written by creator:
-		${description}<br /> We would love you to with us. Please accept the
-		invitation by clicking link :
+		, created by
+		${invitedBy}. Meeting starts on
+		${eventDate}. <br /> "
+		${description}"<br /> Answer the invitation by clicking the link :
 		${link}
-		event Id is :
-		${eventId}
 	</p>
 	<br /> Greetings
-	<br /> Meet Me team
+	<br /> MeetMe team
 </body>
 </html>

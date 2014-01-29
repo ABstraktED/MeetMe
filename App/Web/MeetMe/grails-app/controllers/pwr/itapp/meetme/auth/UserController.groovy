@@ -436,7 +436,7 @@ class UserController {
 				else
 				{
 					flash.message = message(code: 'val.msg.user.userSaved')
-					redirect(action: "list")
+					redirect(controller: "invitation", action: "list")
 					return
 				}
 			}

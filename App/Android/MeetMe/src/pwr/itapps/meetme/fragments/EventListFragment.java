@@ -171,7 +171,8 @@ public class EventListFragment extends ListFragment {
 				List<Event> events = eventModel.fetchAll();
 				EventListFragment.this.events.clear();
 				EventListFragment.this.events.addAll(events);
-				adapter.notifyDataSetChanged();
+				adapter = new EventsAdapter(getActivity(), EventListFragment.this.events);
+				setListAdapter(adapter);
 				prefs.putLong(SharedPreferencesHelper.EVENTS_SYNCH,
 						new Date().getTime(), getActivity());
 			} else {

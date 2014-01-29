@@ -168,7 +168,8 @@ public class FriendsFragment extends ListFragment {
 				List<User> users = userModel.fetchAllUsers();
 				FriendsFragment.this.users.clear();
 				FriendsFragment.this.users.addAll(users);
-				adapter.notifyDataSetChanged();
+				adapter = new FriendsAdapter(getActivity(), FriendsFragment.this.users);
+				setListAdapter(adapter);
 			} else {
 				Toast.makeText(getActivity(), "U may have no friends... ?",
 						Toast.LENGTH_SHORT).show();

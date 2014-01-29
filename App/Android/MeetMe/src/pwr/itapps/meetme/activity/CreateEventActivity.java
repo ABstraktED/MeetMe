@@ -161,7 +161,6 @@ public class CreateEventActivity<MyAndroidAppActivity> extends Activity {
 
 	private boolean createEvent() {
 
-
 		// Reset errors.
 		mEventNameEt.setError(null);
 		mEventDateEt.setError(null);
@@ -169,14 +168,12 @@ public class CreateEventActivity<MyAndroidAppActivity> extends Activity {
 		mEventAddressEt.setError(null);
 		mEventDecritptionEt.setError(null);
 
-
 		// Store values at the time of the creation attempt.
 		mEventName = mEventNameEt.getText().toString();
 		mEventDate = mEventDateEt.getText().toString();
 		mEventTime = mEventTimeEt.getText().toString();
 		mEventAddress = mEventAddressEt.getText().toString();
 		mEventDecritption = mEventDecritptionEt.getText().toString();
-
 
 		boolean cancel = false;
 		View focusView = null;
@@ -207,37 +204,35 @@ public class CreateEventActivity<MyAndroidAppActivity> extends Activity {
 			mEventTimeEt.setError(getString(R.string.error_invalid_time));
 			focusView = mEventTimeEt;
 			cancel = true;
-		
+
 		} else if (TextUtils.isEmpty(mEventAddress)) {
 			mEventAddressEt.setError(getString(R.string.error_field_required));
 			focusView = mEventAddressEt;
 			cancel = true;
 		} else if (TextUtils.isEmpty(mEventDecritption)) {
-			mEventDecritptionEt.setError(getString(R.string.error_field_required));
+			mEventDecritptionEt
+					.setError(getString(R.string.error_field_required));
 			focusView = mEventDecritptionEt;
 			cancel = true;
-
+		}
 		if (cancel) {
 
 			focusView.requestFocus();
 			return false;
 		} else {
-				// Show a progress spinner, and kick off a background task to
-				// perform the user login attempt.
-			mCreateEventStatusMessageView
-						.setText(R.string.creating_event_task);
-				showProgress(true);
+			// Show a progress spinner, and kick off a background task to
+			// perform the user login attempt.
+			mCreateEventStatusMessageView.setText(R.string.creating_event_task);
+			showProgress(true);
 
-				// EventsOutDto = new EventsOutDto(mEventName,mEventDate,
-				// mEventTime, mEventAddress, mEventDecritption);
+			// EventsOutDto = new EventsOutDto(mEventName,mEventDate,
+			// mEventTime, mEventAddress, mEventDecritption);
 
 			return true;
 		}
-	}
-	
-}
 
-	
+	}
+
 	// Extra Date validation
 	public boolean validate(final String date) {
 
@@ -289,7 +284,7 @@ public class CreateEventActivity<MyAndroidAppActivity> extends Activity {
 			return false;
 		}
 	}
-	
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
 	private void showProgress(final boolean show) {
 		// for very easy animations. If available, use these APIs to fade-in
@@ -304,8 +299,9 @@ public class CreateEventActivity<MyAndroidAppActivity> extends Activity {
 					.setListener(new AnimatorListenerAdapter() {
 						@Override
 						public void onAnimationEnd(Animator animation) {
-							mCreateEventStatusView.setVisibility(show ? View.VISIBLE
-									: View.GONE);
+							mCreateEventStatusView
+									.setVisibility(show ? View.VISIBLE
+											: View.GONE);
 						}
 					});
 
@@ -322,10 +318,10 @@ public class CreateEventActivity<MyAndroidAppActivity> extends Activity {
 		} else {
 			// The ViewPropertyAnimator APIs are not available, so simply show
 			// and hide the relevant UI components.
-			mCreateEventStatusView.setVisibility(show ? View.VISIBLE : View.GONE);
+			mCreateEventStatusView.setVisibility(show ? View.VISIBLE
+					: View.GONE);
 			mCreateEventFormView.setVisibility(show ? View.GONE : View.VISIBLE);
 		}
 	}
 
-
-}	
+}
